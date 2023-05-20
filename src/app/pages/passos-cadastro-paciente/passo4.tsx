@@ -8,12 +8,12 @@ import {ProgressBarra} from './../CadastroPacienteWizard'
 
 interface Passo4Props extends FormikProps<any> { }
 const tituloMain = 'Responsável'; 
-const Passo4: FC<Passo4Props> = ({ values, errors, touched, isSubmitting, setFieldValue }) => {
+const Passo4: FC<Passo4Props> = ({ values, errors, touched, isSubmitting, setFieldValue }) => {  
   return (
     <div className='container'>        
         <div className='mt-5 col-12 mb-5'>          
           <h2 className='fw-bolder fs-1 d-flex align-items-center text-dark'>
-          <i className='bi bi-telephone-plus-fill ms-2 fs-4x me-4 text-color-primary'
+          <i className='bi bi-chat-left-heart-fill ms-2 fs-4x me-4 text-color-primary'
               data-bs-toggle='tooltip'
               title='Cadastrar novo Paciente'
             ></i>
@@ -44,20 +44,19 @@ const Passo4: FC<Passo4Props> = ({ values, errors, touched, isSubmitting, setFie
                       <div className='col-12'><div className="separator separator-content my-15">Adicionar {tituloMain}: {index}</div></div>
                     )}
                     <div className="col-lg-6 mt-10">
-                      <label className="form-label required">
+                      <label className="form-label">
                       {index === 0
                           ? 'Nome do ' + tituloMain + ' principal:'
                           : 'Nome do ' + tituloMain + ' adicional: (' + index + ')'}
                       </label>
                       <Field
                         placeholder="Responsável principal"
-                        className="form-control mt-2 col-12 form-control-lg form-control-solid required"
+                        className="form-control mt-2 col-12 form-control-lg form-control-solid"
                         name={`responsaveis.${index}.nome`}
-                      />
-                      <ErrorMessage name={`responsaveis.${index}.nome`} component="div" className="text-danger" />
+                      />                      
                     </div>
                     <div className="col-lg-6 mt-10">                      
-                      <label className="form-label required">
+                      <label className="form-label">
                       {index === 0
                           ? 'Gênero do ' + tituloMain + ' principal:'
                           : 'Gênero do ' + tituloMain + ' adicional: (' + index + ')'}
@@ -65,7 +64,7 @@ const Passo4: FC<Passo4Props> = ({ values, errors, touched, isSubmitting, setFie
                       <Field
                         placeholder="Gênero do responsável legal"
                         as="select"
-                        className="form-select mt-2 col-12 form-select-lg form-select-solid required"
+                        className="form-select mt-2 col-12 form-select-lg form-select-solid"
                         name={`responsaveis.${index}.genero`}
                       >
                         <option>Selecione</option>
@@ -73,6 +72,7 @@ const Passo4: FC<Passo4Props> = ({ values, errors, touched, isSubmitting, setFie
                         <option value="feminino">Feminino</option>
                         <option value="outro">Outro</option>
                       </Field>
+                      {/* msg error
                       <ErrorMessage
                         className="text-danger"
                         name={`responsaveis.${index}.genero`}
@@ -83,22 +83,24 @@ const Passo4: FC<Passo4Props> = ({ values, errors, touched, isSubmitting, setFie
                           </div>
                         )}                        
                       />
+                       */}
                     </div>
 
                     <div className="col-lg-6 mt-10">
-                      <label className="form-label required">
+                      <label className="form-label">
                       {index === 0
                           ? 'Telefone do ' + tituloMain + ' principal:'
                           : 'Telefone do ' + tituloMain + ' adicional: (' + index + ')'
                       }
                       </label>
                       <Field
-                        placeholder="Telefone do responsável legal"
-                        maxLength="11"
-                        className="form-control mt-2 col-12 form-control-lg form-control-solid required"
+                        placeholder="(99)99999-9999"
+                        maxLength="13"
+                        className="form-control mt-2 col-12 form-control-lg form-control-solid"
                         name={`responsaveis.${index}.telefone`}
                       />
-                      <ErrorMessage name={`responsaveis.${index}.telefone`} component="div" className="text-danger" />
+
+                      {/* msg error<ErrorMessage name={`responsaveis.${index}.telefone`} component="div" className="text-danger" /> */}
 
                       <div className="mt-5 form-check form-switch form-check-custom form-check-solid justify-content-between">
                         <label className="form-check-label">

@@ -6,12 +6,15 @@ import { KTSVG, toAbsoluteUrl } from '../../_metronic/helpers';
 import ReactPaginate from 'react-paginate';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
-import { Formik, Form } from 'formik';
+import { Formik } from 'formik';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Form from 'react-bootstrap/Form';
 
 export function ListagemPacientes() {
     /* Define a pesquisa */
     const [search, setSearch] = useState('');
-
+    const [carregando, setCarregando] = useState('');
+    const [itemsPerPage, setItemsPerPage] = useState(25);
     /* Puxa os dados dos pacientes do PacientesModel */
     const [pacientes, setPacientes] = useState<Paciente[]>([]);
     const [pacientesmodal, setPacientesmodal] = useState<Paciente[]>([]);
@@ -20,15 +23,17 @@ export function ListagemPacientes() {
 
     useEffect(() => {
         async function fetchPacientes() {
+            setCarregando('Carregando...');
             const pacientes = await buscarPacientes();
             setPacientes(pacientes);
+            setCarregando('');
         }
         fetchPacientes();
     }, []);
 
 
      /* Defina o número de itens a serem exibidos por página */
-    const itemsPerPage = 10;
+    
     const pageCount = Math.ceil(pacientes.length / itemsPerPage);
 
 
@@ -36,7 +41,7 @@ export function ListagemPacientes() {
     const DeleteForm: React.FC<{ id: string }> = ({ id }) => {
         const getidmodal = id;
         const handleSubmit = async () => {
-          try {
+          try {            
             await axios.delete(`http://127.0.0.1:3333/pacientes/${id}`);
             // Aqui você pode lidar com o sucesso da solicitação DELETE
             console.log('Paciente excluído com sucesso!');
@@ -52,7 +57,7 @@ export function ListagemPacientes() {
             <Form>
             <button
                 type="submit"                
-                className='btn btn-lg btn-light-primary me-3'>
+                className='btn btn-lg btn-danger me-3'>
                 <i className="bi bi-x-square-fill"></i>Excluir</button>
                 </Form>
         </Formik>
@@ -89,13 +94,13 @@ export function ListagemPacientes() {
                     <td className='px-2 py-1'>
                         <div className="d-flex justify-content-end flex-shrink-0">
                         <a href={`/pagina-paciente/${paciente.id}`} className="btn btn-light-primary btn-sm align-middle mx-2"><i className="bi bi-search"></i>Visualizar</a>
-                            <a href={`/pagina-paciente/${paciente.id}`} className="btn  btn-light-warning btn-sm align-middle mx-2"><i className="bi bi-pencil-square"></i>Editar</a>                            
+                        <a href={`/pagina-paciente/${paciente.id}`} className="btn btn-light-warning btn-sm align-middle mx-2"><i className="bi bi-pencil-square"></i>Editar</a>                            
                             <button
-                        type="button"
-                        data-bs-toggle="modal"
-                        data-bs-target={`#kt_modal_${paciente.id}`}
-                        className="btn btn-danger btn-sm mt-5 mb-5"
-                      >
+                                type="button"
+                                data-bs-toggle="modal"
+                                data-bs-target={`#kt_modal_${paciente.id}`}
+                                className="btn btn-light-danger btn-sm align-middle mx-2"
+                            >
                         <i className="bi bi-x-octagon-fill fs-4 me-2"></i>{' '}
                         Excluir
                       </button>
@@ -116,28 +121,24 @@ export function ListagemPacientes() {
                                 <i className="path3"></i>
                                 </i>
                                 <div className="text-center">
-                                <h5 className="fw-bolder fs-1 mb-5">Tem certeza que deseja apagar paciente: <b>{paciente.nome_completo}</b>?</h5>
+                                <h5 className="fw-bolder fs-1 mb-5">Tem certeza que deseja apagar o paciente: <b>{paciente.nome_completo}</b>?</h5>
                                 <div className="separator separator-dashed border-danger opacity-25 mb-5"></div>
                                 <div className="mb-9">
                                     Ao apagar este elemento, os dados contidos nele <strong>serão deletados.</strong><br />
                                 </div>
                                 <div className="d-flex flex-center flex-wrap"> 
-                                    <button data-bs-dismiss="modal" aria-label="Cancelar" className="btn btn-outline btn-outline-danger btn-active-danger m-2">Cancelar</button>
+                                    <button data-bs-dismiss="modal" aria-label="Cancelar" className="btn btn-outline btn-outline-primary btn-active-danger m-2">Cancelar</button>
                                     <DeleteForm id={paciente.id.toString()} />
                                 </div>
                                 </div>
-
                             </div>
                             </div>
                         </div>
                         </div>
                     </div> 
-                </tr>
-                                   
-           )) 
-                   
-    };
-    
+                </tr>                                   
+           ))                    
+    };   
 
     return (
         <div className="card shadow-sm">
@@ -157,27 +158,26 @@ export function ListagemPacientes() {
                 <div className='text-center'>
                     <div className='row align-items-start'>
                         <div className='col-4 '>
-                            {/*
-                            <Form className=''>
+                           
+                            <Form className='' >
                                 <InputGroup className='my-3'>
                                     <KTSVG
                                         path='/media/icons/duotune/general/gen004.svg'
-                                        className='svg-icon svg-icon-3x me-5' />
-                                         form ctrl 
+                                        className='svg-icon svg-icon-3x me-5' />                                         
                                     <Form.Control
-                                        autoCapitalize="none"
+                                        autoCapitalize="none"                                        
                                         className='text-lowercase form-control-solid'
                                         onChange={(e) => setSearch(e.target.value)}
                                         placeholder='Buscar por paciente...'
                                     />
                                 </InputGroup>                                 
                             </Form>
-                            */}
+                           
                         </div>
                         <div className='col order-last'>
                             <div className="d-flex justify-content-end flex-shrink-0">
                             <Link
-                                to='/cadastro-paciente'
+                                to='/formularios/cadastrar-paciente'
                                 className='btn btn-primary btn-sm align-middle mt-4'>
                                 <i className="bi bi-pencil-square"></i>
                                 Novo paciente
@@ -185,11 +185,6 @@ export function ListagemPacientes() {
                             </div>
                         </div>
                     </div>
-                    <button type="button"
-                    className="btn btn-primary"
-                    data-bs-toggle="modal"
-                    data-bs-target="#kt_modal_1"
-                    >butao</button>
                 </div>                
         
                 <div className="table-responsive mt-8">
@@ -209,6 +204,7 @@ export function ListagemPacientes() {
                         {/* ... */}
                         <tbody>
                             {/* Altere para renderizar apenas os pacientes na página atual */}
+                            {carregando}
                             {renderPacientes()}
                         </tbody>
                     </table>
