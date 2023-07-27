@@ -132,6 +132,7 @@ const CustomColors = [
 
 export const Editorpasso4 = () => {
   const valueFromContext = useContext(EditorValueContext);    
+  
   console.log('Value from context:', valueFromContext);
   const [value, setValue] = useState(valueFromContext);
   
