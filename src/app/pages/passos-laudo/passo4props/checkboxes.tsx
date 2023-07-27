@@ -14,7 +14,8 @@ type ContentType = {
     const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const selectedValue = event.currentTarget.value;
         const isChecked = event.currentTarget.checked;
-        let updatedDescription;
+        let updatedDescription; 
+
         if (isChecked) {
             updatedDescription = [...descricaoSelecionada, selectedValue];
         } else {
@@ -224,7 +225,7 @@ export const getPasso4EditorContent = (selecoes: string[]) => {
         { type: "paragraph", children: [{ text: "" }] },       
     ];
 
-    // Adiciona um parágrafo para cada seleção
+    // Adiciona um parágrafo para cada seleção teste
     for (let selecao of selecoes) {
         content.push({ type: "paragraph", children: [{ text: selecao }] });
     }
