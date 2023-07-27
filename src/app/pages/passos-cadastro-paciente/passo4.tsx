@@ -2,9 +2,29 @@ import { FC } from 'react';
 /*
 import { KTIcon, KTSVG } from '../../../_metronic/helpers'; 
 */
-import { ErrorMessage, Field, FieldArray, FormikProps } from 'formik';
+import { ErrorMessage, Field, FieldProps, FieldArray, FormikProps } from 'formik';
 import { Responsaveis } from './CadastrarPacienteWizardHelper';
-import {ProgressBarra} from './../CadastroPacienteWizard'
+import {ProgressBarra} from './../CadastroPacienteWizard';
+import MaskedInput from 'react-text-mask';
+
+const phoneNumberMask = [
+  "(",
+  /[1-9]/,  
+  /\d/,
+  ")",
+  " ",
+  /\d/,
+  /\d/,
+  /\d/,
+  /\d/,
+  /\d/,
+  "-",
+  /\d/,
+  /\d/,
+  /\d/,
+  /\d/
+];
+
 
 interface Passo4Props extends FormikProps<any> { }
 const tituloMain = 'Responsável'; 
@@ -93,14 +113,17 @@ const Passo4: FC<Passo4Props> = ({ values, errors, touched, isSubmitting, setFie
                           : 'Telefone do ' + tituloMain + ' adicional: (' + index + ')'
                       }
                       </label>
-                      <Field
-                        placeholder="(99)99999-9999"
-                        maxLength="13"
-                        className="form-control mt-2 col-12 form-control-lg form-control-solid"
-                        name={`responsaveis.${index}.telefone`}
-                      />
+                      <Field name={`responsaveis.${index}.telefone`} render={({ field }: FieldProps) => (
+                            <MaskedInput
+                              {...field}
+                              mask={phoneNumberMask}
+                              className="form-control col-12 form-control-lg form-control-solid required"                                  
+                              placeholder="Telefone do responsável legal"
+                              type="text"
+                            />
+                          )} />
 
-                      {/* msg error<ErrorMessage name={`responsaveis.${index}.telefone`} component="div" className="text-danger" /> */}
+                      <ErrorMessage name={`responsaveis.${index}.telefone`} component="div" className="text-danger" />
 
                       <div className="mt-5 form-check form-switch form-check-custom form-check-solid justify-content-between">
                         <label className="form-check-label">

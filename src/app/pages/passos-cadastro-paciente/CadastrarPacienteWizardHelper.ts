@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 export interface ICreatePaciente {  
   id: string
   nomeCompleto: string
+  nome_completo: string
   dataNascimento: string
   genero: string
   escolaridade: string
@@ -29,6 +30,7 @@ export interface Endereco {
   complemento: string;
 }
 export interface Telefones {
+  id: string;
   telefone: string;
   isWhatsapp: boolean;
 }
@@ -62,7 +64,7 @@ const createPacienteSchemas = [
   Yup.object().shape({    
     enderecos: Yup.array().of(
       Yup.object().shape({
-        cep: Yup.number().required('O CEP é obrigatório'),
+        cep: Yup.number().required('O CEP é obrigatório'), 
         cidade: Yup.string().required('A cidade é obrigatória'),
         estado: Yup.string().required('O estado é obrigatório'),
         endereco: Yup.string().required('O endereço é obrigatório'),
@@ -75,7 +77,7 @@ const createPacienteSchemas = [
     email: Yup.string().required().label('Email'),
     telefones: Yup.array().of(
       Yup.object().shape({
-        telefone: Yup.number().required('Campo obrigatório'),
+        telefone: Yup.string().required('Campo obrigatório'),
         isWhatsapp: Yup.string().required('É whatsapp?'),
       })
     ),
@@ -96,6 +98,7 @@ const createPacienteSchemas = [
 const inits: ICreatePaciente = {
   id: '',
   nomeCompleto: '',
+  nome_completo: '',
   dataNascimento: '',
   genero: '',
   escolaridade: '',
@@ -120,6 +123,7 @@ const inits: ICreatePaciente = {
   ],
   telefones: [
     {
+      id: '',
       telefone: '',
       isWhatsapp: false,
     }

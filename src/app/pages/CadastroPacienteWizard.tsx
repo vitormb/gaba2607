@@ -115,7 +115,7 @@ const CadastroPacienteWiz: FC = () => {
         setTimeout(() => {
           setCadastroCallback('Redirecionando...');
           setCadastroConcluido(true);
-          window.location.reload();
+          document.location.href = '/Listagem-Pacientes'
         }, 2000);
         
                  
@@ -370,7 +370,7 @@ const CadastroPacienteWiz: FC = () => {
                   type="submit"> 
                   <span className='indicator-label'>
                   {isSubmitting ? 'Enviando...' : 'Enviar'}
-                  </span>                   
+                  </span>
                   <KTIcon iconName="arrow-right"
                   className="fs-3 ms-2 me-0" />                 
                   </button>
@@ -408,7 +408,7 @@ const ProgressBarra: React.FC<LoadingBar> = ({ className, color, title, descript
   return (
     <div className={`${className}`}>
       {/* begin::Body */}
-      <div className='card-body my-3'>
+      <div className=''>
         <div className={`progress h-7px bg-${color} bg-opacity-50 mt-7`}>
           <div
             className={`progress-bar bg-${color}`}

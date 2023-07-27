@@ -11,7 +11,7 @@ const Passo1: FC = () => {
           <i className='bi bi-person-fill-add ms-2 fs-4x me-4 text-color-primary'
               data-bs-toggle='tooltip'
               title='Cadastrar novo Paciente'
-            ></i>
+          ></i>
             Cadastrar novo Paciente
           </h2>
           <div className='text-gray-400 fw-bold fs-6'>
