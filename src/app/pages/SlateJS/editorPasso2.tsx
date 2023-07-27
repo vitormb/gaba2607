@@ -62,8 +62,9 @@ const editorWrapperStyle = {
 };
 type KitchenSinkEditorProps = {
   pacienteData: PacienteData;
-  content: any[];
-  setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void;
+  content: any; // substitua 'any' pelo tipo correto
+  setFieldValue: () => void;
+  pacienteDataContent: any; // substitua 'any' pelo tipo correto
 };
 interface PacienteData {
   id: number;
@@ -84,8 +85,8 @@ Custom props da AI
 
 /* Editor bkp callings */
 
-
 export const KitchenSinkEditor = (props: KitchenSinkEditorProps) => {
+
   const editor = useMemo(() => withReact(createEditor()), []);
   const { pacienteData, content, setFieldValue } = props;
   const [value, setValue] = useState<Node[]>(content);  
@@ -93,7 +94,7 @@ export const KitchenSinkEditor = (props: KitchenSinkEditorProps) => {
   const [pergunta, setPergunta] = useState('');
   const [resposta, setResposta] = useState('');
   const [isLoading, setIsLoading] = useState(false);  
-  
+  const [editorContent, setEditorContent] = useState(pacienteDataContent);
   const handleAddText = (text:any) => {
     console.log('aaaaa')
     return {
