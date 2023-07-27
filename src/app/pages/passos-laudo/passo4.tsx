@@ -3,7 +3,6 @@ import {Formik, Field, ErrorMessage, useFormikContext, FormikValues} from 'formi
 import {ProgressBarra} from '../CadastroPacienteWizard'
 import {CheckBoxPasso4, getPasso4EditorContent} from './passo4props/checkboxes'
 import {Editorpasso4} from './passo4props/editorpasso4'
-
 import {Selecoes} from './passo4props/content'
 
 const Passo4: FC = () => {
@@ -46,7 +45,7 @@ const Passo4: FC = () => {
       <div className='row'>
         <div className='col-lg-3 mt-10'>
           <label className='form-label required'>Quantidade de sessões realizadas:</label>
-          <Field
+          <Field 
             type='number'
             placeholder='Quantidade de sessões'
             className='form-control form-control-lg form-control-solid'
