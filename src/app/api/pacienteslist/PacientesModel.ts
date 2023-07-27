@@ -1,5 +1,6 @@
 export interface Paciente {
   id: number;
+  nomeCompleto: string;
   nome_completo: string;
   data_nascimento: string;
   genero: string;
@@ -14,7 +15,7 @@ export interface Paciente {
   estado_nascimento: string;
   pais_nascimento: string;
   telefones: Telefone[];
-  enderecos: Endereco[];
+  enderecos: Enderecos[];
   responsaveis: Responsavel[];
 }
 
@@ -25,7 +26,7 @@ interface Telefone {
   paciente_id: number;
 }
 
-interface Endereco {
+interface Enderecos {
   id: number;
   cep: string;
   cidade: string;

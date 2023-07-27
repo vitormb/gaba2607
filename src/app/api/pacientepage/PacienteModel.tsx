@@ -1,6 +1,6 @@
 type Paciente = {
   id: number;
-  nome_completo: string;
+  nomeCompleto: string;
   data_nascimento: string;
   genero: string;
   escolaridade: string;

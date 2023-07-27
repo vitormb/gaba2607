@@ -1,9 +1,10 @@
 import * as Yup from 'yup';
-import { pt } from 'yup-locale-pt';
+
 
 export interface ICreatePaciente {  
   id: string
   nomeCompleto: string
+  nome_completo: string
   dataNascimento: string
   genero: string
   escolaridade: string
@@ -29,6 +30,7 @@ export interface Endereco {
   complemento: string;
 }
 export interface Telefones {
+  id: string;
   telefone: string;
   isWhatsapp: boolean;
 }
@@ -52,17 +54,17 @@ export interface EnderecoCEP {
 
 const createPacienteSchemas = [
   Yup.object({      
-    nomeCompleto: Yup.string().required().label('Nome completo'),
-    dataNascimento: Yup.date().required().label('Data de nascimento'),
-    genero: Yup.string().required().label('Gênero'),
-    escolaridade: Yup.string().required().label('Escolaridade'),
-    segmento: Yup.string().required().label('Segmento'),
-    lateralidade: Yup.string().required().label('Lateralidade'),    
+    nomeCompleto: Yup.string().required('Nome completo é um campo obrigatório'),
+    dataNascimento: Yup.date().required('Data de nascimento é um campo obrigatório').label('Data de nascimento'),
+    genero: Yup.string().required('Gênero é um campo obrigatório').label('Gênero'),
+    escolaridade: Yup.string().required('Escolaridade é um campo obrigatório').label('Escolaridade'),
+    segmento: Yup.string().required('Segmento é um campo obrigatório').label('Segmento'),
+    lateralidade: Yup.string().required('Lateralidade é um campo obrigatório').label('Lateralidade'),    
   }),  
   Yup.object().shape({    
     enderecos: Yup.array().of(
       Yup.object().shape({
-        cep: Yup.string().required('O CEP é obrigatório'),
+        cep: Yup.number().required('O CEP é obrigatório'), 
         cidade: Yup.string().required('A cidade é obrigatória'),
         estado: Yup.string().required('O estado é obrigatório'),
         endereco: Yup.string().required('O endereço é obrigatório'),
@@ -75,44 +77,44 @@ const createPacienteSchemas = [
     email: Yup.string().required().label('Email'),
     telefones: Yup.array().of(
       Yup.object().shape({
-        telefone: Yup.string().required('O telefone é obrigatório'),
+        telefone: Yup.string().required('Campo obrigatório'),
         isWhatsapp: Yup.string().required('É whatsapp?'),
       })
     ),
   }),   
-  Yup.object().shape({        
+  Yup.object().shape({    
     responsaveis: Yup.array().of(
       Yup.object().shape({
-        nome: Yup.string().required('O nome do responsável é obrigatório'),
-        genero: Yup.string().oneOf(["masculino", "feminino", "outro"], "selecione o gênero do responsável")
-        .required("escolha uma das opções acima"),
-        telefone: Yup.string().required('O telefone do responsável é obrigatório'),
-        observacao: Yup.string(),
+        nome: Yup.string().notRequired(),
+        genero: Yup.string().notRequired(),
+        telefone: Yup.string().notRequired(),
+        observacao: Yup.string().notRequired()
       })
-    ),
+    )
   }),   
   Yup.object().shape({})
 ]
 
 const inits: ICreatePaciente = {
   id: '',
-  nomeCompleto: 'Vitor Mantovani',
-  dataNascimento: '1989-11-11',
-  genero: 'masculino',
-  escolaridade: 'medio',
-  segmento: 'seg',
-  profissao: 'prof',
-  ocupacao: 'ocu',
-  lateralidade: 'later',
-  organizacao: 'orga',
-  email: 'vitor@vitor.com.br',
-  cidadeNascimento: 'cidadeNascimento',
-  estadoNascimento: 'EstadoNasci',
-  paisNascimento: 'Pais Nasc',
+  nomeCompleto: '',
+  nome_completo: '',
+  dataNascimento: '',
+  genero: '',
+  escolaridade: '',
+  segmento: '',
+  profissao: '',
+  ocupacao: '',
+  lateralidade: '',
+  organizacao: '',
+  email: '',
+  cidadeNascimento: '',
+  estadoNascimento: '',
+  paisNascimento: '',
   enderecos: [
     {
       cidade: '',
-      cep: '35170111',
+      cep: '',
       estado: '',
       endereco: '',
       bairro: '',
@@ -121,18 +123,19 @@ const inits: ICreatePaciente = {
   ],
   telefones: [
     {
-      telefone: '31986544321',
+      id: '',
+      telefone: '',
       isWhatsapp: false,
     }
   ],
   responsaveis: [
     {
-      id: '1',
-      nome: 'Katia',
-      genero: 'Feminino',
+      id: '',
+      nome: '',
+      genero: '',
       isWhatsapp: false,
-      telefone: '319865512',
-      observacao: 'obs'
+      telefone: '',
+      observacao: ''
     }
   ]
 };

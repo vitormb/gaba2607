@@ -50,7 +50,7 @@ const SidebarMenuMain = () => {
         icon='tablet-text-down'
       >
           <SidebarMenuItem 
-          to='/cadastro-laudo'
+          to='/formularios/cadastrar-laudo'
           icon='add-notepad'
           title='Novo laudo'
           hasBullet={false} />
@@ -70,6 +70,16 @@ const SidebarMenuMain = () => {
           to='/#link'
           icon='chart-pie-3'
           title='Visualizar gráficos'
+          hasBullet={false} />
+          <SidebarMenuItem 
+          to='/ddbase'
+          icon='bi bi-arrows-move'
+          title='Ajustar elementos'
+          hasBullet={false} />
+          <SidebarMenuItem 
+          to='/pdfbase'
+          icon='bi bi-arrows-move'
+          title='PDF Base'
           hasBullet={false} />
       </SidebarMenuItemWithSub>
 

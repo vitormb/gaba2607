@@ -1,8 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { FC } from 'react'
-/*
-import { KTIcon } from '../../../_metronic/helpers'
-*/
 import { ErrorMessage, Field } from 'formik'
 import { ProgressBarra } from './../CadastroPacienteWizard'
 
@@ -14,10 +11,9 @@ const Passo1: FC = () => {
           <i className='bi bi-person-fill-add ms-2 fs-4x me-4 text-color-primary'
               data-bs-toggle='tooltip'
               title='Cadastrar novo Paciente'
-            ></i>
+          ></i>
             Cadastrar novo Paciente
           </h2>
-
           <div className='text-gray-400 fw-bold fs-6'>
             Os campos marcados com <span className='required'> </span> são obrigatórios.
           </div>
@@ -30,6 +26,7 @@ const Passo1: FC = () => {
             description='Progresso do cadastro'
             progress='0%'
           />
+          
         </div>
 
         <div className='fv-row'>
@@ -41,6 +38,7 @@ const Passo1: FC = () => {
                 className='form-control form-control-lg form-control-solid required'
                 name='nomeCompleto'
               />
+              <ErrorMessage name='nomeCompleto' component="div" className="text-danger"  />
             </div>
 
             <div className='col-lg-6 mt-10'>
@@ -51,6 +49,7 @@ const Passo1: FC = () => {
                 placeholder='dd/mm/aaaa'
                 className='form-control form-control-lg form-control-solid'
               />
+              <ErrorMessage name='dataNascimento' component="div" className="text-danger"  />
             </div>
             <div className='col-lg-6 mt-10'>
               <label className='form-label required'>Gênero</label>
@@ -60,6 +59,7 @@ const Passo1: FC = () => {
                 <option value="feminino">Feminino</option>
                 <option value="outro">Outro</option>
               </Field>
+              <ErrorMessage name='genero' component="div" className="text-danger"  />
             </div>
             <div className='col-lg-6 mt-10'>
               <label className='form-label'>Organização:</label>
@@ -76,6 +76,7 @@ const Passo1: FC = () => {
                 <option value="Ambidestro">Público</option>
                 <option value="Canhoto">Privado</option>
               </Field>
+              <ErrorMessage name='segmento' component="div" className="text-danger"  />
             </div>
 
             <div className='col-lg-6 mt-10'>
@@ -85,6 +86,7 @@ const Passo1: FC = () => {
                 className='form-control form-control-lg form-control-solid required'
                 name='escolaridade'
               />
+              
             </div>
             <div className='col-lg-6 mt-10'>
               <label className='form-label required'>Lateralidade:</label>
@@ -94,6 +96,7 @@ const Passo1: FC = () => {
                 <option value="canhoto">Canhoto</option>
                 <option value="destro">Destro</option>
               </Field>
+              <ErrorMessage name='lateralidade' component="div" className="text-danger"  />
             </div>
             <div className='col-lg-6 mt-10'>
               <label className='form-label'>Profissão:</label>
@@ -111,15 +114,7 @@ const Passo1: FC = () => {
                 name='ocupacao'
               />
             </div>
-
-          </div>
-          <div className='text-danger mt-10'>
-            <ErrorMessage name='nomeCompleto' className='alert alert-danger d-flex align-items-center p-5 mb-10' component="p" />
-            <ErrorMessage name='dataNascimento' className='alert alert-danger d-flex align-items-center p-5 mb-10' component="p" />
-            <ErrorMessage name='genero' className='alert alert-danger d-flex align-items-center p-5 mb-10' component="p" />
-            <ErrorMessage name='segmento' className='alert alert-danger d-flex align-items-center p-5 mb-10' component="p" />
-            <ErrorMessage name='lateralidade' className='alert alert-danger d-flex align-items-center p-5 mb-10' component="p" />
-          </div>
+          </div>          
         </div>
       </div>    
   )

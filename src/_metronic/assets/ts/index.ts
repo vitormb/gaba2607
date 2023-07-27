@@ -5,7 +5,10 @@ export * as components from './components/index'
 //     keenthemes: any;
 //   }
 // }
-
+interface Window {
+    webkitSpeechRecognition: any;
+    SpeechRecognition: any;
+  }
 // window.keenthemes = {
 //   components: {
 //     ScrollTop: components.ScrollTopComponent,

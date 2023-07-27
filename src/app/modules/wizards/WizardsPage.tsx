@@ -3,6 +3,7 @@ import {PageLink, PageTitle} from '../../../_metronic/layout/core'
 import {Vertical} from './components/Vertical'
 import {Horizontal} from './components/Horizontal'
 import {CadastroPacienteWiz} from '../../pages/CadastroPacienteWizard'
+import {CadastroLaudoWiz} from '../../pages/CadastroLaudoWizard'
 
 const wizardsBreadCrumbs: Array<PageLink> = [
   {
@@ -14,6 +15,12 @@ const wizardsBreadCrumbs: Array<PageLink> = [
   {
     title: 'Cadastrar paciente',
     path: '/cadastrar-paciente',
+    isSeparator: true,
+    isActive: true,
+  },
+  {
+    title: 'Criar Laudo',
+    path: '/criar-laudo',
     isSeparator: true,
     isActive: true,
   },
@@ -35,8 +42,17 @@ const WizardsPage = () => (
         path='cadastrar-paciente'
         element={
           <>
-            <PageTitle breadcrumbs={wizardsBreadCrumbs}>Cadastrar novo paciente</PageTitle>
+            <PageTitle breadcrumbs={wizardsBreadCrumbs}>Cadastrar novo Paciente</PageTitle>
             <CadastroPacienteWiz />
+          </>
+        }
+      />
+      <Route
+        path='cadastrar-laudo'
+        element={
+          <>
+            <PageTitle breadcrumbs={wizardsBreadCrumbs}>Cadastrar novo Laudo</PageTitle>
+            <CadastroLaudoWiz />
           </>
         }
       />

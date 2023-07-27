@@ -14,43 +14,44 @@ const AuthLayout = () => {
     }
   }, [])
 
+  const objStyle = { 
+    marginRight: '33%',
+    WebkitBackdropFilter: 'blur(10px)',
+    backdropFilter: 'blur(10px)',
+    border: '1px solid rgba(255, 255, 255, 0.15)',
+
+  };
+
   return (
     <div
-      className='d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed'
-      style={{
-        backgroundImage: `url(${toAbsoluteUrl('/media/illustrations/sketchy-1/14.png')})`,
-      }}
+      className='d-flex flex-column align-center flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed'      
     >
+      <video style={{               
+        zIndex: -1,       
+        width: '100vw',
+        height: '100vh',
+        objectFit: 'cover',
+        left: `0`,
+        right: `0`,
+        top: `0`,
+        bottom: `0`,
+        clipPath: 'circle(55% at 80% 53%)',
+        position: 'fixed',        
+      }} id="vbg" autoPlay loop muted poster="/media/login/loginalt.jpg">
+      <source src={toAbsoluteUrl('/media/login/gabalogin.mp4')} type="video/mp4" />
+      </video>
+      
       {/* begin::Content */}
-      <div className='d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20'>
-        {/* begin::Logo */}
-        <a href='#' className='mb-12'>
-          <img alt='Logo' src={toAbsoluteUrl('/media/logos/default.svg')} className='h-45px' />
-        </a>
-        {/* end::Logo */}
+      <div className='d-flex justify-content-space-evenly flex-center flex-column flex-column-fluid p-10 pb-lg-20'>        
         {/* begin::Wrapper */}
-        <div className='w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto'>
+        <div style={objStyle} className='bg-opacity-75 w-lg-500px rounded shadow-sm p-10 p-lg-15'>          
           <Outlet />
         </div>
         {/* end::Wrapper */}
       </div>
       {/* end::Content */}
       {/* begin::Footer */}
-      <div className='d-flex flex-center flex-column-auto p-10'>
-        <div className='d-flex align-items-center fw-bold fs-6'>
-          <a href='#' className='text-muted text-hover-primary px-2'>
-            About
-          </a>
-
-          <a href='#' className='text-muted text-hover-primary px-2'>
-            Contact
-          </a>
-
-          <a href='#' className='text-muted text-hover-primary px-2'>
-            Contact Us
-          </a>
-        </div>
-      </div>
+      
       {/* end::Footer */}
     </div>
   )

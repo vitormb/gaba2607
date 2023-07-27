@@ -6,15 +6,13 @@ import {Link} from 'react-router-dom'
 import axios from "axios";
 import moment from 'moment';
 
-
 const queryClient = new QueryClient();
 
-function Example({ id }: { id: number }) {
+function PacienteIndvPg({ id }: { id: number }) {
 
   const { isLoading, error, data, isFetching } = useQuery(["repoData", id], () =>
     axios.get(`http://127.0.0.1:3333/pacientes/${id}`).then((res) => res.data)
   );
-
 
   const formatarTelefone = (telefone: string): string => {
     // Aplicar a máscara ao telefone aqui
@@ -154,7 +152,7 @@ function Example({ id }: { id: number }) {
           <div className="card-title m-0">
             <KTIcon iconName='profile-circle' className='fs-1 text-primary me-2 ' /><h3 className="fw-bolder m-0">Dados do paciente</h3>
           </div>
-          <a className="btn btn-primary align-self-center" href="#">Editar informações</a>
+          <a className="btn btn-primary align-self-center" href={`/paciente-editar/${data.id}`} >Editar informações</a>
         </div>
         <div className="card-body row align-items-start p-8">
           <div className="col-sm">
@@ -348,7 +346,7 @@ function Example({ id }: { id: number }) {
 export function PacienteIndividual({ id }: { id: number }) {
   return (
     <QueryClientProvider client={queryClient}>
-      <Example id={id} />
+      <PacienteIndvPg id={id} />
       <ReactQueryDevtools initialIsOpen />
     </QueryClientProvider>
   )

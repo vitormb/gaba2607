@@ -10,14 +10,14 @@ import {useAuth} from '../core/Auth'
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
-    .email('Wrong email format')
-    .min(3, 'Minimum 3 symbols')
-    .max(50, 'Maximum 50 symbols')
-    .required('Email is required'),
+    .email('Formato inválido de e-mail')
+    .min(3, 'Mínimo de 3 caracteres especiais')
+    .max(50, 'Maximo de 50 caracteres especiais')
+    .required('O campo e-mail é obrigatório'),
   password: Yup.string()
-    .min(3, 'Minimum 3 symbols')
-    .max(50, 'Maximum 50 symbols')
-    .required('Password is required'),
+    .min(3, 'Mínimo de 3 caracteres especiais')
+    .max(50, 'Maximo de 50 caracteres especiais')
+    .required('A senha é obrigatória'),
 })
 
 const initialValues = {
@@ -48,7 +48,7 @@ export function Login() {
       } catch (error) {
         console.error(error)
         saveAuth(undefined)
-        setStatus('The login details are incorrect')
+        setStatus('Erro de autenticação. Por favor, verifique se digitou corretamente seu usuário e senha.')
         setSubmitting(false)
         setLoading(false)
       }
@@ -64,16 +64,19 @@ export function Login() {
     >
       {/* begin::Heading */}
       <div className='text-center mb-11'>
-        <h1 className='text-dark fw-bolder mb-3'>Sign In</h1>
-        <div className='text-gray-500 fw-semibold fs-6'>Your Social Campaigns</div>
+        {/* begin::Logo */}
+        <a href='#' className='flex-column-auto my-auto flex-center'>
+          <img alt='Logo' src={toAbsoluteUrl('/media/logos/default-dark.svg')} className='h-75px' />
+        </a>
+        {/* end::Logo */}        
+        <div className='text-dark-500 mt-10 fw-semibold fs-6'>Simplifique sua forma de emitir laudos psicológicos.</div>
       </div>
       {/* begin::Heading */}
 
-      {/* begin::Login options */}
+      {/* begin::Login options 
       <div className='row g-3 mb-9'>
-        {/* begin::Col */}
-        <div className='col-md-6'>
-          {/* begin::Google link */}
+        
+        <div className='col-md-6'>          
           <a
             href='#'
             className='btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100'
@@ -84,14 +87,11 @@ export function Login() {
               className='h-15px me-3'
             />
             Sign in with Google
-          </a>
-          {/* end::Google link */}
-        </div>
-        {/* end::Col */}
+          </a>          
+        </div>       
 
-        {/* begin::Col */}
-        <div className='col-md-6'>
-          {/* begin::Google link */}
+        
+        <div className='col-md-6'>        
           <a
             href='#'
             className='btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100'
@@ -107,35 +107,31 @@ export function Login() {
               className='theme-dark-show h-15px me-3'
             />
             Sign in with Apple
-          </a>
-          {/* end::Google link */}
-        </div>
-        {/* end::Col */}
-      </div>
-      {/* end::Login options */}
+          </a>        
+        </div>        
+      
 
-      {/* begin::Separator */}
+      
       <div className='separator separator-content my-14'>
         <span className='w-125px text-gray-500 fw-semibold fs-7'>Or with email</span>
       </div>
-      {/* end::Separator */}
+     </div> */ }
 
       {formik.status ? (
         <div className='mb-lg-15 alert alert-danger'>
           <div className='alert-text font-weight-bold'>{formik.status}</div>
         </div>
       ) : (
-        <div className='mb-10 bg-light-info p-8 rounded'>
+        <div style={{display:'none', visibility:'hidden'}} className='mb-10 bg-light-info p-8 rounded'>
           <div className='text-info'>
-            Use account <strong>admin@demo.com</strong> and password <strong>demo</strong> to
-            continue.
+            [Use a credencial <strong>admin@demo.com</strong> e a senha <strong>demo</strong> para acessar ao painel de testes.] 
           </div>
         </div>
       )}
 
       {/* begin::Form group */}
       <div className='fv-row mb-8'>
-        <label className='form-label fs-6 fw-bolder text-dark'>Email</label>
+        <label className='form-label fs-6 fw-bolder text-dark'>E-mail</label>
         <input
           placeholder='Email'
           {...formik.getFieldProps('email')}
@@ -151,7 +147,7 @@ export function Login() {
           autoComplete='off'
         />
         {formik.touched.email && formik.errors.email && (
-          <div className='fv-plugins-message-container'>
+          <div className='text-danger fv-plugins-message-container'>
             <span role='alert'>{formik.errors.email}</span>
           </div>
         )}
@@ -160,7 +156,7 @@ export function Login() {
 
       {/* begin::Form group */}
       <div className='fv-row mb-3'>
-        <label className='form-label fw-bolder text-dark fs-6 mb-0'>Password</label>
+        <label className='form-label fw-bolder text-dark fs-6 mb-0'>Senha</label>
         <input
           type='password'
           autoComplete='off'
@@ -191,7 +187,7 @@ export function Login() {
 
         {/* begin::Link */}
         <Link to='/auth/forgot-password' className='link-primary'>
-          Forgot Password ?
+          Esqueceu sua senha ?
         </Link>
         {/* end::Link */}
       </div>
@@ -205,10 +201,10 @@ export function Login() {
           className='btn btn-primary'
           disabled={formik.isSubmitting || !formik.isValid}
         >
-          {!loading && <span className='indicator-label'>Continue</span>}
+          {!loading && <span className='indicator-label'>Acessar sistema</span>}
           {loading && (
             <span className='indicator-progress' style={{display: 'block'}}>
-              Please wait...
+              Por favor, aguarde...
               <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
             </span>
           )}
@@ -217,9 +213,9 @@ export function Login() {
       {/* end::Action */}
 
       <div className='text-gray-500 text-center fw-semibold fs-6'>
-        Not a Member yet?{' '}
+        Ainda não possui uma conta?{' '}
         <Link to='/auth/registration' className='link-primary'>
-          Sign up
+          Registre-se agora.
         </Link>
       </div>
     </form>

@@ -2,6 +2,8 @@
 import {FC} from 'react'
 import {PageTitle} from '../../../_metronic/layout/core'
 import {ListsWidget2} from '../../../_metronic/partials/widgets'
+import annyang from 'annyang';
+import AIGaba from '../AI/aibase';
 
 const DashboardPage: FC = () => (
   <>
@@ -17,8 +19,13 @@ const DashboardWrapper: FC = () => {
   
   return (
     <>
-      <PageTitle breadcrumbs={[]}>Menu principal</PageTitle>
-      <DashboardPage />
+      <PageTitle breadcrumbs={[]}>Menu principal</PageTitle> 
+      <DashboardPage /> 
+      <AIGaba/>
+      <div>
+      <h1 className='my-10'>Reconhecimento de Fala</h1>
+      
+      </div>
     </>
   )
 }

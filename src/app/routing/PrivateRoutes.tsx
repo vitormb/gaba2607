@@ -7,21 +7,20 @@ import {DashboardWrapper} from '../pages/dashboard/DashboardWrapper'
 import {getCSSVariableValue} from '../../_metronic/assets/ts/_utils'
 import {WithChildren} from '../../_metronic/helpers'
 /*import BuilderPageWrapper from '../pages/layout-builder/BuilderPageWrapper'*/
-import { CadastroPaciente } from '../pages/CadastroPaciente'
 import { ListagemPacientes } from '../pages/ListagemPaciente'
-import { CadastroDeLaudo } from '../pages/CadastroLaudo'
 import { PacienteIndividual } from '../pages/PacienteIndividual'
+import { EditarPaciente } from '../pages/PacienteEdit'
 import { useParams } from 'react-router-dom';
-
-
+import { DDbaseWrapper } from '../pages/drag-and-drop/ddmain';
+import { PDFembedPage } from '../pages/pdf/pdfview';
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
-  const WizardsPage = lazy(() => import('../modules/wizards/WizardsPage'))
-  
+  const WizardsPage = lazy(() => import('../modules/wizards/WizardsPage'))  
   const WizardCadastroLaudo = lazy(() => import('../modules/wizards/WizardCadastroLaudo'))
   const AccountPage = lazy(() => import('../modules/accounts/AccountPage'))
   const WidgetsPage = lazy(() => import('../modules/widgets/WidgetsPage'))
+
   /* const ChatPage = lazy(() => import('../modules/apps/chat/ChatPage')) */
   
   const UsersPage = lazy(() => import('../modules/apps/user-management/UsersPage'))
@@ -29,11 +28,19 @@ const PrivateRoutes = () => {
   return (
     <Routes>
       <Route element={<MasterLayout />}>
-        {/* Listagem abaixo das páginas criadas */}
-        <Route path="/cadastro-laudo" element={<CadastroDeLaudo />} />
-        <Route path="/cadastro-paciente" element={<CadastroPaciente />} />
-        <Route path="/Listagem-Pacientes" element={<ListagemPacientes />} />
+        {/* Listagem abaixo das páginas criadas */}        
         
+        
+        <Route path="/Listagem-Pacientes" element={<ListagemPacientes />} />  
+
+        <Route path="/DDbase" element={<DDbaseWrapper />} />          
+        <Route path="/pdfbase" element={<PDFembedPage />} />     
+        
+        <Route 
+          path="/paciente-editar/:id"
+          element={<PacienteEditWrapper />} 
+        />
+
         <Route 
           path="/pagina-paciente/:id"
           element={<PacienteIndividualWrapper />} 
@@ -100,6 +107,10 @@ function PacienteIndividualWrapper() {
   return <PacienteIndividual id={Number(id)} />
 }
 
+function PacienteEditWrapper() {
+  const { id } = useParams();
+  return <EditarPaciente id={Number(id)} />
+}
 
 
 

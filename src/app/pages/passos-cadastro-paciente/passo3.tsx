@@ -2,13 +2,34 @@ import { FC } from 'react';
 /*
 import { KTIcon } from '../../../_metronic/helpers';
 */
-import { ErrorMessage, Field, FieldArray, FormikProps } from 'formik';
+import { ErrorMessage, Field, FieldProps, FieldArray, FormikProps } from 'formik';
 import { Telefones } from './CadastrarPacienteWizardHelper';
 import { ProgressBarra } from './../CadastroPacienteWizard';
+import MaskedInput from 'react-text-mask'
+
+const phoneNumberMask = [
+  "(",
+  /[1-9]/,  
+  /\d/,
+  ")",
+  " ",
+  /\d/,
+  /\d/,
+  /\d/,
+  /\d/,
+  /\d/,
+  "-",
+  /\d/,
+  /\d/,
+  /\d/,
+  /\d/
+];
+
 
 interface Passo3Props extends FormikProps<any> { }
 const Passo3: FC<Passo3Props> = ({ values }) => {
   const tituloMain = 'Telefone';
+  
   return (
     <div className='container'>
       <div className='row align-items-start'>
@@ -21,7 +42,7 @@ const Passo3: FC<Passo3Props> = ({ values }) => {
             Contato
           </h2>
           <div className='text-gray-400 fw-bold fs-6'>
-            Basta preencher o <b>CEP</b> para atualizar todos os dados (exceto o complemento). 
+            Preencha as informações de contato do paciente. 
           </div>
         </div>
         <div className='progresso col-12'>
@@ -37,9 +58,9 @@ const Passo3: FC<Passo3Props> = ({ values }) => {
         <div className='container'>
         <div className='row align-items-start'>
           <div className="col-lg-6 mt-10">
-            <label className="form-label required">Email do paciente</label>
+            <label className="form-label required">E-mail do paciente:</label>
             <Field
-              placeholder='Email'
+              placeholder='email@email.com.br'
               className='form-control form-control-lg form-control-solid'
               name='email'
             />
@@ -60,13 +81,17 @@ const Passo3: FC<Passo3Props> = ({ values }) => {
                             : tituloMain + ' adicional: (' + index + ')'
                           }
                         </label>
-                        <Field
-                          placeholder="Telefone principal"
-                          maxLength={8}
-                          className="form-control col-12 form-control-lg form-control-solid required"
-                          name={`telefones.${index}.telefone`}
-                        />
+                        <Field name={`telefones.${index}.telefone`} render={({ field }: FieldProps) => (
+                            <MaskedInput
+                              {...field}
+                              mask={phoneNumberMask}
+                              className="form-control col-12 form-control-lg form-control-solid required"                                   
+                              placeholder="Telefone do paciente"
+                              type="text"
+                            />
+                          )} />
                         <ErrorMessage name={`telefones.${index}.telefone`} component="div" className="text-danger" />
+
                         <div className="mt-5 form-check form-switch form-check-custom form-check-solid justify-content-between">
                           <label className="form-check-label">
                             Este telefone é whatsapp?<br /> {telefones.isWhatsapp === false ? "Não" : "Sim"}
@@ -135,7 +160,10 @@ const Passo3: FC<Passo3Props> = ({ values }) => {
                       isWhatsapp: false
                     })}
                   >
-                    <i className="bi bi-house-add-fill fs-4 me-2"></i>Adicionar novo {tituloMain}
+                    <i className='bi bi-telephone-plus-fill ms-2 fs-4 me-4 text-color-primary'
+              data-bs-toggle='tooltip'
+              title='Cadastrar novo Paciente'
+            ></i>Adicionar novo {tituloMain}
                   </button>
                 </div>
               )}

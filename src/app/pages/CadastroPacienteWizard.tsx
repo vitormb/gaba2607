@@ -1,23 +1,35 @@
 import React, { FC, useEffect, useRef, useState } from 'react'
+import { createPacienteSchemas, ICreatePaciente, inits } from './passos-cadastro-paciente/CadastrarPacienteWizardHelper'
+import { StepperComponent } from '../../_metronic/assets/ts/components'
+import { Form, Formik, FormikValues } from 'formik'
+import { KTIcon } from '../../_metronic/helpers'
 import { Passo1 } from './passos-cadastro-paciente/passo1'
 import { Passo2 } from './passos-cadastro-paciente/passo2'
 import { Passo3 } from './passos-cadastro-paciente/passo3'
 import { Passo4 } from './passos-cadastro-paciente/passo4'
 import { Passo5 } from './passos-cadastro-paciente/passo5'
-import { KTIcon } from '../../_metronic/helpers'
-import { StepperComponent } from '../../_metronic/assets/ts/components'
-import { Form, Formik, FormikHelpers, ErrorMessage, FormikValues } from 'formik'
-import { createPacienteSchemas, ICreatePaciente, inits } from './passos-cadastro-paciente/CadastrarPacienteWizardHelper'
 import axios, { AxiosError } from 'axios';
-import * as Yup from 'yup';
+
 
 const CadastroPacienteWiz: FC = () => {
-  const [showModal, setShowModal] = useState(false);
-  const [apiResponse, setApiResponse] = useState(null);
+  const [cadastroConcluido, setCadastroConcluido] = useState(false);
+  const [cadastroCallback, setCadastroCallback] = useState('Aguardando...');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [skin, setSkin] = useState('loading');    
+  
+  const handleCloseModal = () => setCadastroConcluido(false);
+  
+  // eslint-disable-next-line
+  const [showModal, setShowModal] = useState(false); 
+  // eslint-disable-next-line
+  const [apiResponse, setApiResponse] = useState(null); 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
-  const [show, setShow] = useState(false);
+  // eslint-disable-next-line
+  const [error, setError] = useState(''); 
+  // eslint-disable-next-line
+  const [success, setSuccess] = useState(''); 
+  // eslint-disable-next-line
+  const [show, setShow] = useState(false); 
   const stepperRef = useRef<HTMLDivElement | null>(null)
   const stepper = useRef<StepperComponent | null>(null)
   const [currentSchema, setCurrentSchema] = useState(createPacienteSchemas[0])
@@ -26,8 +38,8 @@ const CadastroPacienteWiz: FC = () => {
  
   const loadStepper = () => {
     stepper.current = StepperComponent.createInsance(stepperRef.current as HTMLDivElement)
-  }
-  const btnRef = useRef<HTMLButtonElement | null>(null);
+  } 
+
   const prevStep = () => {
     if (!stepper.current) {
       return
@@ -35,38 +47,40 @@ const CadastroPacienteWiz: FC = () => {
     stepper.current.goPrev()
     setCurrentSchema(createPacienteSchemas[stepper.current.currentStepIndex - 1])
     setSubmitButton(stepper.current.currentStepIndex === stepper.current.totalStepsNumber)
-  }
-
-  async function test() {
-    console.log('start timer');
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    console.log('after 1 second');
-  }
+  } 
 
   const postData = async (data: ICreatePaciente) => {
     
     try {
+      setCadastroCallback('Validando cadastro...');
+      setSkin('loading');
+      setIsSubmitting(true);
+      
       const response = await axios.post('http://127.0.0.1:3333/pacientes', data);      
-      console.log(response.data); // Handle the successful response as needed    
-      alert('Cadastro realizado com sucesso!');
-      setIsModalOpen(true);      
+      console.log(response.data); // Handle the successful response as needed         
+      
     } catch (error) {
       if ((error as AxiosError).response) {
         // The request was made and the server responded with a status code
         setIsModalOpen(true);
+        setIsSubmitting(false);
         const axiosError = error as AxiosError;
+        setCadastroCallback(`<h4>Erro ao cadastrar paciente:</h4><span class="text-danger">${axiosError.response?.data.errors[0].message}</span>`);
+        setSkin('error');
         console.error('Error in postData:', axiosError.response?.data);
         console.error('Status code:', axiosError.response?.status);
-        console.error('Response headers:', axiosError.response?.headers);
-        alert(axiosError.response?.data.errors[0].message);
+        console.error('Response headers:', axiosError.response?.headers);        
         
       } else if ((error as AxiosError).request) {
         // The request was made but no response was received
-        console.error('No response received:', (error as AxiosError).request);
+        console.error('Houve um problema em sua conexão com o servidor.', (error as AxiosError).request);
+        setSkin('error');
+        setCadastroCallback('Houve um problema em sua conexão com o servidor. Caso o erro persista, entre em contato com nosso suporte.');
       } else {
         // Something happened in setting up the request that triggered an error
         const genericError = error as Error;
-        console.error('Error during request setup:', genericError.message);
+        setSkin('error');
+        console.error('Error during request setup:', genericError.message); 
       }
       throw error;
     }
@@ -76,11 +90,13 @@ const CadastroPacienteWiz: FC = () => {
     setIsModalOpen(false);
   };
 
+  /* Faz um loop dos passos e enfim invoca o SubmitStep
   const submitForm = (values: ICreatePaciente, actions: FormikValues) => {
     if (showModal) {
       submitStep(values, actions);
     }
   };
+  */
 
   const submitStep = async (values: ICreatePaciente, actions: FormikValues) => {
     if (!stepper.current) {
@@ -91,13 +107,22 @@ const CadastroPacienteWiz: FC = () => {
       stepper.current.goNext();
       console.log(stepper.current.currentStepIndex);
     } else {
-      try {
+      try {       
         await postData(values);
-        setSuccess('Form submitted successfully.'); // Set the success message
+        setCadastroCallback('Cadastro realizado com sucesso!');
+        setSkin('sucesso');
+        //toastr.success("New order has been placed!");
+        setTimeout(() => {
+          setCadastroCallback('Redirecionando...');
+          setCadastroConcluido(true);
+          document.location.href = '/Listagem-Pacientes'
+        }, 2000);
+        
+                 
       } catch (error) {
         // Handle form submission error
         if ((error as AxiosError).response) {
-          
+          console.log('houve erro');  
         } else if ((error as AxiosError).request) {
           // The request was made but no response was received
           console.error('No response received:', (error as AxiosError).request);
@@ -112,8 +137,25 @@ const CadastroPacienteWiz: FC = () => {
     }
     setSubmitButton(stepper.current.currentStepIndex === stepper.current.totalStepsNumber)
     setCurrentSchema(createPacienteSchemas[stepper.current.currentStepIndex - 1])
-  }
+  } 
 
+  const definirskin =
+  skin === 'loading'
+    ? 'bg-primary text-white'
+    : skin === 'error'
+    ? 'bg-danger text-white'
+    : skin === 'sucesso'
+    ? 'bg-success text-white'
+    : 'Skin inválido';
+
+    const definiralerta =
+  skin === 'loading'
+    ? 'Alerta'
+    : skin === 'error'
+    ? 'Erro'
+    : skin === 'sucesso'
+    ? 'Sucesso!'
+    : 'Erro desconhecido';
 
   useEffect(() => {
     if (!stepperRef.current) {
@@ -267,36 +309,23 @@ const CadastroPacienteWiz: FC = () => {
       </div>
       {/* begin::Aside*/}
 
-      <div className='d-flex flex-row-fluid flex-center bg-body rounded'>
-         {isModalOpen && (  
-        <div className="modal fade" tabIndex={-1} id={`kt_modal_erro`}>
+      <div className='d-flex flex-row-fluid flex-center bg-body rounded'>      
+      <div className="modal fade" id="kt_modal_sucesso" tabIndex={-1} aria-labelledby="kt_modal_sucesso" aria-hidden="true">
         <div className="modal-dialog">
           <div className="modal-content">
+            <div className={`modal-header ${definirskin}`}>
+              <h5 className="modal-title" id="kt_modal_sucesso">{definiralerta}</h5>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
             <div className="modal-body">
-              <div className="alert alert-dismissible bg-light-danger d-flex flex-center flex-column py-10 px-10 px-lg-20 mb-10">
-                <i className="ki-duotone ki-question fs-5x text-danger">
-                  <i className="path1"></i>
-                  <i className="path2"></i>
-                  <i className="path3"></i>
-                </i>
-                <div className="text-center">
-                  <h5 className="fw-bolder fs-1 mb-5"></h5>
-                  <div className="separator separator-dashed border-danger opacity-25 mb-5"></div>
-                  <div className="mb-9">
-                    ERRO ERRO ERRRO  <span className="close" onClick={closeModal}>XX</span>
-                  </div>
-                  <div className="d-flex flex-center flex-wrap"> 
-                    <button data-bs-dismiss="modal" aria-label="Cancelar" className="btn btn-outline btn-outline-danger btn-active-danger m-2">Cancelar</button>
-                    <button data-bs-dismiss="modal" aria-label="Apagar" className="btn btn-danger m-2">Ok, apagar</button>
-                  </div>
-                </div>
-
-              </div>
+            <div dangerouslySetInnerHTML={{__html: cadastroCallback}}></div>
+            </div>
+            <div className="modal-footer">              
+              <button type="button" data-bs-dismiss="modal" aria-label="Close" className={`btn text-white ${definirskin}`}>Ok</button>
             </div>
           </div>
         </div>
-      </div>)}
-        
+      </div>
         <Formik validationSchema={currentSchema} initialValues={initValues} onSubmit={submitStep} status={apiResponse}>
           {(formikProps) => (
             <Form className='col-lg-12 p-5' noValidate id='kt_create_account_form'>
@@ -332,19 +361,28 @@ const CadastroPacienteWiz: FC = () => {
                     Voltar
                   </button>
                 </div>
-
                 <div>
-
+                {isSubmitButton ? (
+                  <button 
+                  className='btn btn-lg btn-success me-3'
+                  data-bs-toggle="modal"
+                  data-bs-target="#kt_modal_sucesso"
+                  type="submit"> 
+                  <span className='indicator-label'>
+                  {isSubmitting ? 'Enviando...' : 'Enviar'}
+                  </span>
+                  <KTIcon iconName="arrow-right"
+                  className="fs-3 ms-2 me-0" />                 
+                  </button>
+                ) : (                  
                   <button
-                    type={isSubmitButton ? 'submit' : 'submit'} 
-                    className='btn btn-lg btn-primary me-3'                    
-                  >
-                    <span className="indicator-label">
-                      {isSubmitButton ? 'Enviar' : 'Continuar'}
-                      <KTIcon iconName="arrow-right" className="fs-3 ms-2 me-0" />
-                    </span>
-                  </button>                  
-                </div>
+                  className='btn btn-lg btn-primary me-3'                  
+                  type="submit">
+                    <span className='indicator-label'>Avançar</span>
+                  </button>
+                )}   
+                </div>                              
+
               </div>
             </Form>
           )}
@@ -370,7 +408,7 @@ const ProgressBarra: React.FC<LoadingBar> = ({ className, color, title, descript
   return (
     <div className={`${className}`}>
       {/* begin::Body */}
-      <div className='card-body my-3'>
+      <div className=''>
         <div className={`progress h-7px bg-${color} bg-opacity-50 mt-7`}>
           <div
             className={`progress-bar bg-${color}`}

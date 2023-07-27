@@ -45,12 +45,12 @@ class StepperComponent {
     this.steps = this.element.querySelectorAll('[data-kt-stepper-element="nav"]')
     this.btnNext = this.element.querySelector('[data-kt-stepper-action="next"]')
     this.btnPrev = this.element.querySelector('[data-kt-stepper-action="previous"]')
-    this.btnSubmit = this.element.querySelector('[data-kt-stepper-action="submit"]')
+    this.btnSubmit = this.element.querySelector('[data-kt-stepper-action="submit"]') 
 
     // Variables
     this.totalStepsNumber = this.steps?.length | 0
-    this.passedStepIndex = 0
-    this.currentStepIndex = 1 
+    this.passedStepIndex = 0    
+    this.currentStepIndex = 1
 
     // Set Current Step
     if (this.options.startIndex > 1) {

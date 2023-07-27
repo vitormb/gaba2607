@@ -19,7 +19,7 @@ const Passo5: FC<Passo5Props> = ({ values }) => {
         <div className='text-gray-400 fw-bold fs-6'>
           Confira os dados cadastrados e finalize clique em enviar.
         </div>
-        
+
       </div>
       <div className='progresso col-12'>
         <ProgressBarra
@@ -74,7 +74,7 @@ const Passo5: FC<Passo5Props> = ({ values }) => {
                   <li className='list-group-item bg-light border-0'>
                     <b>Lateralidade:</b><br />
                     {values.lateralidade}
-                  </li>                
+                  </li>
                   <li className='list-group-item bg-light border-0'>
                     <b>Organização:</b><br />
                     {values.organizacao}
@@ -177,32 +177,36 @@ const Passo5: FC<Passo5Props> = ({ values }) => {
             </div>
             <div className="card-body">
               <div className='col-12 text-xl-end'>                
-                  {values.responsaveis.map((responsaveis: Responsaveis, index: number) => (                    
+                {values.responsaveis.length !== null ? (                  
+                  values.responsaveis.map((responsaveis: Responsaveis, index: number) => (
+                    responsaveis.nome && (
                       <ul key={index} className='list-group text-xl-start'>
                         <li className='list-group-item bg-light border-0'>
-                          <b>Responsável:</b><br/> {responsaveis.nome}
+                          <b>Nome:</b><br /> {responsaveis.nome}
                         </li>
                         <li className='list-group-item bg-light border-0'>
-                        <b>Nome:</b><br/> {responsaveis.nome}
+                          <b>Gênero:</b> <br /> {responsaveis.genero}
                         </li>
                         <li className='list-group-item bg-light border-0'>
-                        <b>Gênero:</b> <br/> {responsaveis.genero}
-                        </li>
-                        <li className='list-group-item bg-light border-0'>
-                        <b>Telefone:</b> <br/> {responsaveis.telefone}
+                          <b>Telefone:</b> <br /> {responsaveis.telefone}
                         </li>
                         <div className='badge badge-success'>{responsaveis.isWhatsapp !== false ? 'Whatsapp' : ''}</div>
                         <li className='list-group-item bg-light border-0'>
-                        <b>Observação:</b> <br/> {responsaveis.observacao}
-                        </li>
-                      </ul>                    
-                  ))}
-                </div>
-              </div>              
+                          <b>Observação:</b> <br /> {responsaveis.observacao}
+                        </li>                        
+                      </ul>
+                    )                    
+                  ))
+                ) : (
+                  <p>Nenhum responsável cadastrado</p>
+                ) 
+                }
+              </div>
             </div>
           </div>
         </div>
-      </div>    
+      </div>
+    </div>
   )
 }
 export { Passo5 }
