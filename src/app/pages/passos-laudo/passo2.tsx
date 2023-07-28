@@ -26,11 +26,11 @@ export function calcularIdade(dataNascimento: string): number {
   return idade;
 }
 
-function pacienteDataToObject(data: PacienteData): PacienteData {
-  // Sua lógica para transformar pacienteData em um objeto
-  const processedData: PacienteData = {
-    ...data
-  };
+function pacienteDataToObject(data: PacienteData): PacienteData[] {
+  // Sua lógica para transformar pacienteData em um array de objetos
+  const processedData: PacienteData[] = [
+    data
+  ];
   
   return processedData;
 }
@@ -39,13 +39,13 @@ const getKitchenSinkEditorContent = (pacienteData: PacienteData) => [
   { type: "h1", textAlign: "center", fontSize: '36', backgroundColor:'#0993E3', children: [{ text: 'INTRODUÇÃO:' }] },
   { type: "divider", children: [{ text: "\n\n" }], size: 1 },
   { type: "paragraph", children: [{ text: 'Segundo o Código de Ética Profissional do Psicólogo, artigo 1 "g" e "h" é um dever do Psicólogo: “Informar, a quem de direito, os resultados decorrentes da prestação de serviços psicológicos, transmitindo somente o que for necessário para a tomada de decisões que afetem o usuário ou beneficiário”;  e, “orientar a quem de direito sobre os encaminhamentos apropriados, a partir da prestação de serviços psicológicos, e fornecer, sempre que solicitado, os documentos pertinentes ao bom termo do trabalho”.\n\n' }] },
-  pacienteDataToObject(pacienteData) // adiciona os dados do paciente
+  ...pacienteDataToObject(pacienteData) // adiciona os dados do paciente
 ];
     
 const Passo2: FC = () => {    
 const { selectedData } = usePacienteContext();
 const { values } = useFormikContext<FormikValues>();
-const [processedPacienteData, setProcessedPacienteData] = useState<PacienteData | null>(null);
+const [processedPacienteData, setProcessedPacienteData] = useState<PacienteData[] | null>(null);
 
   const pacienteData: PacienteData = useMemo(() => {
     if (!selectedData) {
