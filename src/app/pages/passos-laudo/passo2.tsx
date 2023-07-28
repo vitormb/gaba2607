@@ -2,7 +2,7 @@ import React, { FC, useCallback, useContext, useMemo, useEffect, useState } from
 import { ErrorMessage, Field, FormikValues, useFormikContext } from 'formik';
 import { ProgressBarra } from '../CadastroPacienteWizard';
 import { usePacienteContext }  from './PacienteContext';
-import { KitchenSinkEditor} from '../SlateJS/editorPasso2';
+import { KitchenSinkEditor} from '../SlateJS/editorPasso2'; 
 
 type PacienteData = {
   id: number;
