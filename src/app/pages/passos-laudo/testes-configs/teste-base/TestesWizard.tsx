@@ -21,7 +21,9 @@ export const TestesWizard: React.FC = (PropFinal) => {
     }
   }
   return (
-    <TestesSelecionados />
-    <SubTestesContent />
+    <div>
+      <TestesSelecionados />
+      <SubTestesContent valor='aa' idTeste='bbb' />
+    </div>
   )
 }

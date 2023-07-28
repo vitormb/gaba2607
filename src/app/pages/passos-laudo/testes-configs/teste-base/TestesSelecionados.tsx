@@ -1,7 +1,12 @@
 import React, {FC, useState} from 'react';
 import {TestesWizard} from '../teste-base/TestesWizard';
 
-export const TestesSelecionados: React.FC = (PropFinal) => {
+interface TestesSelecionadosProps {
+    selectedItems: any[];
+    handleConfigureTest: (item: any) => void;
+    // ... outras props necessárias ...
+  }
+  export const TestesSelecionados: React.FC<TestesSelecionadosProps> = ({selectedItems, handleConfigureTest, /* ... outras props ... */}) => {
     
     return (
       <div>
