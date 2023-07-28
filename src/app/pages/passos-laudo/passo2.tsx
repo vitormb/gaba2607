@@ -13,8 +13,12 @@ type PacienteData = {
   dataNascimento: string; // adicionar propriedade
 };
 
+const Passo2: FC = () => {    
+const { selectedData } = usePacienteContext();
+const { values } = useFormikContext<FormikValues>();
+
 // Função para calcular idade
-export function calcularIdade(dataNascimento: string): number {
+function calcularIdade(dataNascimento: string): number {
   const hoje = new Date();
   const dataNasc = new Date(dataNascimento);
   let idade = hoje.getFullYear() - dataNasc.getFullYear();
@@ -26,44 +30,24 @@ export function calcularIdade(dataNascimento: string): number {
   return idade;
 }
 
-function pacienteDataToObject(data: PacienteData): PacienteData[] {
-  // Sua lógica para transformar pacienteData em um array de objetos
-  if (!data) {
-    return [];
-  }
-
-  const processedData: PacienteData[] = [
-    data
-  ];
-  
-  return processedData;
-}
-
 const getKitchenSinkEditorContent = (pacienteData: PacienteData) => [  
   { type: "h1", textAlign: "center", fontSize: '36', backgroundColor:'#0993E3', children: [{ text: 'INTRODUÇÃO:' }] },
   { type: "divider", children: [{ text: "\\n\\n" }], size: 1 },
   { type: "paragraph", children: [{ text: 'Segundo o Código de Ética Profissional do Psicólogo, artigo 1 "g" e "h" é um dever do Psicólogo: “Informar, a quem de direito, os resultados decorrentes da prestação de serviços psicológicos, transmitindo somente o que for necessário para a tomada de decisões que afetem o usuário ou beneficiário”;  e, “orientar a quem de direito sobre os encaminhamentos apropriados, a partir da prestação de serviços psicológicos, e fornecer, sempre que solicitado, os documentos pertinentes ao bom termo do trabalho”.\\n\\n' }] },
-  ...pacienteDataToObject(pacienteData) // adiciona os dados do paciente
+  { type: "paragraph", children: [{ text: `Nome do paciente: ${pacienteData.nomeCompleto}` }] }  
 ];
-    
-const Passo2: FC = () => {    
-const { selectedData } = usePacienteContext();
-const { values } = useFormikContext<FormikValues>();
-const [processedPacienteData, setProcessedPacienteData] = useState<PacienteData[] | null>(null);
-
   const pacienteData: PacienteData = useMemo(() => {
     if (!selectedData) {
       return {
-        id: 0,
-        nome: '',
-        idade: 0,
-        genero: '',
-        nomeCompleto: '',
-        dataNascimento: '',
+        id: 52,
+        nome: 'Vitor Mantovani',
+        idade: 33,
+        genero: 'Masculino',
+        nomeCompleto: 'Vitor Mantovani',
+        dataNascimento: '26/11/1989',
         ...values, // incluindo as propriedades do objeto 'values'
       };
     }
-
     return {
       id: selectedData.id,
       nome: selectedData.nomeCompleto,
@@ -81,18 +65,12 @@ const [processedPacienteData, setProcessedPacienteData] = useState<PacienteData[
   
   const [editorContent, setEditorContent] = useState(pacienteDataContent || []);
 
-  const handleAddText = (newElement: any) => { // substitua 'any' pelo tipo correto
+  const handleAddText = (newElement: any) => { 
     setEditorContent(prevContent => [...prevContent, newElement]);
   };
-  console.log('pacienteDataContent', pacienteDataContent);
 
-  useEffect(() => {
-    // Se selectedData é válido (não é null), e processedPacienteData ainda não foi calculado, calculamos agora
-    if (selectedData && !processedPacienteData) {
-      const data = pacienteDataToObject(selectedData);
-      setProcessedPacienteData(data);
-    }
-  }, [selectedData, processedPacienteData]); 
+  console.log('pacienteDataContent', pacienteDataContent);
+  console.log('datacontent:', pacienteDataContent);
 
   return (
     <div className='container-fluid'>
@@ -154,9 +132,7 @@ const [processedPacienteData, setProcessedPacienteData] = useState<PacienteData[
             </>
             <div className='col-lg-12 mt-10'>
               <div className='separator mb-10'></div>
-
-              {editorContent && <KitchenSinkEditor pacienteData={pacienteData} content={editorContent} setFieldValue={() => {}} pacienteDataContent={pacienteDataContent} />}
-             
+              <KitchenSinkEditor pacienteDataContent={editorContent} pacienteData={pacienteData} content={editorContent} setFieldValue={() => {}} />             
              <ErrorMessage name='introducao' component="div" className="text-danger" />              
             </div>
             <pre>{JSON.stringify(pacienteData, null, 2)}</pre>

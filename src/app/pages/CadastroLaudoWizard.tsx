@@ -201,15 +201,11 @@ const CadastroLaudoWiz: FC = () => {
               {(formikProps) => (
                 
                 <Form className='col-lg-12 p-5' id='kt_create_account_form'>
-                  <div className='current card card-custom card-stretch' data-kt-stepper-element='content' >
-                    
-                      <Passo1 />
-                    
+                  <div className='current card card-custom card-stretch' data-kt-stepper-element='content' >                    
+                      <Passo1 />                    
                   </div>
-                  <div data-kt-stepper-element='content'>
-                    
-                      <Passo2 />
-                    
+                  <div data-kt-stepper-element='content'>                   
+                      <Passo2 />                    
                   </div>
 
                   <div data-kt-stepper-element='content'>

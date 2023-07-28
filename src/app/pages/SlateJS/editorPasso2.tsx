@@ -94,7 +94,7 @@ export const KitchenSinkEditor = (props: KitchenSinkEditorProps) => {
   const [pergunta, setPergunta] = useState('');
   const [resposta, setResposta] = useState('');
   const [isLoading, setIsLoading] = useState(false);  
-  const [editorContent, setEditorContent] = useState(props.pacienteDataContent); // atualizado para usar props
+  
   const handleAddText = (newText: string) => {
     // Cria um novo objeto de parágrafo com o texto
     const newParagraph = {
@@ -117,7 +117,7 @@ export const KitchenSinkEditor = (props: KitchenSinkEditorProps) => {
     try {
       setIsLoading(true);
 
-      const API_KEY = "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"; // secure -> environment variable
+      const API_KEY = "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"; // secure -> environment variable
       const APIBody = {
         "prompt": pergunta + "\nA:",
         "temperature": 0.9,
@@ -263,8 +263,6 @@ const onChange = (value:any) => {
                     <div className='col-auto me-auto'>
                     <button
                         type="button"
-                        data-bs-toggle="modal"
-                        data-bs-target="#modalAI"
                         className='btn btn-info btn-pulse-ai me-2'
                         onClick={handleAIGabaClick}
                       >
