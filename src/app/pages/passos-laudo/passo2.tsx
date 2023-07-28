@@ -79,11 +79,7 @@ const [processedPacienteData, setProcessedPacienteData] = useState<PacienteData[
     return getKitchenSinkEditorContent(pacienteData);
   }, [pacienteData]);
   
-  if (pacienteDataContent) {
-    const [editorContent, setEditorContent] = useState(pacienteDataContent);
-  }
-
-  const [editorContent, setEditorContent] = useState(pacienteDataContent);
+  const [editorContent, setEditorContent] = useState(pacienteDataContent);  
 
   const handleAddText = (newElement: any) => { // substitua 'any' pelo tipo correto
     setEditorContent(prevContent => [...prevContent, newElement]);
