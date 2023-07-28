@@ -83,7 +83,7 @@ const Passo2: FC = () => {
       // Vamos supor que esta função retorne um valor do tipo PacienteData
       const processedData: PacienteData = {
         ...pacienteData
-      };
+      }; 
       
       return processedData;
     }
@@ -94,7 +94,7 @@ const Passo2: FC = () => {
       setProcessedPacienteData(data);
     }
   }, [selectedData, processedPacienteData]);
-  
+
   const getKitchenSinkEditorContent = (pacienteData: PacienteData) => [  
     { type: "h1", textAlign: "center", fontSize: '36', backgroundColor:'#0993E3', children: [{ text: 'INTRODUÇÃO:' }] },
     { type: "divider", children: [{ text: "\n\n" }], size: 1 },
