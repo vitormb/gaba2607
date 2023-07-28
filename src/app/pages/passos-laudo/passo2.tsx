@@ -79,7 +79,7 @@ const [processedPacienteData, setProcessedPacienteData] = useState<PacienteData[
     return getKitchenSinkEditorContent(pacienteData);
   }, [pacienteData]);
   
-  const [editorContent, setEditorContent] = useState(pacienteDataContent);  
+  const [editorContent, setEditorContent] = useState(pacienteDataContent || []);
 
   const handleAddText = (newElement: any) => { // substitua 'any' pelo tipo correto
     setEditorContent(prevContent => [...prevContent, newElement]);
@@ -155,7 +155,7 @@ const [processedPacienteData, setProcessedPacienteData] = useState<PacienteData[
             <div className='col-lg-12 mt-10'>
               <div className='separator mb-10'></div>
 
-              <KitchenSinkEditor pacienteData={pacienteData} content={editorContent} setFieldValue={() => {}} pacienteDataContent={pacienteDataContent} />
+              {editorContent && <KitchenSinkEditor pacienteData={pacienteData} content={editorContent} setFieldValue={() => {}} pacienteDataContent={pacienteDataContent} />}
              
              <ErrorMessage name='introducao' component="div" className="text-danger" />              
             </div>
