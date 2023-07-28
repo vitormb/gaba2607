@@ -28,6 +28,10 @@ export function calcularIdade(dataNascimento: string): number {
 
 function pacienteDataToObject(data: PacienteData): PacienteData[] {
   // Sua lógica para transformar pacienteData em um array de objetos
+  if (!data) {
+    return [];
+  }
+
   const processedData: PacienteData[] = [
     data
   ];
@@ -74,6 +78,10 @@ const [processedPacienteData, setProcessedPacienteData] = useState<PacienteData[
   const pacienteDataContent = useMemo(() => {
     return getKitchenSinkEditorContent(pacienteData);
   }, [pacienteData]);
+  
+  if (pacienteDataContent) {
+    const [editorContent, setEditorContent] = useState(pacienteDataContent);
+  }
 
   const [editorContent, setEditorContent] = useState(pacienteDataContent);
 
