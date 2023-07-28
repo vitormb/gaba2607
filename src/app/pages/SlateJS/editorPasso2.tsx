@@ -63,7 +63,7 @@ const editorWrapperStyle = {
 type KitchenSinkEditorProps = {
   pacienteData: PacienteData;
   content: any; // substitua 'any' pelo tipo correto
-  setFieldValue: () => void;
+  setFieldValue: (fieldName: string, value: any) => void; // atualizado para aceitar dois argumentos
   pacienteDataContent: any; // substitua 'any' pelo tipo correto
 };
 interface PacienteData {
@@ -94,12 +94,16 @@ export const KitchenSinkEditor = (props: KitchenSinkEditorProps) => {
   const [pergunta, setPergunta] = useState('');
   const [resposta, setResposta] = useState('');
   const [isLoading, setIsLoading] = useState(false);  
-  const [editorContent, setEditorContent] = useState(pacienteDataContent);
-  const handleAddText = (text:any) => {
-    console.log('aaaaa')
-    return {
-      children: [{ text }]
+  const [editorContent, setEditorContent] = useState(props.pacienteDataContent); // atualizado para usar props
+  const handleAddText = (newText: string) => {
+    // Cria um novo objeto de parágrafo com o texto
+    const newParagraph = {
+      type: 'paragraph',
+      children: [{ text: newText }],
     };
+  
+    // Adiciona o novo parágrafo ao valor atual do editor
+    setNewValue((currentValue) => [...currentValue, newParagraph]);
   };
 
   const handleValueChange = (value:any) => {
