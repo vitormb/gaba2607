@@ -41,8 +41,8 @@ function pacienteDataToObject(data: PacienteData): PacienteData[] {
 
 const getKitchenSinkEditorContent = (pacienteData: PacienteData) => [  
   { type: "h1", textAlign: "center", fontSize: '36', backgroundColor:'#0993E3', children: [{ text: 'INTRODUÇÃO:' }] },
-  { type: "divider", children: [{ text: "\n\n" }], size: 1 },
-  { type: "paragraph", children: [{ text: 'Segundo o Código de Ética Profissional do Psicólogo, artigo 1 "g" e "h" é um dever do Psicólogo: “Informar, a quem de direito, os resultados decorrentes da prestação de serviços psicológicos, transmitindo somente o que for necessário para a tomada de decisões que afetem o usuário ou beneficiário”;  e, “orientar a quem de direito sobre os encaminhamentos apropriados, a partir da prestação de serviços psicológicos, e fornecer, sempre que solicitado, os documentos pertinentes ao bom termo do trabalho”.\n\n' }] },
+  { type: "divider", children: [{ text: "\\n\\n" }], size: 1 },
+  { type: "paragraph", children: [{ text: 'Segundo o Código de Ética Profissional do Psicólogo, artigo 1 "g" e "h" é um dever do Psicólogo: “Informar, a quem de direito, os resultados decorrentes da prestação de serviços psicológicos, transmitindo somente o que for necessário para a tomada de decisões que afetem o usuário ou beneficiário”;  e, “orientar a quem de direito sobre os encaminhamentos apropriados, a partir da prestação de serviços psicológicos, e fornecer, sempre que solicitado, os documentos pertinentes ao bom termo do trabalho”.\\n\\n' }] },
   ...pacienteDataToObject(pacienteData) // adiciona os dados do paciente
 ];
     
@@ -166,24 +166,5 @@ const [processedPacienteData, setProcessedPacienteData] = useState<PacienteData[
     </div>
   );
 }
-
-/*
-Criar um novo elemento apenas para receber os dados do usuário.
-Listar uma série de funções com dados específicos e preparar envios para o backend.
-
-ex:
-
-PacienteDadosGerais.tsx 
->> nome, idade, genero, nomeCompleto, dataNascimento...
->> exportar as arrays na ordem solicitada pelo editorMain original para rodar no slateJS.
-
-Criar outro elemento para receber as listagens de sugestões de texto a serem adicionadas ao 'meio campo'.
-integrar o assistente de AI e o elemento de listagem para enviar o texto direto para o 'meio campo'.
-
-preparar um "meio campo" que receba a listagem e a IA e depois enviar para o editorMain.
-
-> dados do paciente + dados da listagem + Dados da IA >> meio campo integrando todos os valores >> editorMain [recebe os dados do paciente]
-
-*/
 
 export { Passo2 };
