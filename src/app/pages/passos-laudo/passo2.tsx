@@ -60,11 +60,7 @@ const Passo2: FC = () => {
     };
   }, [selectedData, values]);
 
-  const getKitchenSinkEditorContent = (pacienteData: PacienteData) => [  
-    { type: "h1", textAlign: "center", fontSize: '36', backgroundColor:'#0993E3', children: [{ text: 'INTRODUÇÃO:' }] },
-    { type: "divider", children: [{ text: "\n\n" }], size: 1 },
-    { type: "paragraph", children: [{ text: 'Segundo o Código de Ética Profissional do Psicólogo, artigo 1 "g" e "h" é um dever do Psicólogo: “Informar, a quem de direito, os resultados decorrentes da prestação de serviços psicológicos, transmitindo somente o que for necessário para a tomada de decisões que afetem o usuário ou beneficiário”;  e, “orientar a quem de direito sobre os encaminhamentos apropriados, a partir da prestação de serviços psicológicos, e fornecer, sempre que solicitado, os documentos pertinentes ao bom termo do trabalho”.\n\n' }] },    
-  ];
+
 
   const pacienteDataContent = useMemo(() => {
     return getKitchenSinkEditorContent(pacienteData);
@@ -75,6 +71,9 @@ const Passo2: FC = () => {
   const handleAddText = (newElement: any) => { // substitua 'any' pelo tipo correto
     setEditorContent(prevContent => [...prevContent, newElement]);
   };
+
+
+
 
   console.log('pacienteDataContent', pacienteDataContent);
 
@@ -95,6 +94,13 @@ const Passo2: FC = () => {
       setProcessedPacienteData(data);
     }
   }, [selectedData, processedPacienteData]);
+  
+  const getKitchenSinkEditorContent = (pacienteData: PacienteData) => [  
+    { type: "h1", textAlign: "center", fontSize: '36', backgroundColor:'#0993E3', children: [{ text: 'INTRODUÇÃO:' }] },
+    { type: "divider", children: [{ text: "\n\n" }], size: 1 },
+    { type: "paragraph", children: [{ text: 'Segundo o Código de Ética Profissional do Psicólogo, artigo 1 "g" e "h" é um dever do Psicólogo: “Informar, a quem de direito, os resultados decorrentes da prestação de serviços psicológicos, transmitindo somente o que for necessário para a tomada de decisões que afetem o usuário ou beneficiário”;  e, “orientar a quem de direito sobre os encaminhamentos apropriados, a partir da prestação de serviços psicológicos, e fornecer, sempre que solicitado, os documentos pertinentes ao bom termo do trabalho”.\n\n' }] },
+    ...pacienteDataToObject(pacienteData) // adiciona os dados do paciente
+  ];
 
   return (
     <div className='container-fluid'>
