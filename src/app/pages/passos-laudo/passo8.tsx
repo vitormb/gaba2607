@@ -18,7 +18,7 @@ const Passo8: FC = () => {
 
   return( 
     <div className='container-flex w-100'>
-      <TesteBase dados={dados} />
+      <TesteBase  dados={dados} />
     </div>
   )
 }
