@@ -16,6 +16,7 @@ interface Props {
   }
 }
 interface TestePropValues {
+   pontuacao: number
     nome: string
     descricao: string
     friendlyname: string
@@ -115,12 +116,28 @@ export function TesteBase({dados}: Props) {
         </div>
     )
 })
-  const TestePropTR: React.FC<TestePropValues> = React.memo(({nome, descricao, friendlyname}) => {
+  const TestePropTR: React.FC<TestePropValues> = React.memo(({nome, descricao, pontuacao, friendlyname}) => {
     return (
       <tr className='align-middle'>
         <td className='col-small'>{idSubteste++}</td>
         <td className='col-2'>{nome}</td>
         <td className='col-3'>{descricao}</td>
+        <td className='col'>
+          <div className='form-floating'>
+            <input
+              name={friendlyname + '-percentil'}
+              type='number'
+              value={pontuacao}
+              className='form-control border-0'
+              placeholder='Percentil'
+              inputMode='numeric'
+            />
+            <label className='text-gray-600' htmlFor={friendlyname + '-percentil'}>
+              Percentil
+            </label>
+          </div>
+        </td>
+        {/*}
         <td className='col'>
           <div className='form-floating'>
             <Field
@@ -135,6 +152,7 @@ export function TesteBase({dados}: Props) {
             </label>
           </div>
         </td>
+    */}
         {showPonderado && (
           <td className='col-1'>
             <div className='form-floating'>
@@ -275,6 +293,7 @@ export function TesteBase({dados}: Props) {
           {dados.nomeDoSubTeste.map((nome, index) => (
             <TestePropTR
               key={index}
+              pontuacao={dados.pontuacao[index]}
               nome={nome}
               descricao={dados.descricao[index]}
               friendlyname={dados.friendlyTitle[index]}
