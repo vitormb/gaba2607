@@ -23,8 +23,8 @@ interface TestePropValues {
   }
   interface TestePropGraficoValues {
     nomes: string[]
-    pontuacoes: number[]
-    pontuacoesBase: number[]
+    pontuacao: number[]
+    pontuacaoBase: number[]
     indices: string[]
   }
   
@@ -57,7 +57,7 @@ export function TesteBase({dados}: Props) {
     }
   }, [])
   const GraficoSegmentos: React.FC<TestePropGraficoValues> = React.memo(
-    ({ nomes, pontuacoes, pontuacoesBase, indices }) => {
+    ({ nomes, pontuacaoBase, indices }) => {
       const options = {
         chart: {
           id: 'basic-bar',
@@ -66,7 +66,7 @@ export function TesteBase({dados}: Props) {
           categories: nomes,
         },
         annotations: {
-          points: pontuacoes.map((pontuacao:any, index:any) => ({
+          points: dados.pontuacao.map((pontuacao:any, index:any) => ({
             x: nomes[index],
             y: pontuacao,
             marker: {
@@ -81,7 +81,7 @@ export function TesteBase({dados}: Props) {
               }
             }
           })),
-          yaxis: pontuacoesBase.map((pontuacaoBase:any, index:any) => ({
+          yaxis: pontuacaoBase.map((pontuacaoBase:any, index:any) => ({
             y: pontuacaoBase,
             borderColor: '#00E396',
             label: {
@@ -99,11 +99,11 @@ export function TesteBase({dados}: Props) {
       const series = [
         {
           name: 'Pontuação',
-          data: pontuacoes,
+          data: dados.pontuacao,
         },
         {
           name: 'Pontuação Base',
-          data: pontuacoesBase,
+          data: pontuacaoBase,
         },
       ]
    
@@ -310,8 +310,8 @@ const TestePropTR: React.FC<TestePropValues> = React.memo(({nome, descricao, fri
       
       <GraficoSegmentos
         nomes={dados.nomeDoSubTeste}
-        pontuacoes={dados.pontuacao}
-        pontuacoesBase={dados.pontuacaoBase}
+        pontuacao={dados.pontuacao}
+        pontuacaoBase={dados.pontuacaoBase}
         indices={dados.indices}
         />
       
