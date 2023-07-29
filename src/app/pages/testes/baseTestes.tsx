@@ -116,7 +116,12 @@ export function TesteBase({dados}: Props) {
         </div>
     )
 })
-  const TestePropTR: React.FC<TestePropValues> = React.memo(({nome, descricao, pontuacao, friendlyname}) => {
+const TestePropTR: React.FC<TestePropValues> = React.memo(({nome, descricao, friendlyname, pontuacao: pontuacaoInicial}) => {
+  const [pontuacao, setPontuacao] = useState(pontuacaoInicial); // Adicione um estado para a pontuação
+  const handlePercentilChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const percentilValue = Number(event.target.value); // Converta o valor para um número
+    setPontuacao(percentilValue); // Atualize a pontuação
+  };
     return (
       <tr className='align-middle'>
         <td className='col-small'>{idSubteste++}</td>
@@ -131,6 +136,7 @@ export function TesteBase({dados}: Props) {
               className='form-control border-0'
               placeholder='Percentil'
               inputMode='numeric'
+              onChange={handlePercentilChange} // Adicione a função handlePercentilChange aqui
             />
             <label className='text-gray-600' htmlFor={friendlyname + '-percentil'}>
               Percentil
