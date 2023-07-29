@@ -28,7 +28,8 @@ interface TestePropValues {
     indices: string[]
   }
   
-export function TesteBase({dados}: Props) {
+  export function TesteBase({dados}: Props) {
+    const [pontuacaoState, setPontuacaoState] = useState(dados.pontuacao); // Adicione um estado para a pontuação
   const [showPonderado, setShowPonderado] = useState(false)
   const [showInterpretacao, setShowInterpretacao] = useState(false)
   const [showScoreZ, setShowScoreZ] = useState(false)
@@ -116,7 +117,7 @@ export function TesteBase({dados}: Props) {
         </div>
     )
 })
-const TestePropTR: React.FC<TestePropValues> = React.memo(({nome, descricao, friendlyname, pontuacao: pontuacaoInicial}) => {
+const TestePropTR: React.FC<TestePropValues & { setPontuacao: (value: number) => void }> = React.memo(({nome, descricao, pontuacao, setPontuacao, friendlyname}) => {
   const [pontuacao, setPontuacao] = useState(pontuacaoInicial); // Adicione um estado para a pontuação
   const handlePercentilChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const percentilValue = Number(event.target.value); // Converta o valor para um número
@@ -296,24 +297,29 @@ const TestePropTR: React.FC<TestePropValues> = React.memo(({nome, descricao, fri
           </tr>
         </thead>
         <tbody>
-          {dados.nomeDoSubTeste.map((nome, index) => (
-            <TestePropTR
-              key={index}
-              pontuacao={dados.pontuacao[index]}
-              nome={nome}
-              descricao={dados.descricao[index]}
-              friendlyname={dados.friendlyTitle[index]}
-            />
-          ))}
+        {dados.nomeDoSubTeste.map((nome, index) => (
+          <TestePropTR
+            key={index}
+            pontuacao={pontuacaoState[index]}
+            setPontuacao={(value: number) => {
+              const newPontuacao = [...pontuacaoState];
+              newPontuacao[index] = value;
+              setPontuacaoState(newPontuacao);
+            }}
+            nome={nome}
+            descricao={dados.descricao[index]}
+            friendlyname={dados.friendlyTitle[index]}
+          />
+        ))}
         </tbody>
       </table>
       
       <GraficoSegmentos
         nomes={dados.nomeDoSubTeste}
-        pontuacao={dados.pontuacao}
+        pontuacao={pontuacaoState} // Use o estado da pontuação aqui
         pontuacaoBase={dados.pontuacaoBase}
         indices={dados.indices}
-        />
+      />
       
     </div>
   )
