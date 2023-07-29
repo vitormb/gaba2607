@@ -230,7 +230,7 @@ const Passo7: FC = () => {
         </div>
       </div>
       <div className='separator my-10'></div>
-      <TestesSelecionados selectedItems={[]} valor='asdx' handleConfigureTest={SubTestesContent}/>
+      <TestesSelecionados selectedItems={[]} valor='asdx' handleConfigureTest={SubTestesContent} />
     </div>
   )
 }
