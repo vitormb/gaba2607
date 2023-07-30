@@ -58,51 +58,37 @@ interface TestePropValues {
   }, [])
   const GraficoSegmentos: React.FC<TestePropGraficoValues> = React.memo(
     ({ nomes, pontuacaoBase, indices }) => {
-      const pontuacaoComCores = dados.pontuacao.map(pontuacao => pontuacao < 10 ? -1 : pontuacao); // Crie uma nova série de dados
-  
       const options = {
         chart: {
-          id: 'basic-bar',
+          id: 'basic-bar'
         },
         xaxis: {
           categories: nomes,
-        },
-        colors: ['#FF0000', '#0000FF'], // Defina a cor padrão para azul e a cor para o valor especial para vermelho
+        },        
         annotations: {
-          points: pontuacaoComCores.map((pontuacao:any, index:any) => ({
+          points: dados.pontuacao.map((pontuacao:any, index:any) => ({
             x: nomes[index],
             y: pontuacao,
             marker: {
               size: 0
-            },
+            },            
             label: {
-              borderColor: '#0000FF',
+              borderColor: '#FF4560',
               offsetY: 0,
               style: {
                 color: '#fff',
-                background: '#0000FF',
+                background: '#FF4560',
               }
             }
           })),
-          yaxis: pontuacaoBase.map((pontuacaoBase:any, index:any) => ({
-            y: pontuacaoBase,
-            borderColor: '#00E396',
-            label: {
-              borderColor: '#00E396',
-              style: {
-                color: '#fff',
-                background: '#00E396',
-              },
-              text: 'Pontuação Base',
-            }
-          }))
+          
         },
       }
   
       const series = [
         {
           name: 'Pontuação',
-          data: pontuacaoComCores, // Use a nova série de dados aqui
+          data: dados.pontuacao,
         },
         {
           name: 'Pontuação Base',
@@ -114,7 +100,7 @@ interface TestePropValues {
         <div className='table-responsive w-100'>
             <div className='col-10'>
                 <h2>Gráfico de Pontuações</h2>
-                <Chart options={options} series={series} type='line' width='100%' />
+                <Chart options={options} series={series} type='line' width='768' />
             </div>
         </div>
     )
@@ -131,7 +117,7 @@ const TestePropTR: React.FC<TestePropValues> = React.memo(({nome, descricao, ind
         <td className='col-2'>{nome}</td>
         <td className='col-2'>{indices}</td>
         <td className='col-3'>{descricao}</td>
-        <td className='col bg-success'>
+        <td className='col bg-primary'>
           <div className='form-floating'>
             <input
               name={friendlyname + '-percentil'}
@@ -320,7 +306,6 @@ const TestePropTR: React.FC<TestePropValues> = React.memo(({nome, descricao, ind
         pontuacaoBase={dados.pontuacaoBase}
         indices={dados.indices}
         />
-      
     </div>
   )
 }

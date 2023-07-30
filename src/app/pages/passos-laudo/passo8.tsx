@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { FC, useState, useEffect } from 'react';
-import { TesteBase } from '../testes/baseTestes';
+import { TesteBase } from './testes-configs/teste-base/baseTestes';
 
 
 const Passo8: FC = () => {
