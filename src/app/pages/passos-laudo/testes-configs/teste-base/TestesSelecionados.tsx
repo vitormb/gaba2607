@@ -52,7 +52,7 @@ export const TestesSelecionados: React.FC<TestesSelecionadosProps> = ({
                         friendlytitle: '',
                         descricao: '',
                         faixaEtariaRecomendada: '',
-                        pontuacao: '',
+                        pontuacao: '10',
                         normas: '',
                         interpretacao: '',
                         referencias: '',

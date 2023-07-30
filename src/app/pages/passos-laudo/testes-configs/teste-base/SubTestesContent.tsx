@@ -4,14 +4,19 @@ interface SubTestesProps {
   valor: any
   idTeste: string
 }
-export const SubTestesContent: FC<SubTestesProps> = ({valor, idTeste}) => {
-  const [isChecked, setIsChecked] = useState(false) // defina isChecked como estado
-  const [selectedItems, setSelectedItems] = useState<any[]>([])
+interface SubTestesProps {
+  valor: any
+  idTeste: string
+  selectedItems: any[]
+  setSelectedItems: (items: any[]) => void
+}
+export const SubTestesContent: FC<SubTestesProps> = ({valor, idTeste, selectedItems, setSelectedItems}) => {
+  const [isChecked, setIsChecked] = useState(false)
+
   const handleCheckboxChange = (valor: any) => {
     setIsChecked(!isChecked);
     if (selectedItems.includes(valor)) {      
       setSelectedItems(selectedItems.filter((item) => item !== valor))
-      console.log('Estes foram os selecionados: ', [...selectedItems, valor])
     } else {
       setSelectedItems([...selectedItems, valor])
     }
@@ -21,7 +26,7 @@ export const SubTestesContent: FC<SubTestesProps> = ({valor, idTeste}) => {
       className='col border-gray-200 border-bottom'
       data-bs-toggle='tooltip'
       data-bs-html='true'
-      title='xxx'
+      title={valor}
     >
       <label
         className='d-flex flex-stack py-6 px-10 cursor-pointer bg-hover-light-secondary'
