@@ -16,26 +16,27 @@ interface Props {
   }
 }
 interface TestePropValues {
-  pontuacao: number
-  nome: string
-  descricao: string
-  friendlyname: string
-}
-interface TestePropGraficoValues {
-  nomes: string[]
-  pontuacao: number[]
-  pontuacaoBase: number[]
-  indices: string[]
-}
+   pontuacao: number
+    nome: string
+    descricao: string
+    friendlyname: string
+    indices: string
+  }
+  interface TestePropGraficoValues {
+    nomes: string[]
+    pontuacao: number[]
+    pontuacaoBase: number[]
+    indices: string[]
+  }
+  
+  export function TesteBase({dados}: Props) {
+    const [pontuacao, setPontuacao] = useState(dados.pontuacao); // Adicione um estado para a pontuação
 
-export function TesteBase({dados}: Props) {
-  const [pontuacaoState, setPontuacaoState] = useState(dados.pontuacao) // Adicione um estado para a pontuação
   const [showPonderado, setShowPonderado] = useState(false)
   const [showInterpretacao, setShowInterpretacao] = useState(false)
   const [showScoreZ, setShowScoreZ] = useState(false)
   const [showPontuacaoBruta, setShowPontuacaoBruta] = useState(false)
-
-  var idSubteste = 1
+  var idSubteste = 1 
 
   const toggleColumn = useCallback((column: string) => {
     switch (column) {
@@ -56,20 +57,20 @@ export function TesteBase({dados}: Props) {
     }
   }, [])
   const GraficoSegmentos: React.FC<TestePropGraficoValues> = React.memo(
-    ({nomes, pontuacaoBase, indices}) => {
+    ({ nomes, pontuacaoBase, indices }) => {
       const options = {
         chart: {
           id: 'basic-bar',
         },
         xaxis: {
           categories: nomes,
-        },
+        },        
         annotations: {
-          points: dados.pontuacao.map((pontuacao: any, index: any) => ({
+          points: dados.pontuacao.map((pontuacao:any, index:any) => ({
             x: nomes[index],
             y: pontuacao,
             marker: {
-              size: 0,
+              size: 0
             },
             label: {
               borderColor: '#FF4560',
@@ -77,10 +78,10 @@ export function TesteBase({dados}: Props) {
               style: {
                 color: '#fff',
                 background: '#FF4560',
-              },
-            },
+              }
+            }
           })),
-          yaxis: pontuacaoBase.map((pontuacaoBase: any, index: any) => ({
+          yaxis: pontuacaoBase.map((pontuacaoBase:any, index:any) => ({
             y: pontuacaoBase,
             borderColor: '#00E396',
             label: {
@@ -90,11 +91,11 @@ export function TesteBase({dados}: Props) {
                 background: '#00E396',
               },
               text: 'Pontuação Base',
-            },
-          })),
+            }
+          }))
         },
       }
-
+  
       const series = [
         {
           name: 'Pontuação',
@@ -105,45 +106,45 @@ export function TesteBase({dados}: Props) {
           data: pontuacaoBase,
         },
       ]
-
+   
       return (
         <div className='table-responsive w-100'>
-          <div className='col-10'>
-            <h2>Gráfico de Pontuações</h2>
-            <Chart options={options} series={series} type='line' width='100%' />
-          </div>
-        </div>
-      )
-    }
-  )
-  const TestePropTR: React.FC<TestePropValues & {setPontuacaoState: (value: number) => void}> =
-    React.memo(({nome, descricao, pontuacao, setPontuacaoState, friendlyname}) => {
-      const handlePercentilChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const percentilValue = Number(event.target.value) // Converta o valor para um número
-        setPontuacaoState(percentilValue) // Atualize a pontuação
-      }
-      return (
-        <tr className='align-middle'>
-          <td className='col-small'>{idSubteste++}</td>
-          <td className='col-2'>{nome}</td>
-          <td className='col-3'>{descricao}</td>
-          <td className='col'>
-            <div className='form-floating'>
-              <input
-                name={friendlyname + '-percentil'}
-                type='number'
-                value={pontuacao}
-                className='form-control border-0'
-                placeholder='Percentil'
-                inputMode='numeric'
-                onChange={handlePercentilChange} // Adicione a função handlePercentilChange aqui
-              />
-              <label className='text-gray-600' htmlFor={friendlyname + '-percentil'}>
-                Percentil
-              </label>
+            <div className='col-10'>
+                <h2>Gráfico de Pontuações</h2>
+                <Chart options={options} series={series} type='line' width='100%' />
             </div>
-          </td>
-          {/*}
+        </div>
+    )
+})
+const TestePropTR: React.FC<TestePropValues> = React.memo(({nome, descricao, indices, friendlyname, pontuacao: pontuacaoInicial}) => {
+  const [pontuacao, setPontuacao] = useState(pontuacaoInicial); // Adicione um estado para a pontuação
+  const handlePercentilChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const percentilValue = Number(event.target.value); // Converta o valor para um número
+    setPontuacao(percentilValue); // Atualize a pontuação
+  };
+    return (
+      <tr className='align-middle'>
+        <td className='col-small'>{idSubteste++}</td>
+        <td className='col-2'>{nome}</td>
+        <td className='col-2'>{indices}</td>
+        <td className='col-3'>{descricao}</td>
+        <td className='col bg-success'>
+          <div className='form-floating'>
+            <input
+              name={friendlyname + '-percentil'}
+              type='number'
+              value={pontuacao}
+              className='form-control border-0'
+              placeholder='Percentil'
+              inputMode='numeric'
+              onChange={handlePercentilChange} // Adicione a função handlePercentilChange aqui
+            />
+            <label className='text-gray-600' htmlFor={friendlyname + '-percentil'}>
+              Percentil
+            </label>
+          </div>
+        </td>
+        {/*}
         <td className='col'>
           <div className='form-floating'>
             <Field
@@ -159,78 +160,78 @@ export function TesteBase({dados}: Props) {
           </div>
         </td>
     */}
-          {showPonderado && (
-            <td className='col-1'>
-              <div className='form-floating'>
-                <Field
-                  name={friendlyname + '-ponderado'}
-                  type='input'
-                  className='form-control border-0'
-                  placeholder='Ponderado'
-                  inputMode='numeric'
-                />
-                <label className='text-gray-600' htmlFor={friendlyname + '-ponderado'}>
-                  Ponderado
-                </label>
-              </div>
-            </td>
-          )}
-          {showInterpretacao && (
-            <td className='col'>
-              <div className='form-floating'>
-                <Field
-                  as='select'
-                  name={friendlyname + '-qualitativa'}
-                  className='form-control border-0'
-                  placeholder='Int. Qualitativa'
-                >
-                  <option value=''>Selecione</option>
-                  <option value='Confiança Social Alta'>Confiança Social Alta</option>
-                  <option value='Confiança Social Moderada'>Confiança Social Moderada</option>
-                  <option value='Confiança Social Baixa'>Confiança Social Baixa</option>
-                  <option value='Confiança Social Prejudicada'>Confiança Social Prejudicada</option>
-                </Field>
-                <label className='text-gray-600' htmlFor={friendlyname + '-qualitativa'}>
-                  Qualitativa
-                </label>
-              </div>
-            </td>
-          )}
-          {showScoreZ && (
-            <td className='col-1'>
-              <div className='form-floating'>
-                <Field
-                  name={friendlyname + '-scoreZ'}
-                  type='number'
-                  className='form-control border-0'
-                  placeholder='Score-Z'
-                  inputMode='numeric'
-                />
-                <label className='text-gray-600' htmlFor={friendlyname + '-scoreZ'}>
-                  Score-Z
-                </label>
-              </div>
-            </td>
-          )}
-          {showPontuacaoBruta && (
-            <td className='col-1'>
-              <div className='form-floating'>
-                <Field
-                  name={friendlyname + '-ptbruta'}
-                  type='number'
-                  className='form-control border-0'
-                  placeholder='Pontuação Bruta'
-                  inputMode='numeric'
-                />
-                <label className='text-gray-600' htmlFor={friendlyname + '-ptbruta'}>
-                  Pt. Bruta
-                </label>
-              </div>
-            </td>
-          )}
-        </tr>
-      )
-    })
+        {showPonderado && (
+          <td className='col-1'>
+            <div className='form-floating'>
+              <Field
+                name={friendlyname + '-ponderado'}
+                type='input'
+                className='form-control border-0'
+                placeholder='Ponderado'
+                inputMode='numeric'
+              />
+              <label className='text-gray-600' htmlFor={friendlyname + '-ponderado'}>
+                Ponderado
+              </label>
+            </div>
+          </td>
+        )}
+        {showInterpretacao && (
+          <td className='col'>
+            <div className='form-floating'>
+              <Field
+                as='select'
+                name={friendlyname + '-qualitativa'}
+                className='form-control border-0'
+                placeholder='Int. Qualitativa'
+              >
+                <option value=''>Selecione</option>
+                <option value='Confiança Social Alta'>Confiança Social Alta</option>
+                <option value='Confiança Social Moderada'>Confiança Social Moderada</option>
+                <option value='Confiança Social Baixa'>Confiança Social Baixa</option>
+                <option value='Confiança Social Prejudicada'>Confiança Social Prejudicada</option>
+              </Field>
+              <label className='text-gray-600' htmlFor={friendlyname + '-qualitativa'}>
+                Qualitativa
+              </label>
+            </div>
+          </td>
+        )}
+        {showScoreZ && (
+          <td className='col-1'>
+            <div className='form-floating'>
+              <Field
+                name={friendlyname + '-scoreZ'}
+                type='number'
+                className='form-control border-0'
+                placeholder='Score-Z'
+                inputMode='numeric'
+              />
+              <label className='text-gray-600' htmlFor={friendlyname + '-scoreZ'}>
+                Score-Z
+              </label>
+            </div>
+          </td>
+        )}
+        {showPontuacaoBruta && (
+          <td className='col-1'>
+            <div className='form-floating'>
+              <Field
+                name={friendlyname + '-ptbruta'}
+                type='number'
+                className='form-control border-0'
+                placeholder='Pontuação Bruta'
+                inputMode='numeric'
+              />
+              <label className='text-gray-600' htmlFor={friendlyname + '-ptbruta'}>
+                Pt. Bruta
+              </label>
+            </div>
+          </td>
+        )}
+      </tr>
+    )
+  })
 
   return (
     <div className='table-responsive w-100'>
@@ -286,8 +287,9 @@ export function TesteBase({dados}: Props) {
         <thead>
           <tr className='align-middle bg-primary'>
             <th className='col-1'>ID</th>
-            <th className='col-3'>Nome do processo</th>
-            <th className='col-4'>Descrição</th>
+            <th className='col-2'>Nome do processo</th>
+            <th className='col-3'>Índice</th>
+            <th className='col-3'>Descrição</th>
             <th className='col-1'>Percentil</th>
             {showPonderado && <th className='col'>Ponderado</th>}
             {showInterpretacao && <th className='col'>Interpretação qualitativa</th>}
@@ -299,26 +301,23 @@ export function TesteBase({dados}: Props) {
           {dados.nomeDoSubTeste.map((nome, index) => (
             <TestePropTR
               key={index}
-              pontuacao={pontuacaoState[index]}
-              setPontuacaoState={(value: number) => {
-                const newPontuacao = [...pontuacaoState]
-                newPontuacao[index] = value
-                setPontuacaoState(newPontuacao)
-              }}
+              pontuacao={dados.pontuacao[index]}
               nome={nome}
+              indices={dados.indices[index]}
               descricao={dados.descricao[index]}
               friendlyname={dados.friendlyTitle[index]}
             />
           ))}
         </tbody>
       </table>
-
+      
       <GraficoSegmentos
         nomes={dados.nomeDoSubTeste}
-        pontuacao={pontuacaoState} // Use o estado da pontuação aqui
+        pontuacao={dados.pontuacao}
         pontuacaoBase={dados.pontuacaoBase}
         indices={dados.indices}
-      />
+        />
+      
     </div>
   )
 }
