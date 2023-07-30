@@ -1,7 +1,6 @@
 import React, {FC, useState} from 'react'
 import {ProgressBarra} from '../CadastroPacienteWizard'
 import {CreateAccordionElement} from './testes-configs/teste-base/CreateAccordionElement'
-import {ModalTestesSelecionados} from './testes-configs/teste-base/ModalTestesSelecionados'
 import {TestesSelecionados} from './testes-configs/teste-base/TestesSelecionados'
 import {SubTestesContent} from './testes-configs/teste-base/SubTestesContent' 
 
@@ -254,9 +253,8 @@ const Passo7: FC = () => {
           />
         </div>
       </div>
-      <div className='separator my-10'></div>
-      <ModalTestesSelecionados selectedItems={selectedItems} valor='asdx' handleConfigureTest={SubTestesContent} />
-      <TestesSelecionados selectedItems={selectedItems} valor='asdx' handleConfigureTest={SubTestesContent} />
+      <div className='separator my-10'></div>      
+      <TestesSelecionados selectedItems={selectedItems} valor='asdx' handleConfigureTest={SubTestesContent} />      
     </div>
   )
 }

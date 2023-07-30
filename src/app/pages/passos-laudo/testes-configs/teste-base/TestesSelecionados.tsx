@@ -1,4 +1,5 @@
 import React, {FC, useState} from 'react'
+import {ModalTestesSelecionados} from './ModalTestesSelecionados'
 
 interface TestesSelecionadosProps {
   selectedItems: any[]
