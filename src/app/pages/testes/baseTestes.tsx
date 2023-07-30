@@ -73,11 +73,11 @@ interface TestePropValues {
               size: 0
             },
             label: {
-              borderColor: '#FF4560',
+              borderColor: pontuacao < 10 ? '#FF0000' : '#00FF00', // Altere a cor baseada na pontuação
               offsetY: 0,
               style: {
                 color: '#fff',
-                background: '#FF4560',
+                background: pontuacao < 10 ? '#FF0000' : '#00FF00', // Altere a cor baseada na pontuação
               }
             }
           })),
