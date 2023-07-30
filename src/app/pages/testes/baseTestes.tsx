@@ -58,6 +58,8 @@ interface TestePropValues {
   }, [])
   const GraficoSegmentos: React.FC<TestePropGraficoValues> = React.memo(
     ({ nomes, pontuacaoBase, indices }) => {
+      const pontuacaoComCores = dados.pontuacao.map(pontuacao => pontuacao < 10 ? -1 : pontuacao); // Crie uma nova série de dados
+  
       const options = {
         chart: {
           id: 'basic-bar',
@@ -65,20 +67,20 @@ interface TestePropValues {
         xaxis: {
           categories: nomes,
         },
-        colors: ['#FF0000', '#00FF00'], // Adicione a propriedade colors aqui
+        colors: ['#FF0000', '#0000FF'], // Defina a cor padrão para azul e a cor para o valor especial para vermelho
         annotations: {
-          points: dados.pontuacao.map((pontuacao:any, index:any) => ({
+          points: pontuacaoComCores.map((pontuacao:any, index:any) => ({
             x: nomes[index],
             y: pontuacao,
             marker: {
               size: 0
             },
             label: {
-              borderColor: pontuacao < 10 ? '#FF0000' : '#00FF00',
+              borderColor: '#0000FF',
               offsetY: 0,
               style: {
                 color: '#fff',
-                background: pontuacao < 10 ? '#FF0000' : '#00FF00',
+                background: '#0000FF',
               }
             }
           })),
@@ -100,7 +102,7 @@ interface TestePropValues {
       const series = [
         {
           name: 'Pontuação',
-          data: dados.pontuacao,
+          data: pontuacaoComCores, // Use a nova série de dados aqui
         },
         {
           name: 'Pontuação Base',
