@@ -1,5 +1,4 @@
 import React, {FC, useState} from 'react'
-import {ModalTestesSelecionados} from './ModalTestesSelecionados'
 
 interface TestesSelecionadosProps {
   selectedItems: any[]
@@ -12,6 +11,7 @@ export const TestesSelecionados: React.FC<TestesSelecionadosProps> = ({
   handleConfigureTest,
   valor,
 }) => {
+  const [selectedTests, setSelectedTests] = useState([]);
   return (
     <div>
       <h2 className='text-primary px-4'>Testes selecionados:</h2>
@@ -43,28 +43,28 @@ export const TestesSelecionados: React.FC<TestesSelecionadosProps> = ({
                   </div>
                 </td>
                 <td className='align-middle text-center d-flex'>
-                  <button                                    
+                <button
                   data-bs-toggle="modal"
-                  data-bs-target="#kt_modal_2"                
-                    type='button'
-                    className='btn btn-primary'
-                    onClick={() =>
-                      handleConfigureTest({
-                        nomeDoTeste: item,
-                        idTeste: 'ID',
-                        friendlytitle: '',
-                        descricao: '',
-                        faixaEtariaRecomendada: '',
-                        pontuacao: '10',
-                        normas: '',
-                        interpretacao: '',
-                        referencias: '',
-                        administracao: '',
-                        tempoDeAplicacao: '',
-                        versoesAtualizacoes: '',
-                      })
-                    }
-                  >
+                  data-bs-target="#kt_modal_2"
+                  type='button'
+                  className='btn btn-primary'
+                  onClick={() =>
+                    handleConfigureTest({
+                      nomeDoTeste: item,
+                      idTeste: 'ID',
+                      friendlytitle: '',
+                      descricao: '',
+                      faixaEtariaRecomendada: '',
+                      pontuacao: '10',
+                      normas: '',
+                      interpretacao: '',
+                      referencias: '',
+                      administracao: '',
+                      tempoDeAplicacao: '',
+                      versoesAtualizacoes: '',
+                    })
+                  }
+                >
                     Configurar
                   </button>
                 </td>

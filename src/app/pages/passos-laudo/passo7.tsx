@@ -2,15 +2,19 @@ import React, {FC, useState} from 'react'
 import {ProgressBarra} from '../CadastroPacienteWizard'
 import {CreateAccordionElement} from './testes-configs/teste-base/CreateAccordionElement'
 import {TestesSelecionados} from './testes-configs/teste-base/TestesSelecionados'
-
 import {SubTestesContent} from './testes-configs/teste-base/SubTestesContent'
+
+import {ModalTestesSelecionados} from './testes-configs/teste-base/ModalTestesSelecionados'
 
 const Passo7: FC = () => {
   const [selectedItems, setSelectedItems] = useState<any[]>([])
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedTest, setSelectedTest] = useState(null)
-
+  const [currentTest, setCurrentTest] = useState(null);
   // Estrutura de dados que agrupa os subtestes por categoria
+  const handleConfigureTest = (test:any) => {
+    setCurrentTest(test);
+  };
   const testCategories = {
     Personalidade: [
       'Bateria Fatorial de Personalidade',
@@ -128,14 +132,13 @@ const Passo7: FC = () => {
         </div>
       </div>
       <div className='separator my-10'></div>
+      
       <TestesSelecionados
         selectedItems={selectedItems}
         valor={selectedItems}
-        handleConfigureTest={(item) => {
-          setSelectedTest(item)
-          setIsModalOpen(true)
-        }}
+        handleConfigureTest={handleConfigureTest}        
       />     
+      <ModalTestesSelecionados test={currentTest} />
     </div>
   )
 }
