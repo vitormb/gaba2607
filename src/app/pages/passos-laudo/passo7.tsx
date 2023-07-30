@@ -11,9 +11,11 @@ const Passo7: FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedTest, setSelectedTest] = useState(null)
   const [currentTest, setCurrentTest] = useState(null);
+  const [selectedTests, setSelectedTests] = useState([]);
   // Estrutura de dados que agrupa os subtestes por categoria
   const handleConfigureTest = (test:any) => {
     setCurrentTest(test);
+    setSelectedTests(test);
   };
   const testCategories = {
     Personalidade: [
@@ -138,7 +140,7 @@ const Passo7: FC = () => {
         valor={selectedItems}
         handleConfigureTest={handleConfigureTest}        
       />     
-      <ModalTestesSelecionados test={currentTest} />
+      <ModalTestesSelecionados selectedItems={selectedItems} test={currentTest} />
     </div>
   )
 }

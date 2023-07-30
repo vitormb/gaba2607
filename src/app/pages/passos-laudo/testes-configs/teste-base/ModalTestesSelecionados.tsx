@@ -3,7 +3,9 @@ import {TesteBase} from './baseTestes'
 
 interface ModalTestesSelecionadosProps {
   selectedItems: any[]
+  test: any // Adicione esta linha
 }
+
 const dados = {
   nomeDoSubTeste: [
     'Semelhanças',
@@ -130,6 +132,7 @@ const dados = {
 
 export const ModalTestesSelecionados: React.FC<ModalTestesSelecionadosProps> = ({
   selectedItems,
+  test
 }) => {
   return (
     <>

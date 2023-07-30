@@ -10,8 +10,7 @@ export const TestesSelecionados: React.FC<TestesSelecionadosProps> = ({
   selectedItems,
   handleConfigureTest,
   valor,
-}) => {
-  const [selectedTests, setSelectedTests] = useState([]);
+}) => {  
   return (
     <div>
       <h2 className='text-primary px-4'>Testes selecionados:</h2>
