@@ -151,7 +151,7 @@ export const ModalTestesSelecionados: React.FC<ModalTestesSelecionadosProps> = (
                 </div>
               </div>
               <div className='modal-body'>
-                <TesteBase dados={item} />
+              {test && <TesteBase dados={test} />}
               </div>
               <div className='modal-footer'>
                 <button type='button' className='btn btn-light' data-bs-dismiss='modal'>
