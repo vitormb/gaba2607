@@ -2,7 +2,7 @@ import React, {useState, useCallback} from 'react'
 import {Field, ErrorMessage} from 'formik'
 import Chart from 'react-apexcharts'
 
-interface Props {
+export interface Props {
   dados: {
     nomeDoSubTeste: string[]
     friendlyTitle: string[]
@@ -132,23 +132,7 @@ const TestePropTR: React.FC<TestePropValues> = React.memo(({nome, descricao, ind
               Percentil
             </label>
           </div>
-        </td>
-        {/*}
-        <td className='col'>
-          <div className='form-floating'>
-            <Field
-              name={friendlyname + '-percentil'}
-              type='number'
-              className='form-control border-0'
-              placeholder='Percentil'
-              inputMode='numeric'
-            />
-            <label className='text-gray-600' htmlFor={friendlyname + '-percentil'}>
-              Percentil
-            </label>
-          </div>
-        </td>
-    */}
+        </td>        
         {showPonderado && (
           <td className='col-1'>
             <div className='form-floating'>
@@ -309,30 +293,3 @@ const TestePropTR: React.FC<TestePropValues> = React.memo(({nome, descricao, ind
     </div>
   )
 }
-
-/* 
-#Compreensão Verbal#
-SM: Semelhanças
-VC: Vocabulário
-CO: Compreensão
-IN: Informação
-RP: Raciocínio com Palavras
-
-#Organização Perceptua#
-CB: Cubos
-CN: Conceitos figurativos
-RM: Raciocínio Matricial
-CF: Completar Figuras
-
-#Memória Operacional#
-DG: Dígitos
-SNL: Seq. de Números e Letras
-AR: Aritmética
-
-#Velocidade de Processamento#
-CD: Código
-PS: Procurar Símbolos
-CA: Cancelamento
-
-
-*/

@@ -3,6 +3,9 @@ let indexteste = 1
 interface SubTestesProps {
   valor: any
   idTeste: string
+  selectedItems: any[]
+  setSelectedItems: (items: any[]) => void
+  handleConfigureTest: (item: any) => void  // Adicione esta linha
 }
 interface SubTestesProps {
   valor: any
@@ -10,7 +13,7 @@ interface SubTestesProps {
   selectedItems: any[]
   setSelectedItems: (items: any[]) => void
 }
-export const SubTestesContent: FC<SubTestesProps> = ({valor, idTeste, selectedItems, setSelectedItems}) => {
+export const SubTestesContent: FC<SubTestesProps> = ({valor, idTeste, selectedItems, setSelectedItems, handleConfigureTest}) => {
   const [isChecked, setIsChecked] = useState(false)
 
   const handleCheckboxChange = (valor: any) => {
