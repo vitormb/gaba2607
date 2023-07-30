@@ -2,11 +2,14 @@ import React, {FC, useState} from 'react'
 import {ProgressBarra} from '../CadastroPacienteWizard'
 import {CreateAccordionElement} from './testes-configs/teste-base/CreateAccordionElement'
 import {TestesSelecionados} from './testes-configs/teste-base/TestesSelecionados'
+import {ModalTestesSelecionados} from './testes-configs/teste-base/ModalTestesSelecionados'
 import {SubTestesContent} from './testes-configs/teste-base/SubTestesContent' 
 
 
 const Passo7: FC = () => {
   const [selectedItems, setSelectedItems] = useState<any[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedTest, setSelectedTest] = useState(null);
   return (
     <div className='container-flex'>
       <div className='mt-5 col-12 mb-5'>
@@ -254,7 +257,15 @@ const Passo7: FC = () => {
         </div>
       </div>
       <div className='separator my-10'></div>      
-      <TestesSelecionados selectedItems={selectedItems} valor='asdx' handleConfigureTest={SubTestesContent} />      
+      <TestesSelecionados
+        selectedItems={selectedItems}
+        valor='asdx'
+        handleConfigureTest={(item) => {
+          setSelectedTest(item);
+          setIsModalOpen(true);
+        }}
+      />
+      {isModalOpen && <ModalTestesSelecionados selectedItems={[selectedTest]} />}
     </div>
   )
 }
