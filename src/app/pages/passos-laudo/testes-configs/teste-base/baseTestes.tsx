@@ -15,6 +15,8 @@ export interface Props {
     indices: string[]
   }
 }
+
+
 interface TestePropValues {
    pontuacao: number
     nome: string
