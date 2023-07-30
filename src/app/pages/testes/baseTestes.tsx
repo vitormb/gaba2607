@@ -64,7 +64,8 @@ interface TestePropValues {
         },
         xaxis: {
           categories: nomes,
-        },        
+        },
+        colors: ['#FF0000', '#00FF00'], // Adicione a propriedade colors aqui
         annotations: {
           points: dados.pontuacao.map((pontuacao:any, index:any) => ({
             x: nomes[index],
@@ -73,11 +74,11 @@ interface TestePropValues {
               size: 0
             },
             label: {
-              borderColor: pontuacao < 10 ? '#FF0000' : '#00FF00', // Altere a cor baseada na pontuação
+              borderColor: pontuacao < 10 ? '#FF0000' : '#00FF00',
               offsetY: 0,
               style: {
                 color: '#fff',
-                background: pontuacao < 10 ? '#FF0000' : '#00FF00', // Altere a cor baseada na pontuação
+                background: pontuacao < 10 ? '#FF0000' : '#00FF00',
               }
             }
           })),
