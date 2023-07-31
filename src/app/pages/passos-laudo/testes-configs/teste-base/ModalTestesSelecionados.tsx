@@ -137,7 +137,7 @@ export const ModalTestesSelecionados: React.FC<ModalTestesSelecionadosProps> = (
   return (
     <>
       {selectedItems.map((item: any, index: any) => (
-        <div className='modal bg-white fade' tabIndex={-1} id={`kt_modal_${index}`}>
+        <div className='modal bg-white fade' tabIndex={-1} id={'modal-'+test.friendlytitle}>
           <div className='modal-dialog modal-fullscreen'>
             <div className='modal-content shadow-none'>
               <div className='modal-header'>

@@ -140,7 +140,7 @@ const Passo7: FC = () => {
         valor={selectedItems}
         handleConfigureTest={handleConfigureTest}        
       />     
-      {selectedTest && <ModalTestesSelecionados selectedItems={selectedItems} test={currentTest} />}
+      <ModalTestesSelecionados selectedItems={selectedItems} test={currentTest} />
     </div>
   )
 }

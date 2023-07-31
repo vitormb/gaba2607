@@ -44,7 +44,7 @@ export const TestesSelecionados: React.FC<TestesSelecionadosProps> = ({
                 <td className='align-middle text-center d-flex'>
                 <button
                   data-bs-toggle="modal"
-                  data-bs-target="#kt_modal_2"
+                  data-bs-target={'modal-'+valor.friendlytitle}
                   type='button'
                   className='btn btn-primary'
                   onClick={() =>
