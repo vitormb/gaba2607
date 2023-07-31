@@ -220,20 +220,24 @@ const Passo7: FC = () => {
               title={category}
               cogarea={category}
               friendlytitle={category}
-              content={tests.map((test) => (
-                <div key={test.nomeDoSubTeste}>
-                  <SubTestesContent
-                    idTeste={test.nomeDoSubTeste}
-                    valor={test}
-                    selectedItems={selectedItems}
-                    setSelectedItems={setSelectedItems}
-                    handleConfigureTest={(item) => {
-                      setSelectedTest(item)
-                      setIsModalOpen(true)
-                    }}
-                  />                 
-                </div>
-              ))}
+              content={tests.map((test) => {
+                if (typeof test === 'object') {
+                  return (
+                    <div key={test.nomeDoSubTeste}>
+                      <SubTestesContent
+                        idTeste={test.nomeDoSubTeste}
+                        valor={test}
+                        selectedItems={selectedItems}
+                        setSelectedItems={setSelectedItems}
+                        handleConfigureTest={(item) => {
+                          setSelectedTest(item)
+                          setIsModalOpen(true)
+                        }}
+                      />                 
+                    </div>
+                  )
+                }
+              })}
             />
           ))}
         </div>
