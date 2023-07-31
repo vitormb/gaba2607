@@ -19,7 +19,17 @@ const Passo7: FC = () => {
   };
   const testCategories = {
     Personalidade: [
-      'Bateria Fatorial de Personalidade',
+      {
+        nomeDoSubTeste: 'Bateria Fatorial de Personalidade',
+        friendlyTitle: 'Bateria Fatorial de Personalidade',
+        descricao: 'Descrição do teste',
+        faixaEtariaRecomendada: '18-60',
+        pontuacao: 100,
+        pontuacaoBase: 100,
+        normas: 'Normas do teste',
+        interpretacao: 'Interpretação do teste',
+        indices: 'Índices do teste',
+      },
       'CAT- A - Teste de Apercepção Infantil',
       'Escalas Beck',
       'HTP',
@@ -116,9 +126,9 @@ const Passo7: FC = () => {
               cogarea={category}
               friendlytitle={category}
               content={tests.map((test) => (
-                <div key={test}>
+                <div key={test.nomeDoSubTeste}>
                   <SubTestesContent
-                    idTeste={test}
+                    idTeste={test.nomeDoSubTeste}
                     valor={test}
                     selectedItems={selectedItems}
                     setSelectedItems={setSelectedItems}
