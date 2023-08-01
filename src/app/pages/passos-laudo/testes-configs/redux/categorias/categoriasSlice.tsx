@@ -1,35 +1,29 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface Categoria {
+export interface Categoria {
   id: string;
   nome: string;
-  testes: Teste[];
+  testes: string[]; // IDs dos testes
 }
 
-interface Teste {
-  id: string;
-  nome: string;
-  subtestes: Subteste[];
+interface CategoriasState {
+  categorias: Categoria[];
 }
 
-interface Subteste {
-  id: string;
-  nome: string;
-  resultado: number;
-}
-
-const initialState: Categoria[] = [
-  // inicialize com qualquer estado inicial necessário
-];
+const initialState: CategoriasState = {
+  categorias: [],
+};
 
 const categoriasSlice = createSlice({
   name: 'categorias',
   initialState,
   reducers: {
-    // defina quaisquer reducers necessários aqui
+    addCategoria: (state, action: PayloadAction<Categoria>) => {
+      state.categorias.push(action.payload);
+    },
   },
 });
 
-export const { /* exporte quaisquer ações necessárias aqui */ } = categoriasSlice.actions;
+export const { addCategoria } = categoriasSlice.actions;
 
 export default categoriasSlice.reducer;

@@ -1,23 +1,29 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface Subteste {
+export interface Subteste {
   id: string;
   nome: string;
   resultado: number;
 }
 
-const initialState: Subteste[] = [
-  // inicialize com qualquer estado inicial necessário
-];
+interface SubtestesState {
+  subtestes: Subteste[];
+}
+
+const initialState: SubtestesState = {
+  subtestes: [],
+};
 
 const subtestesSlice = createSlice({
   name: 'subtestes',
   initialState,
   reducers: {
-    // defina quaisquer reducers necessários aqui
+    addSubteste: (state, action: PayloadAction<Subteste>) => {
+      state.subtestes.push(action.payload);
+    },
   },
 });
 
-export const { /* exporte quaisquer ações necessárias aqui */ } = subtestesSlice.actions;
+export const { addSubteste } = subtestesSlice.actions;
 
 export default subtestesSlice.reducer;
