@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import ListagemDePacientes from './PacienteList';
 import { usePacienteContext } from './PacienteContext';
 
+import TesteRedux from './testes-configs/redux/testeRedux';
+
 interface Passos1Props {
   paciente: Paciente;
 }
@@ -165,6 +167,7 @@ const Passo1: FC = () => {
               </div>
               <div className="container">
               <div className='row justify-content-md-center align-items-center pacientecard bg-black rounded bg-opacity-25 p-10'>
+              <TesteRedux />
                 <div className="col-md-auto">
                   <div className="card">
                     <div className="card-content">

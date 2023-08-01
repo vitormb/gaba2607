@@ -16,6 +16,10 @@ import './_metronic/assets/keenicons/duotone/style.css'
 import './_metronic/assets/keenicons/outline/style.css'
 import './_metronic/assets/keenicons/solid/style.css'
 
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import rootReducer from './app/pages/passos-laudo/testes-configs/redux/rootReducer'
+
 /**
  * TIP: Replace this style import with rtl styles to enable rtl mode
  *
@@ -40,6 +44,10 @@ import {AuthProvider, setupAxios} from './app/modules/auth'
 setupAxios(axios)
 Chart.register(...registerables)
 
+const store = configureStore({
+  reducer: rootReducer,
+});
+
 const queryClient = new QueryClient()
 const container = document.getElementById('root')
 if (container) {
@@ -47,7 +55,9 @@ if (container) {
     <QueryClientProvider client={queryClient}>
       <MetronicI18nProvider>
         <AuthProvider> 
-          <AppRoutes />
+        <Provider store={store}>
+            <AppRoutes />
+          </Provider>
         </AuthProvider>
       </MetronicI18nProvider>
       <ReactQueryDevtools initialIsOpen={false} />
