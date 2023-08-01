@@ -5,8 +5,7 @@ import subtestesReducer from './subtestes/subtestesSlice';
 
 // Seu middleware personalizado
 const customMiddleware = (storeAPI:any) => (next:any) => (action:any) => {
-  console.log('Despachando ação:', action);
-
+  console.log('Despachando ação:', action);  
   return next(action);
 };
 
