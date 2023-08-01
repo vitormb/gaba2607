@@ -9,6 +9,7 @@ interface TestesListProps {
 
 const TestesList: React.FC<TestesListProps> = ({ testesIds }) => {
   const testes = useSelector((state: any) => state.testes.testes);
+  console.log("Testes: ", testes); // Adicione esta linha
 
   return (
     <div>

@@ -4,6 +4,7 @@ export interface Subteste {
   id: string;
   nome: string;
   resultado: number;
+  testeId: string; // Adicione esta linha
 }
 
 interface SubtestesState {

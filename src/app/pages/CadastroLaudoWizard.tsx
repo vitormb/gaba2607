@@ -196,6 +196,7 @@ const CadastroLaudoWiz: FC = () => {
             <button onClick={toggleFullWidth} type="button" className="bi bi-arrows-fullscreen app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary body-bg h-30px w-30px position-absolute top-50 start-100 translate-middle rotate"></button>
           </div>
           <div className=''>
+            
           <PacienteContextProvider>  
             <Formik validationSchema={currentSchema} initialValues={initValues} onSubmit={submitStep} status={apiResponse} enableReinitialize={true}>
               {(formikProps) => (
@@ -223,9 +224,9 @@ const CadastroLaudoWiz: FC = () => {
                   <div data-kt-stepper-element='content'>
                     <Passo6 />
                   </div>
-
-                  <div data-kt-stepper-element='content' >
-                    <Passo7 />
+                  
+                  <div data-kt-stepper-element='content' >                  
+                    <Passo7 />                    
                   </div>
 
                   <div data-kt-stepper-element='content'>
