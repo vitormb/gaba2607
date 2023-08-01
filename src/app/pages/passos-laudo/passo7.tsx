@@ -6,16 +6,37 @@ import {SubTestesContent} from './testes-configs/teste-base/SubTestesContent'
 
 import {ModalTestesSelecionados} from './testes-configs/teste-base/ModalTestesSelecionados'
 
+type ValorType = {
+  nomeDoSubTeste: string
+  friendlyTitle: string
+  descricao: string
+  faixaEtariaRecomendada: string
+  pontuacao: number
+  pontuacaoBase: number
+  normas: string
+  interpretacao: string
+  indices: string
+}
+
 const Passo7: FC = () => {
   const [selectedItems, setSelectedItems] = useState<any[]>([])
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [selectedTest, setSelectedTest] = useState(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)  
   const [currentTest, setCurrentTest] = useState(null);
-  const [selectedTests, setSelectedTests] = useState([]);
+  const [selectedTest, setSelectedTest] = useState<ValorType | null>({
+    nomeDoSubTeste: '',
+    friendlyTitle: '',
+    descricao: '',
+    faixaEtariaRecomendada: '',
+    pontuacao: 0,
+    pontuacaoBase: 0,
+    normas: '',
+    interpretacao: '',
+    indices: '',
+  });
   // Estrutura de dados que agrupa os subtestes por categoria
   const handleConfigureTest = (test:any) => {
     setCurrentTest(test);
-    setSelectedTests(test);
+    setSelectedTest(test);
   };
 
   const defaultTestValues = {
@@ -144,45 +165,212 @@ const Passo7: FC = () => {
       },
     ],
     Linguagem: [
-      'Confias',
-      'Manual da Escala de Tdah - versão para professores',
-      'Teste de Compreensão Leitora de Textos Descritivos',
-      'Teste de Habilidades e Conhecimento Pré-Alfabetização',
-      'TENA',
+      {
+        nomeDoSubTeste: 'Confias',
+        friendlyTitle: 'Confias',
+        descricao: 'Descrição do teste',
+        faixaEtariaRecomendada: '18-60',
+        ...defaultTestValues,
+      },
+      {
+        nomeDoSubTeste: 'Manual da Escala de Tdah - versão para professores',
+        friendlyTitle: 'ManualDaEscalaDeTdahVersaoParaProfessores',
+        descricao: 'Descrição do teste',
+        faixaEtariaRecomendada: '18-60',
+        ...defaultTestValues,
+      },
+      {
+        nomeDoSubTeste: 'Teste de Compreensão Leitora de Textos Descritivos',
+        friendlyTitle: 'TesteDeCompreensaoLeitoraDeTextosDescritivos',
+        descricao: 'Descrição do teste',
+        faixaEtariaRecomendada: '18-60',
+        ...defaultTestValues,
+      },
+      {
+        nomeDoSubTeste: 'Teste de Habilidades e Conhecimento Pré-Alfabetização',
+        friendlyTitle: 'TesteDeHabilidadesEConhecimentoPreAlfabetizacao',
+        descricao: 'Descrição do teste',
+        faixaEtariaRecomendada: '18-60',
+        ...defaultTestValues,
+      },
+      {
+        nomeDoSubTeste: 'TENA',
+        friendlyTitle: 'TENA',
+        descricao: 'Descrição do teste',
+        faixaEtariaRecomendada: '18-60',
+        ...defaultTestValues,
+      },
     ],
     'Habilidades acadêmicas': [
-      'CORUJA PRO-MAT',
-      'Teste de Desempenho Escolar',
-      'CORUJA ESPECIALISTA',
-      'TDE 2',
+      {
+        nomeDoSubTeste: 'CORUJA PRO-MAT',
+        friendlyTitle: 'CORUJA PRO-MAT',
+        descricao: 'Descrição do teste',
+        faixaEtariaRecomendada: '18-60',
+        ...defaultTestValues,
+      },
+      {
+        nomeDoSubTeste: 'Teste de Desempenho Escolar',
+        friendlyTitle: 'TesteDeDesempenhoEscolar',
+        descricao: 'Descrição do teste',
+        faixaEtariaRecomendada: '18-60',
+        ...defaultTestValues,
+      },
+      {
+        nomeDoSubTeste: 'CORUJA ESPECIALISTA',
+        friendlyTitle: 'CORUJA ESPECIALISTA',
+        descricao: 'Descrição do teste',
+        faixaEtariaRecomendada: '18-60',
+        ...defaultTestValues,
+      },
+      {
+        nomeDoSubTeste: 'TDE 2',
+        friendlyTitle: 'TDE 2',
+        descricao: 'Descrição do teste',
+        faixaEtariaRecomendada: '18-60',
+        ...defaultTestValues,
+      },      
     ],
     'Quociente Intelectual': [
-      'Desenho da Figura Humana',
-      'Escala de Maturidade Mental - COLUMBIA',
-      'Escala de Traços de Personalidade para Crianças',
-      'Figuras Complexas de Rey',
-      'R-2 - Raven para crianças',
-      'SON R',
-      'Teste de Memória de Reconhecimento - TEM-R',
-      'Teste não verbal de Inteligência Geral - BETA III',
-      'WAIS',
-      'WASI',
-      'WISC 4',
+      {
+        nomeDoSubTeste: 'Desenho da Figura Humana',
+        friendlyTitle: 'DesenhoDaFiguraHumana',
+        descricao: 'Descrição do teste',
+        faixaEtariaRecomendada: '18-60',
+        ...defaultTestValues,
+      },
+      {
+        nomeDoSubTeste: 'Escala de Maturidade Mental - COLUMBIA',
+        friendlyTitle: 'EscalaDeMaturidadeMentalCOLUMBIA',
+        descricao: 'Descrição do teste',
+        faixaEtariaRecomendada: '18-60',
+        ...defaultTestValues,
+      },
+      {
+        nomeDoSubTeste: 'Escala de Traços de Personalidade para Crianças',
+        friendlyTitle: 'EscalaDeTraçosDePersonalidadeParaCriancas',
+        descricao: 'Descrição do teste',
+        faixaEtariaRecomendada: '18-60',
+        ...defaultTestValues,
+      },
+      {
+        nomeDoSubTeste: 'Figuras Complexas de Rey',
+        friendlyTitle: 'Figuras Complexas de Rey',
+        descricao: 'Descrição do teste',
+        faixaEtariaRecomendada: '18-60',
+        ...defaultTestValues,
+      },
+      {
+        nomeDoSubTeste: 'SON R',
+        friendlyTitle: 'SONR',
+        descricao: 'Descrição do teste',
+        faixaEtariaRecomendada: '18-60',
+        ...defaultTestValues,
+      },
+      {
+        nomeDoSubTeste: 'Teste de Memória de Reconhecimento - TEM-R',
+        friendlyTitle: 'TesteDeMemóriaDeReconhecimento-TEM-R',
+        descricao: 'Descrição do teste',
+        faixaEtariaRecomendada: '18-60',
+        ...defaultTestValues,
+      },
+      {
+        nomeDoSubTeste: 'Teste não verbal de Inteligência Geral - BETA III',
+        friendlyTitle: 'TesteNaoVerbalDeInteligenciaGeral-BETAIII',
+        descricao: 'Descrição do teste',
+        faixaEtariaRecomendada: '18-60',
+        ...defaultTestValues,
+      },
+      {
+        nomeDoSubTeste: 'WAIS',
+        friendlyTitle: 'WAIS',
+        descricao: 'Descrição do teste',
+        faixaEtariaRecomendada: '18-60',
+        ...defaultTestValues,
+      },
+      {
+        nomeDoSubTeste: 'WASI',
+        friendlyTitle: 'WASI',
+        descricao: 'Descrição do teste',
+        faixaEtariaRecomendada: '18-60',
+        ...defaultTestValues,
+      },
+      {
+        nomeDoSubTeste: 'WISC 4',
+        friendlyTitle: 'WISC4',
+        descricao: 'Descrição do teste',
+        faixaEtariaRecomendada: '18-60',
+        ...defaultTestValues,
+      },     
     ],
     Psicopatologia: [
-      'Manual do Inventário de Sintomas de Stress para Adultos de Lipp - ISSL',
-      'PERFIL SENSORIAL',
+      {
+        nomeDoSubTeste: 'Manual do Inventário de Sintomas de Stress para Adultos de Lipp - ISSL',
+        friendlyTitle: 'ManualDoInventárioDeSintomasDeStressParaAdultosDeLippISSL',
+        descricao: 'Descrição do teste',
+        faixaEtariaRecomendada: '18-60',
+        ...defaultTestValues,
+      },
+      {
+        nomeDoSubTeste: 'PERFIL SENSORIAL',
+        friendlyTitle: 'PerfilSensorial',
+        descricao: 'Descrição do teste',
+        faixaEtariaRecomendada: '18-60',
+        ...defaultTestValues,
+      },
     ],
     'Percepção Visual e memória': [
-      'Figuras Complexas de Rey',
-      'Neupsilin',
-      'Teste Gestaltico Visomotor de Bender',
-      'RAVLT',
+      {
+        nomeDoSubTeste: 'Figuras Complexas de Rey',
+        friendlyTitle: 'FigurasComplexasDeRey',
+        descricao: 'Descrição do teste',
+        faixaEtariaRecomendada: '18-60',
+        ...defaultTestValues,
+      },
+      {
+        nomeDoSubTeste: 'Neupsilin',
+        friendlyTitle: 'Neupsilin',
+        descricao: 'Descrição do teste',
+        faixaEtariaRecomendada: '18-60',
+        ...defaultTestValues,
+      },
+      {
+        nomeDoSubTeste: 'Teste Gestaltico Visomotor de Bender',
+        friendlyTitle: 'TesteGestalticoVisomotorDeBender',
+        descricao: 'Descrição do teste',
+        faixaEtariaRecomendada: '18-60',
+        ...defaultTestValues,
+      },
+      {
+        nomeDoSubTeste: 'RAVLT',
+        friendlyTitle: 'RAVLT',
+        descricao: 'Descrição do teste',
+        faixaEtariaRecomendada: '18-60',
+        ...defaultTestValues,
+      },
     ],
     'Habilidades sociais': [
-      'Inventário de habilidades sociais',
-      'Sistema Multimídia de habilidades sociais de crianças',
-      'SSRS - Inventário de Habilidades Sociais, Problemas de Comportamento e Competência Acadêmica para Crianças',
+      {
+        nomeDoSubTeste: 'Inventário de habilidades sociais',
+        friendlyTitle: 'InventarioDeHabilidadesSociais',
+        descricao: 'Descrição do teste',
+        faixaEtariaRecomendada: '18-60',
+        ...defaultTestValues,
+      },
+      {
+        nomeDoSubTeste: 'Sistema Multimídia de habilidades sociais de crianças',
+        friendlyTitle: 'SistemaMultimidiaDeHabilidadesSociaisDeCriancas',
+        descricao: 'Descrição do teste',
+        faixaEtariaRecomendada: '18-60',
+        ...defaultTestValues,
+      },
+      {
+        nomeDoSubTeste: 'SSRS - Inventário de Habilidades Sociais, Problemas de Comportamento e Competência Acadêmica para Crianças',
+        friendlyTitle: 'SSRS',
+        descricao: 'Descrição do teste',
+        faixaEtariaRecomendada: '18-60',
+        ...defaultTestValues,
+      },
     ],
   }
 
