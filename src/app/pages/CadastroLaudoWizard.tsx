@@ -203,7 +203,7 @@ const CadastroLaudoWiz: FC = () => {
                 
                 <Form className='col-lg-12 p-5' id='kt_create_account_form'>
                   <div className='current card card-custom card-stretch' data-kt-stepper-element='content' >                    
-                      <Passo1 />                    
+                      <Passo7 />                    
                   </div>
                   <div data-kt-stepper-element='content'>                   
                       <Passo2 />                    
@@ -226,7 +226,7 @@ const CadastroLaudoWiz: FC = () => {
                   </div>
                   
                   <div data-kt-stepper-element='content' >                  
-                    <Passo7 />                    
+                    <Passo1 />                    
                   </div>
 
                   <div data-kt-stepper-element='content'>

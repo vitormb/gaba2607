@@ -9,7 +9,7 @@ const customMiddleware = (storeAPI:any) => (next:any) => (action:any) => {
   return next(action);
 };
 
-export default configureStore({
+const store = configureStore({
   reducer: {
     categorias: categoriasReducer,
     testes: testesReducer,
@@ -17,3 +17,7 @@ export default configureStore({
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(customMiddleware),
 });
+
+export type RootState = ReturnType<typeof store.getState>;
+
+export default store;
