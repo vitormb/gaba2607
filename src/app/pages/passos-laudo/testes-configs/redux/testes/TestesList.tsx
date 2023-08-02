@@ -9,6 +9,7 @@ interface TestesListProps {
 }
 
 const TestesList: React.FC<TestesListProps> = ({ testesIds }) => {
+  console.log('Renderizando TestesList com testesIds:', testesIds);
   const testes = useSelector((state: RootState) => state.testes.testes);
 
   return (

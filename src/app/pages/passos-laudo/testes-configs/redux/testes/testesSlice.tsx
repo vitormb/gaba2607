@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Subteste } from '../subtestes/subtestesSlice';
 
 export interface Teste {
   id: string;
@@ -33,6 +34,12 @@ const testesSlice = createSlice({
     },
     selectTeste: (state, action: PayloadAction<string>) => {
       state.selectedTestes.push(action.payload);
+    },
+    addSubteste: (state, action: PayloadAction<Subteste>) => {
+      const teste = state.testes.find(teste => teste.id === action.payload.testeId);
+      if (teste) {
+        teste.subtestes.push(action.payload.id);
+      }
     },
   },
 });

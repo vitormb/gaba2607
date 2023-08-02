@@ -21,9 +21,16 @@ const categoriasSlice = createSlice({
     addCategoria: (state, action: PayloadAction<Categoria>) => {
       state.categorias.push(action.payload);
     },
+    addTesteToCategoria: (state, action: PayloadAction<{ categoriaId: string; testeId: string }>) => {
+      const { categoriaId, testeId } = action.payload;
+      const categoria = state.categorias.find(categoria => categoria.id === categoriaId);
+      if (categoria) {
+        categoria.testes.push(testeId);
+      }
+    },
   },
 });
 
-export const { addCategoria } = categoriasSlice.actions;
+export const { addCategoria, addTesteToCategoria } = categoriasSlice.actions;
 
 export default categoriasSlice.reducer;

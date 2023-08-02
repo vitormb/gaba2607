@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { selectTeste } from './testesSlice';
+import { selectTeste } from './testesSlice'; // importe a ação selectTeste
 import { Teste as TesteType } from './testesSlice';
 
 interface TesteProps {
