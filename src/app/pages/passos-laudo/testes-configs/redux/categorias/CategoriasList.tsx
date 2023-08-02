@@ -10,7 +10,7 @@ const CategoriasList: React.FC = () => {
   return (
     <div>
       {categorias.map((categoria) => (
-        <div key={categoria.id}>
+        <div key={categoria.id}>Categoria lista
           <h2>{categoria.nome}</h2>
           <TestesList testesIds={categoria.testes} />
         </div>

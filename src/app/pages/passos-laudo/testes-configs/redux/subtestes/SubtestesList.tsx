@@ -9,7 +9,7 @@ interface SubtestesListProps {
 
 const SubtestesList: React.FC<SubtestesListProps> = ({ subtestesIds }) => {
   const subtestes = useSelector((state: RootState) => state.subtestes.subtestes);
-
+  
   return (
     <div>
       {subtestesIds.map((id) => {
@@ -17,7 +17,7 @@ const SubtestesList: React.FC<SubtestesListProps> = ({ subtestesIds }) => {
         if (!subteste) return null;
 
         return (
-          <div key={subteste.id}>
+          <div key={subteste.id}>Listagem de subteste
             <h4>{subteste.nome}</h4>
             <p>{subteste.descricao}</p>
             <p>Pontuação: {subteste.resultado}</p>

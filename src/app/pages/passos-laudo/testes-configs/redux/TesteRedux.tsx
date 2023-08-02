@@ -8,7 +8,7 @@ import CategoriasList from './categorias/CategoriasList';
 
 function TesteRedux() {
   const dispatch = useDispatch();
-
+  console.log('despacho', dispatch);
   useEffect(() => {
     batch(() => {
       // Adiciona a categoria
@@ -71,7 +71,7 @@ function TesteRedux() {
   return (
     <div>
       {' '}
-      Este é o testeRedux
+      Este é o testeReduxx
       <CategoriasList />
     </div>
   ); 

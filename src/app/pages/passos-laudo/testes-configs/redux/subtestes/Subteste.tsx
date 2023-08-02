@@ -20,7 +20,7 @@ const Subteste: React.FC<SubtesteProps> = ({ subteste }) => {
   };
 
   return (
-    <div>
+    <div>Subteste individual
       <div>Nome: {subteste.nome}</div>
       <div>
         Resultado: {resultado}

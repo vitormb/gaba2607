@@ -1,6 +1,6 @@
-import React, {FC, useState} from 'react'
-import {ProgressBarra} from '../CadastroPacienteWizard'
+import React, { useEffect, FC } from 'react';
 import TestesScreen from '../passos-laudo/testes-configs/redux/mainTesteRedux'
+
 const Passo7: FC = () => {
   return (
     <div>

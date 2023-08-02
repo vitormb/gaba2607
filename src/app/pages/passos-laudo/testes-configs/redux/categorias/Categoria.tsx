@@ -4,7 +4,7 @@ import { Categoria as CategoriaType } from '../categorias/categoriasSlice';
 
 const Categoria: React.FC<{ categoria: CategoriaType }> = ({ categoria }) => {
   return (
-    <div>
+    <div>Categoria nome
       <h1>{categoria.nome}</h1>
       <TestesList testesIds={categoria.testes} />
     </div>

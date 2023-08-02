@@ -5,24 +5,6 @@ import { Link } from 'react-router-dom';
 import ListagemDePacientes from './PacienteList';
 import { usePacienteContext } from './PacienteContext';
 
-import { Provider } from 'react-redux';
-import store from "../passos-laudo/testes-configs/redux/store";
-import TesteRedux from '../passos-laudo/testes-configs/redux/testeRedux';
-
-function MontarTeste() {
-  return (
-    <Provider store={store}>
-      <TesteRedux />
-    </Provider>
-  );
-}
-
-export default MontarTeste;
-
-console.log(TesteRedux);
-console.log('montar teste', MontarTeste);
-console.log(store);
-
 interface Passos1Props {
   paciente: Paciente;
 }
@@ -181,8 +163,7 @@ const Passo1: FC = () => {
                   </div>
                 </div>
               </div>
-              <div className="container">
-              <MontarTeste/>
+              <div className="container">              
               <div className='row justify-content-md-center align-items-center pacientecard bg-black rounded bg-opacity-25 p-10'>
               
                 <div className="col-md-auto">
