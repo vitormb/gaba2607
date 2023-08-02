@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { batch } from 'react-redux';
 import CategoriasList from './categorias/CategoriasList';
-import TestesList from './testes/TestesList';
+import TestesList from './testes/testesList';
 import { SubtestesModal } from './subtestes/subtestesModal';
 import { addCategoria, addTesteToCategoria } from './categorias/categoriasSlice';
 import { addTeste, updateTeste, selectTeste } from './testes/testesSlice';

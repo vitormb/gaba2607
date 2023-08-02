@@ -20,7 +20,7 @@ type ValorType = {
   indices: string
 }
 
-const Passo7: FC = () => {
+const Passo7bkp: FC = () => {
   const [selectedItems, setSelectedItems] = useState<any[]>([])
   const [isModalOpen, setIsModalOpen] = useState(false)  
   const [currentTest, setCurrentTest] = useState(null);
@@ -443,4 +443,4 @@ const Passo7: FC = () => {
     </div>
   )
 }
-export {Passo7}
+export {Passo7bkp}

@@ -1,5 +1,5 @@
 import React from 'react';
-import TestesList from '../testes/TestesList';
+import TestesList from '../testes/testesList';
 import { Categoria as CategoriaType } from '../categorias/categoriasSlice';
 
 const Categoria: React.FC<{ categoria: CategoriaType }> = ({ categoria }) => {

@@ -2,29 +2,20 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
-import SubtestesList from '../subtestes/SubtestesList';
+import TesteItem from './TesteItem';
 
 interface TestesListProps {
-  testesIds: string[];
+  categoriaId: string;
 }
 
-const TestesList: React.FC<TestesListProps> = ({ testesIds }) => {
-  console.log('Renderizando TestesList com testesIds:', testesIds);
-  const testes = useSelector((state: RootState) => state.testes.testes);
+const TestesList: React.FC<TestesListProps> = ({ categoriaId }) => {
+  const testes = useSelector((state: RootState) => state.testes.testes.filter(teste => teste.categoriaId === categoriaId));
 
   return (
     <div>
-      {testesIds.map((id) => {
-        const teste = testes.find((teste) => teste.id === id);
-        if (!teste) return null;
-
-        return (
-          <div key={teste.id}>Listagem de testes
-            <h3>{teste.nome}</h3>
-            <SubtestesList subtestesIds={teste.subtestes} />
-          </div>
-        );
-      })}
+      {testes.map((teste) => (
+        <TesteItem key={teste.id} teste={teste} />
+      ))}
     </div>
   );
 };
