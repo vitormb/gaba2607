@@ -40,7 +40,7 @@ function TesteRedux() {
 
       const subtestesIds = subtestesNomes.map((nome, index) => {
         const subtesteId = `subteste${index + 1}`;
-        dispatch(addSubteste({ id: subtesteId, nome, resultado: 0, testeId }));
+        dispatch(addSubteste({ id: subtesteId, nome, descricao:'', resultado: 0, testeId }));
         return subtesteId;
       });
 
@@ -59,7 +59,7 @@ function TesteRedux() {
       const subtestesNomes2 = ['Subteste 1', 'Subteste 2', 'Subteste 3'];
       const subtestesIds2 = subtestesNomes2.map((nome, index) => {
         const subtesteId = `subteste2_${index + 1}`;
-        dispatch(addSubteste({ id: subtesteId, nome, resultado: 0, testeId: testeId2 }));
+        dispatch(addSubteste({ id: subtesteId, nome, descricao:'', resultado: 0, testeId: testeId2 }));
         return subtesteId;
       });
 

@@ -9,11 +9,12 @@ interface SubtestesModalProps {
     onSubtesteUpdate: (subtesteId: string, newScore: number) => void;
 }
 
-interface Subteste {
-    id: string;
-    nome: string;
-    descricao: string;
-    resultado: number;
+export interface Subteste {
+  id: string;
+  nome: string;
+  descricao: string;
+  resultado: number;
+  testeId: string;
 }
 
 export function SubtestesModal({ testeId, onClose, onSubtesteUpdate }: SubtestesModalProps) {
