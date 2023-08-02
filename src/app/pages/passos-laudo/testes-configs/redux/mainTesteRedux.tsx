@@ -2,18 +2,20 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import CategoriasList from './categorias/CategoriasList';
 import TestesList from './testes/TestesList';
-import SubtestesModal from './subtestes/SubtestesModal';
+import SubtestesModal from './subtestes/subtestesModal';
 
 function TestesScreen() {
-  const [selectedTesteId, setSelectedTesteId] = useState(null);
+const [selectedSubtesteId, setSelectedSubtesteId] = useState<string | null>(null);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
 
-  const handleTesteSelect = (testeId) => {
-    setSelectedTesteId(testeId);
+  const handleSubtesteSelect = (id: string) => {
+    setSelectedSubtesteId(id);
   };
 
-  const handleConfigureClick = () => {
+  const handleConfigureClick = (id: string) => {
+    setSelectedSubtesteId(id);
     setIsModalOpen(true);
   };
 
@@ -26,23 +28,13 @@ function TestesScreen() {
     setIsModalOpen(false);
   };
 
+  
   return (
     <div>
-      <h1>Categorias</h1>
-      <CategoriasList onTesteSelect={handleTesteSelect} />
-      {selectedTesteId && (
-        <div>
-          <h1>Teste selecionado</h1>
-          <TestesList testeId={selectedTesteId} onConfigureClick={handleConfigureClick} />
-        </div>
-      )}
-      {isModalOpen && (
-        <SubtestesModal
-          testeId={selectedTesteId}
-          onClose={handleModalClose}
-          onSubtesteUpdate={handleSubtesteUpdate}
-        />
-      )}
+    <CategoriasList />
+        {isModalOpen && (
+        <SubtestesModal testeId={selectedSubtesteId} onClose={handleModalClose} onSubtesteUpdate={handleSubtesteUpdate} />
+        )}
     </div>
   );
 }

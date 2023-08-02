@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { RootState } from '../store'; // Ajuste este caminho se necessário
+import { RootState } from '../store';
 
 import Modal from 'react-modal';
 
