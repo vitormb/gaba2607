@@ -17,7 +17,7 @@ import './_metronic/assets/keenicons/outline/style.css'
 import './_metronic/assets/keenicons/solid/style.css'
 
 import { Provider } from 'react-redux';
-import { configureStore } from '@reduxjs/toolkit';
+import store from './app/pages/passos-laudo/testes-configs/redux/store'; // Importe a store que você criou
 import rootReducer from './app/pages/passos-laudo/testes-configs/redux/rootReducer'
 
 /**
@@ -44,10 +44,6 @@ import {AuthProvider, setupAxios} from './app/modules/auth'
 setupAxios(axios)
 Chart.register(...registerables)
 
-const store = configureStore({
-  reducer: rootReducer,
-});
-
 const queryClient = new QueryClient()
 const container = document.getElementById('root')
 if (container) {
@@ -55,7 +51,7 @@ if (container) {
     <QueryClientProvider client={queryClient}>
       <MetronicI18nProvider>
         <AuthProvider> 
-        <Provider store={store}>
+        <Provider store={store}> {/* Use a store diretamente aqui */}
             <AppRoutes />
           </Provider>
         </AuthProvider>

@@ -1,15 +1,24 @@
 import React from 'react';
-import SubtestesList from '../subtestes/SubtestesList';
+import { useDispatch } from 'react-redux';
+import { selectTeste } from './testesSlice';
 import { Teste as TesteType } from './testesSlice';
 
-const Teste: React.FC<{ teste: TesteType }> = ({ teste }) => {
-  console.log('pg de Teste.Tsx',Teste)
+interface TesteProps {
+  teste: TesteType;
+}
+
+const Teste: React.FC<TesteProps> = ({ teste }) => {
+  const dispatch = useDispatch();
+
+  const handleCheckboxChange = () => {
+    dispatch(selectTeste(teste.id)); // despache a ação selectTeste quando o checkbox é selecionado
+  };
+
   return (
-    <div>Teste nome
-      <h2>{teste.nome}</h2>
-      <SubtestesList subtestesIds={teste.subtestes} />
+    <div>
+      <input type="checkbox" onChange={handleCheckboxChange} />
+      <h3>{teste.nome}</h3>
+      // ...
     </div>
   );
 };
-
-export default Teste;

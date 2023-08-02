@@ -9,10 +9,12 @@ export interface Teste {
 
 interface TestesState {
   testes: Teste[];
+  selectedTestes: string[]; // IDs dos testes selecionados
 }
 
 const initialState: TestesState = {
   testes: [],
+  selectedTestes: [], // inicialize selectedTestes como um array vazio
 };
 
 const testesSlice = createSlice({
@@ -29,9 +31,12 @@ const testesSlice = createSlice({
         Object.assign(teste, changes);
       }
     },
+    selectTeste: (state, action: PayloadAction<string>) => {
+      state.selectedTestes.push(action.payload);
+    },
   },
 });
 
-export const { addTeste, updateTeste } = testesSlice.actions;
+export const { addTeste, updateTeste, selectTeste } = testesSlice.actions;
 
 export default testesSlice.reducer;
