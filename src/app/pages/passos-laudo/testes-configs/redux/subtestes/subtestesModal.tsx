@@ -15,8 +15,16 @@ interface Subteste {
     resultado: number;
 }
 export function SubtestesModal({ testeId, onClose, onSubtesteUpdate }: SubtestesModalProps) {
-    const teste = useSelector((state: RootState) => state.testes.byId[testeId] || {});
-    const subtestes = useSelector((state: RootState) => teste.subtestes.map((id: string) => state.subtestes.byId[id] || {}));  
+  
+  
+
+    const subtestes = teste ? useSelector((state: RootState) => teste.subtestes.map((id: string) => state.subtestes.subtestes.find(subteste => subteste.id === id)).filter(Boolean)) : [];
+
+    // Se teste ou subtestes forem undefined, retorne null ou algum componente de fallback
+    if (!teste || !subtestes.length) {
+        return null; // ou algum componente de fallback
+    }
+
     return (
       <Modal isOpen={true} onRequestClose={onClose}>
         <h1>Subtestes</h1>
