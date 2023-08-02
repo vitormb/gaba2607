@@ -74,7 +74,7 @@ function TesteRedux() {
       Este é o testeRedux
       <CategoriasList />
     </div>
-  );
+  ); 
 }
 
 export default TesteRedux;
