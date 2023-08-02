@@ -18,26 +18,12 @@ interface Subteste {
 
 export function SubtestesModal({ testeId, onClose, onSubtesteUpdate }: SubtestesModalProps) {
     const teste = useSelector((state: RootState) => state.testes.testes.find(teste => teste.id === testeId));
+    const allSubtestes = useSelector((state: RootState) => state.subtestes.subtestes);
     
     const subtestes = teste 
-        ? useSelector((state: RootState) => 
-            teste.subtestes
-                .map((id: string) => state.subtestes.subtestes.find(subteste => subteste.id === id))
-                .filter(Boolean)
-                .map((subteste: Subteste) => (
-                    <tr key={subteste.id}>
-                        <td>{subteste.nome}</td>
-                        <td>{subteste.descricao}</td>
-                        <td>
-                            <input
-                                type="number"
-                                value={subteste.resultado}
-                                onChange={(e) => onSubtesteUpdate(subteste.id, Number(e.target.value))}
-                            />
-                        </td>
-                    </tr>
-                ))
-        ) 
+        ? teste.subtestes
+            .map((id: string) => allSubtestes.find(subteste => subteste.id === id))
+            .filter(subteste => subteste !== undefined) as Subteste[]
         : [];
 
     // Se teste ou subtestes forem undefined, retorne null ou algum componente de fallback
@@ -57,7 +43,19 @@ export function SubtestesModal({ testeId, onClose, onSubtesteUpdate }: Subtestes
             </tr>
           </thead>
           <tbody>
-            {subtestes}
+            {subtestes.map((subteste: Subteste) => (
+                <tr key={subteste.id}>
+                    <td>{subteste.nome}</td>
+                    <td>{subteste.descricao}</td>
+                    <td>
+                        <input
+                            type="number"
+                            value={subteste.resultado}
+                            onChange={(e) => onSubtesteUpdate(subteste.id, Number(e.target.value))}
+                        />
+                    </td>
+                </tr>
+            ))}
           </tbody>
         </table>
         <button onClick={onClose}>Fechar</button>
