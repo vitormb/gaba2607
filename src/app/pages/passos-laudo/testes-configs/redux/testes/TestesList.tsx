@@ -1,15 +1,24 @@
-// TestesList.tsx
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../store';
-import TesteItem from './TesteItem';
+import React from 'react'
+import {useSelector} from 'react-redux'
+import {RootState} from '../store'
+import TesteItem from './testeItem'
 
-interface TestesListProps {
-  categoriaId: string;
+type TesteType = {
+  id: string
+  nome: string
+  subtestes: string[]
+  categoriaId: string
 }
 
-const TestesList: React.FC<TestesListProps> = ({ categoriaId }) => {
-  const testes = useSelector((state: RootState) => state.testes.testes.filter(teste => teste.categoriaId === categoriaId));
+interface TestesListProps {
+  categoriaId: string
+  testes: TesteType[]
+}
+
+const TestesList: React.FC<TestesListProps> = ({categoriaId}) => {
+  const testes = useSelector((state: RootState) =>
+    state.testes.testes.filter((teste) => teste.categoriaId === categoriaId)
+  )
 
   return (
     <div>
@@ -17,7 +26,7 @@ const TestesList: React.FC<TestesListProps> = ({ categoriaId }) => {
         <TesteItem key={teste.id} teste={teste} />
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default TestesList;
+export default TestesList

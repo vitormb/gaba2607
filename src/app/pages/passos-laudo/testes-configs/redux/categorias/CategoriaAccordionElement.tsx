@@ -23,6 +23,8 @@ export const CategoriaAccordionElement: React.FC<CategoriaAccordionElementProps>
   let numeroAccordion = 0
   var accordionId = `accordion_${indexdata++}`
 
+  const testes = useSelector((state: RootState) => state.testes.testes.filter(teste => teste.categoriaId === categoriaId));
+
   return (
     <div className='accordion' id={accordionId}>
       <div className='col'>
@@ -57,7 +59,7 @@ export const CategoriaAccordionElement: React.FC<CategoriaAccordionElementProps>
                   isExpanded[accordionKey] ? '' : 'collapsed'
                 }`}
               >
-                <TestesList categoriaId={categoriaId} />
+                <TestesList categoriaId={categoriaId} testes={testes} />
               </div>
             </div>
           </div>

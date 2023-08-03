@@ -22,7 +22,7 @@ const SubtestesList: React.FC<SubtestesListProps> = ({ subtestesIds }) => {
         console.log('Renderizando subteste:', subteste);
 
         return (
-          <div key={subteste.id}>Listagem de subteste
+          <div key={subteste.id}>
             <h4>{subteste.nome}</h4>
             <p>{subteste.descricao}</p>
             <p>Pontuação: {subteste.resultado}</p>

@@ -12,12 +12,7 @@ const CategoriasList: React.FC = () => {
     <div className='row justify-content-start'>
       <div className='row row-cols-1 row-cols-md-2 g-4'>
         {categorias.map((categoria) => (
-          <CategoriaAccordionElement
-            key={categoria.id}
-            friendlytitle={categoria.nome}
-            icon=''
-            title={categoria.nome}
-          />
+          <CategoriaAccordionElement key={categoria.id} friendlytitle={categoria.nome} icon='' title={categoria.nome} categoriaId={categoria.id} />
         ))}
       </div>
     </div>
