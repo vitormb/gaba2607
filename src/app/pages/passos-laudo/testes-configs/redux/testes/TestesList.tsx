@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux'
 import {RootState} from '../store'
 import TesteItem from './testeItem'
 
-interface TestesListProps { 
+interface TestesListProps {
   categoriaId: string
 }
 
@@ -12,9 +12,13 @@ const TestesList: React.FC<TestesListProps> = ({categoriaId}) => {
     state.testes.testes.filter((teste) => teste.categoriaId === categoriaId)
   )
 
-  return (
+  return (    
     <>
-      {testes.map((teste) => testes.map((teste, index) => <TesteItem key={index} teste={teste} />))}
+      {testes.map((teste) =>
+        teste.subtestes.map((subtesteId) => (
+          <TesteItem key={subtesteId} teste={teste} subtesteId={subtesteId} />
+        ))
+      )}    
     </>
   )
 }

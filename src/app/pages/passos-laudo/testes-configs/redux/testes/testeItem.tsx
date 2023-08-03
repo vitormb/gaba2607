@@ -19,7 +19,7 @@ const TesteItem: React.FC<TesteItemProps> = ({teste, subtesteId}) => {
     // Implemente a lógica do checkbox aqui
   }
   if (!subteste) return null; // Se o subteste não for encontrado, não renderize nada
-  
+
   return (
     <div
       className='col border-gray-200 border-bottom'
