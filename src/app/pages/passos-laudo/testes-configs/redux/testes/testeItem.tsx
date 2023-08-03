@@ -1,24 +1,25 @@
-// TesteItem.tsx
 import React, {FC, useState} from 'react'
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
 import {Teste} from './testesSlice' // Importe a interface Teste do slice
-import { Subteste } from '../subtestes/subtestesSlice';
 
-interface TesteCheckbox {
-  teste: Teste;
-  subteste: Subteste;
-}
 interface TesteItemProps {
   teste: Teste
+  subtesteId: string
 }
 
-const TesteItem: React.FC<TesteCheckbox> = ({teste: teste, subteste: subteste}) => {
+const TesteItem: React.FC<TesteItemProps> = ({teste, subtesteId}) => {
   const [isChecked, setIsChecked] = useState(false)
   const [selectedSubtests, setSelectedSubtests] = useState([])
 
-  const handleCheckboxChange = (teste: TesteCheckbox) => {
-   
-  }
+  const subtestes = useSelector((state: RootState) => state.subtestes.subtestes);
+  const subteste = subtestes.find(subteste => subteste.id === subtesteId);
 
+  const handleCheckboxChange = (teste: Teste) => {
+    // Implemente a lógica do checkbox aqui
+  }
+  if (!subteste) return null; // Se o subteste não for encontrado, não renderize nada
+  
   return (
     <div
       className='col border-gray-200 border-bottom'
@@ -37,14 +38,14 @@ const TesteItem: React.FC<TesteCheckbox> = ({teste: teste, subteste: subteste}) 
             </span>
           </span>
           <span className='d-flex flex-column'>
-            <span className='fw-bold fs-6'>{teste.nome}</span>            
+            <span className='fw-bold fs-6'>{teste.nome}</span>
             <span className='fs-7 text-muted'>{subteste.descricao}</span>
           </span>
         </span>
         <span className='form-check form-check-custom form-check-solid'>
           <input
             type='checkbox'
-            id={teste.nome} 
+            id={teste.nome}
             checked={isChecked}
             onChange={() => handleCheckboxChange}
           />
