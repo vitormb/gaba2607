@@ -59,7 +59,7 @@ export const CategoriaAccordionElement: React.FC<CategoriaAccordionElementProps>
                   isExpanded[accordionKey] ? '' : 'collapsed'
                 }`}
               >
-                <TestesList categoriaId={categoriaId} testes={testes} />
+                 <TestesList categoriaId={categoriaId} />
               </div>
             </div>
           </div>

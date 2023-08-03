@@ -3,16 +3,8 @@ import {useSelector} from 'react-redux'
 import {RootState} from '../store'
 import TesteItem from './testeItem'
 
-type TesteType = {
-  id: string
-  nome: string
-  subtestes: string[]
+interface TestesListProps { 
   categoriaId: string
-}
-
-interface TestesListProps {
-  categoriaId: string
-  testes: TesteType[]
 }
 
 const TestesList: React.FC<TestesListProps> = ({categoriaId}) => {
@@ -21,11 +13,9 @@ const TestesList: React.FC<TestesListProps> = ({categoriaId}) => {
   )
 
   return (
-    <div>
-      {testes.map((teste) => (
-        <TesteItem key={teste.id} teste={teste} />
-      ))}
-    </div>
+    <>
+      {testes.map((teste) => testes.map((teste, index) => <TesteItem key={index} teste={teste} />))}
+    </>
   )
 }
 
