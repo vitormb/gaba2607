@@ -1,49 +1,39 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Subteste } from '../subtestes/subtestesSlice';
 
+// Defina a interface para o tipo Teste
 export interface Teste {
   id: string;
   nome: string;
-  subtestes: string[]; // IDs dos subtestes
+  subtestes: string[];
   categoriaId: string;
 }
 
-interface TestesState {
-  testes: Teste[];
-  selectedTestes: string[]; // IDs dos testes selecionados
-}
-
-const initialState: TestesState = {
-  testes: [],
-  selectedTestes: [], // inicialize selectedTestes como um array vazio
-};
+// Defina o estado inicial
+const initialState: Teste[] = [];
 
 const testesSlice = createSlice({
   name: 'testes',
   initialState,
   reducers: {
-    addTeste: (state, action: PayloadAction<Teste>) => {
-      state.testes.push(action.payload);
+    initializeTestes(state, action: PayloadAction<Teste[]>) {
+      // preenche o estado inicial com os testes pré-criados
+      return action.payload;
     },
-    updateTeste: (state, action: PayloadAction<{ id: string; changes: Partial<Teste> }>) => {
+    addTeste(state, action: PayloadAction<Teste>) {
+      // adiciona um novo teste ao estado
+      state.push(action.payload);
+    },
+    updateTeste(state, action: PayloadAction<{ id: string; changes: Partial<Teste> }>) {
+      // encontra o teste pelo ID e atualiza com as mudanças fornecidas
       const { id, changes } = action.payload;
-      const teste = state.testes.find(teste => teste.id === id);
+      const teste = state.find((teste) => teste.id === id);
       if (teste) {
         Object.assign(teste, changes);
-      }
-    },
-    selectTeste: (state, action: PayloadAction<string>) => {
-      state.selectedTestes.push(action.payload);
-    },
-    addSubteste: (state, action: PayloadAction<Subteste>) => {
-      const teste = state.testes.find(teste => teste.id === action.payload.testeId);
-      if (teste) {
-        teste.subtestes.push(action.payload.id);
       }
     },
   },
 });
 
-export const { addTeste, updateTeste, selectTeste } = testesSlice.actions;
+export const { initializeTestes, addTeste, updateTeste } = testesSlice.actions;
 
 export default testesSlice.reducer;
