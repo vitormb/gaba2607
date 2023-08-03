@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-// Defina a interface para o tipo Subteste
+// Define the interface for the Subteste type
 export interface Subteste {
   id: string;
   nome: string;
@@ -9,7 +9,7 @@ export interface Subteste {
   testeId: string;
 }
 
-// Defina o estado inicial
+// Define the initial state
 const initialState: Subteste[] = [];
 
 const subtestesSlice = createSlice({
@@ -17,15 +17,15 @@ const subtestesSlice = createSlice({
   initialState,
   reducers: {
     initializeSubtestes(state, action: PayloadAction<Subteste[]>) {
-      // preenche o estado inicial com os subtestes pré-criados
+      // Fills the initial state with the pre-created subtests
       return action.payload;
     },
     addSubteste(state, action: PayloadAction<Subteste>) {
-      // adiciona um novo subteste ao estado
+      // Adds a new subtest to the state
       state.push(action.payload);
     },
     updateSubteste(state, action: PayloadAction<{ id: string; changes: Partial<Subteste> }>) {
-      // encontra o subteste pelo ID e atualiza com as mudanças fornecidas
+      // Finds the subtest by ID and updates it with the provided changes
       const { id, changes } = action.payload;
       const subteste = state.find((subteste) => subteste.id === id);
       if (subteste) {

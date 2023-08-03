@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-// Defina a interface para o tipo Categoria
+// Define the interface for the Categoria type
 export interface Categoria {
   id: string;
   nome: string;
   testes: string[];
 }
 
-// Defina o estado inicial
+// Define the initial state
 const initialState: Categoria[] = [];
 
 const categoriasSlice = createSlice({
@@ -15,15 +15,15 @@ const categoriasSlice = createSlice({
   initialState,
   reducers: {
     initializeCategorias(state, action: PayloadAction<Categoria[]>) {
-      // preenche o estado inicial com as categorias pré-criadas
+      // Fills the initial state with the pre-created categories
       return action.payload;
     },
     addCategoria(state, action: PayloadAction<Categoria>) {
-      // adiciona uma nova categoria ao estado
+      // Adds a new category to the state
       state.push(action.payload);
     },
     addTesteToCategoria(state, action: PayloadAction<{ categoriaId: string; testeId: string }>) {
-      // encontra a categoria pelo ID e adiciona o ID do teste à lista de testes
+      // Finds the category by ID and adds the test ID to the test list
       const { categoriaId, testeId } = action.payload;
       const categoria = state.find((categoria) => categoria.id === categoriaId);
       if (categoria) {
