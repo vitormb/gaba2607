@@ -19,11 +19,11 @@ export interface Subteste {
 
 export function SubtestesModal({ testeId, onClose, onSubtesteUpdate }: SubtestesModalProps) {
     const teste = useSelector((state: RootState) => state.testes.testes.find(teste => teste.id === testeId));
-    const allSubtestes = useSelector((state: RootState) => state.subtestes.subtestes);
+    const allSubtestes = useSelector((state: RootState) => state.subtestes);
     
     const subtestes = teste 
         ? teste.subtestes
-            .map((id: string) => allSubtestes.find(subteste => subteste.id === id))
+        .map((id: string) => allSubtestes.find((subteste: Subteste) => subteste.id === id))
             .filter(subteste => subteste !== undefined) as Subteste[]
         : [];
 

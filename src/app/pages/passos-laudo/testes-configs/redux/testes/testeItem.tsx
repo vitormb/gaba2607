@@ -1,6 +1,7 @@
 import React, {FC, useState} from 'react'
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
+import { Subteste } from '../subtestes/subtestesSlice';
 import {Teste} from './testesSlice' // Importe a interface Teste do slice
 
 interface TesteItemProps {
@@ -12,8 +13,8 @@ const TesteItem: React.FC<TesteItemProps> = ({teste, subtesteId}) => {
   const [isChecked, setIsChecked] = useState(false)
   const [selectedSubtests, setSelectedSubtests] = useState([])
 
-  const subtestes = useSelector((state: RootState) => state.subtestes.subtestes);
-  const subteste = subtestes.find(subteste => subteste.id === subtesteId);
+  const subtestes = useSelector((state: RootState) => state.subtestes);
+  const subteste = subtestes.find((subteste: Subteste) => subteste.id === subtesteId);
 
   const handleCheckboxChange = (teste: Teste) => {
     // Implemente a lógica do checkbox aqui

@@ -2,13 +2,14 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
+import { Subteste } from './subtestesSlice';
 
 interface SubtestesListProps {
   subtestesIds: string[];
 }
 
 const SubtestesList: React.FC<SubtestesListProps> = ({ subtestesIds }) => {
-  const subtestes = useSelector((state: RootState) => state.subtestes.subtestes);
+  const subtestes = useSelector((state: RootState) => state.subtestes);
   
   console.log('IDs dos subtestes recebidos:', subtestesIds);
   console.log('Subtestes no estado Redux:', subtestes);
@@ -16,7 +17,7 @@ const SubtestesList: React.FC<SubtestesListProps> = ({ subtestesIds }) => {
   return (
     <div>
       {subtestesIds.map((id) => {
-        const subteste = subtestes.find((subteste) => subteste.id === id);
+        const subteste = subtestes.find((subteste: Subteste) => subteste.id === id);
         if (!subteste) return null;
 
         console.log('Renderizando subteste:', subteste);

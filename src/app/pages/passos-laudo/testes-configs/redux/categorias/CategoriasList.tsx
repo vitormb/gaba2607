@@ -6,7 +6,7 @@ import TestesList from '../testes/testesList'
 import {CategoriaAccordionElement} from '../categorias/CategoriaAccordionElement'
 
 const CategoriasList: React.FC = () => {
-  const categorias = useSelector((state: RootState) => state.categorias.categorias)
+  const categorias = useSelector((state: RootState) => state.categorias);
 
   return (
     <div className='row justify-content-start'>
