@@ -17,14 +17,11 @@ function TestesScreen() {
 
   useEffect(() => {
     dispatch(initializeCategorias(initialData.categorias));
-    initialData.categorias.forEach((categoria) => {
-      dispatch(initializeTestes(categoria.testes));
-      categoria.testes.forEach((teste) => {
-        dispatch(initializeSubtestes(teste.subtestes));
-      });
+    dispatch(initializeTestes(initialData.testes));
+    initialData.subtestes.forEach((subteste) => {
+      dispatch(initializeSubtestes(subteste));
     });
   }, [dispatch]);
-  
 
   const handleModalClose = () => {
     dispatch(selectTeste(null))
