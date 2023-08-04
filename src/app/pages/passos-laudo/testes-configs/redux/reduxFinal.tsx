@@ -16,10 +16,14 @@ function TestesScreen() {
   const testes = useSelector((state: RootState) => state.testes.testes)
 
   useEffect(() => {
-    dispatch(initializeCategorias(initialData.categorias));
-    dispatch(initializeTestes(initialData.testes));
-    initialData.subtestes.forEach((subteste) => {
-      dispatch(initializeSubtestes(subteste));
+    initialData.categorias.forEach((categoria) => {
+      dispatch(initializeCategorias(categoria));
+      categoria.testes.forEach((teste) => {
+        dispatch(initializeTestes(teste));
+        teste.subtestes.forEach((subteste) => {
+          dispatch(initializeSubtestes(subteste));
+        });
+      });
     });
   }, [dispatch]);
 

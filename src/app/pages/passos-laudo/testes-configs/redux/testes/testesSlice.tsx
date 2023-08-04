@@ -10,7 +10,7 @@ export interface Subteste {
 export interface Teste {
   id: string;
   nome: string;
-  subtestes: Subteste[];
+  subtestes: string[];
 }
 
 export interface TestesState {
