@@ -18,6 +18,15 @@ export const initialData = {
         }
       ]
     },
-    // ...resto das categorias
+    {
+      id: 'categoria2',
+      nome: 'Atenção',
+      testes: []
+    },
+    {
+      id: 'categoria3',
+      nome: 'Quociente Intelectual',
+      testes: []
+    },
   ]
 };
