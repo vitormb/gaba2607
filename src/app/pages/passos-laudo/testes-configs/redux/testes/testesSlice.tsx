@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 // Define the interface for the Teste type
-// Define the interface for the Teste type
+
 export interface Teste {
   id: string;
   nome: string;
+  categoriaId: any;
   subtestes: string[];
-  categoriaId: string;
 }
 
 // Define the interface for the Testes state

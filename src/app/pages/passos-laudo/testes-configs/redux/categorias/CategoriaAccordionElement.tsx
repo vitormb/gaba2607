@@ -2,7 +2,7 @@ import React, {FC, useState} from 'react'
 import { useSelector } from 'react-redux';
 import { RootState } from '../store'; 
 import TestesList from '../testes/testesList';
-
+import Teste from '../testes/testesSlice';
 let indexdata = 1
 
 interface CategoriaAccordionElementProps {

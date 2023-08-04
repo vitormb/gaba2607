@@ -3,30 +3,25 @@ export const initialData = {
     {
       id: 'categoria1',
       nome: 'Personalidades',
-      testes: [
-        {
-          id: 'teste1',
-          nome: 'Desenho da Figura Humana',
-          subtestes: [
-            {
-              id: 'subteste1',
-              nome: 'Nome do Subteste1',
-              descricao: '',
-              resultado: 0,
-            }
-          ]
-        }
-      ]
-    },
+      testes: ['teste1']
+    },    
+  ],
+  testes: [
     {
-      id: 'categoria2',
-      nome: 'Atenção',
-      testes: []
-    },
+      id: 'teste1',
+      nome: 'Desenho da Figura Humana',
+      subtestes: ['subteste1'],
+      categoriaId: ['categoria1'],
+    },    
+  ],
+  subtestes: [
     {
-      id: 'categoria3',
-      nome: 'Quociente Intelectual',
-      testes: []
-    },
+      id: 'subteste1',
+      nome: 'Nome do Subteste1',
+      descricao: '',
+      resultado: 0,
+      testeId: 'teste1' // Adicione esta linha
+    }
+    
   ]
 };
