@@ -16,16 +16,15 @@ function TestesScreen() {
   const testes = useSelector((state: RootState) => state.testes.testes)
 
   useEffect(() => {
+    dispatch(initializeCategorias(initialData.categorias));
     initialData.categorias.forEach((categoria) => {
-      dispatch(initializeCategorias(categoria))
+      dispatch(initializeTestes(categoria.testes));
       categoria.testes.forEach((teste) => {
-        dispatch(initializeTestes(teste))
-        teste.subtestes.forEach((subteste) => {
-          dispatch(initializeSubtestes(subteste))
-        })
-      })
-    })
-  }, [dispatch])
+        dispatch(initializeSubtestes(teste.subtestes));
+      });
+    });
+  }, [dispatch]);
+  
 
   const handleModalClose = () => {
     dispatch(selectTeste(null))

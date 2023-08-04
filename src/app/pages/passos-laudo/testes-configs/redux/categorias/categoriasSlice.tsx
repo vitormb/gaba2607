@@ -33,12 +33,6 @@ const categoriasSlice = createSlice({
   },
 });
 
-export const initializeCategorias = (categoriasData: { id: string; nome: string }[]) => {
-  return {
-    type: 'categorias/initialize',
-    payload: categoriasData.map(({ id, nome }) => ({ id, nome }))
-  };
-};
-
+export const { initializeCategorias, addCategoria, addTesteToCategoria } = categoriasSlice.actions;
 
 export default categoriasSlice.reducer;

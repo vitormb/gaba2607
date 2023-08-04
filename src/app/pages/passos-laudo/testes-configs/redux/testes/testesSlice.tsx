@@ -1,10 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+export interface Subteste {
+  id: string;
+  nome: string;
+  descricao: string;
+  resultado: number;
+}
+
 export interface Teste {
   id: string;
   nome: string;
-  subtestes: string[];
-  categoriaId: string;
+  subtestes: Subteste[];
 }
 
 export interface TestesState {
