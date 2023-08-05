@@ -1,26 +1,32 @@
 import React, {FC, useState} from 'react'
-import { useSelector } from 'react-redux';
-import { RootState } from '../store';
-import { Subteste } from '../subtestes/subtestesSlice';
-import {Teste} from './testesSlice' // Importe a interface Teste do slice
+import {useSelector} from 'react-redux'
+import {RootState} from '../store'
+import {Subteste} from '../subtestes/subtestesSlice'
+import {Teste} from './testesSlice'
+import {useDispatch} from 'react-redux'
+import {addTest, removeTest} from './selectedTestsSlice'
 
 interface TesteItemProps {
   teste: Teste
   subtesteId: string
 }
 
-const TesteItem: React.FC<TesteItemProps> = ({teste, subtesteId}) => {
+const TesteItem: FC<TesteItemProps> = ({teste, subtesteId}) => {
   const [isChecked, setIsChecked] = useState(false)
   const [selectedSubtests, setSelectedSubtests] = useState([])
+  const dispatch = useDispatch()
+  const subtestes = useSelector((state: RootState) => state.subtestes)
+  const subteste = subtestes.find((subteste: Subteste) => subteste.id === subtesteId)
 
-  const subtestes = useSelector((state: RootState) => state.subtestes);
-  const subteste = subtestes.find((subteste: Subteste) => subteste.id === subtesteId);
-
-  const handleCheckboxChange = (teste: Teste) => {
-    // Implemente a lógica do checkbox aqui
+  const handleCheckboxChange = (event: any) => {
+    if (event.target.checked) {
+      dispatch(addTest(teste))
+    } else {
+      dispatch(removeTest(teste))
+    }
   }
-  if (!subteste) return null; // Se o subteste não for encontrado, não renderize nada
 
+  if (!subteste) return null
   return (
     <div
       className='col border-gray-200 border-bottom'
@@ -48,7 +54,7 @@ const TesteItem: React.FC<TesteItemProps> = ({teste, subtesteId}) => {
             type='checkbox'
             id={teste.nome}
             checked={isChecked}
-            onChange={() => handleCheckboxChange}
+            onChange={handleCheckboxChange}
           />
         </span>
       </label>
