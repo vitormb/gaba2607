@@ -24,6 +24,7 @@ const TesteItem: FC<TesteItemProps> = ({teste, subtesteId}) => {
     } else {
       dispatch(removeTest(teste))
     }
+    setIsChecked(!isChecked)
   }
 
   if (!subteste) return null
@@ -46,17 +47,18 @@ const TesteItem: FC<TesteItemProps> = ({teste, subtesteId}) => {
           </span>
           <span className='d-flex flex-column'>
             <span className='fw-bold fs-6'>{teste.nome}</span>
-            <span className='fs-7 text-muted'>{subteste.descricao}</span>
+            <span className='fs-7 text-muted'>{teste.descricao}</span>
           </span>
         </span>
-        <span className='form-check form-check-custom form-check-solid'>
+        <div className='form-check form-check-custom form-check-solid'>
           <input
+            className='form-check-input'
             type='checkbox'
             id={teste.nome}
             checked={isChecked}
             onChange={handleCheckboxChange}
           />
-        </span>
+        </div>
       </label>
     </div>
   )

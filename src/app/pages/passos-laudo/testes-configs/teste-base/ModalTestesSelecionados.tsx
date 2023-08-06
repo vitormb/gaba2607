@@ -132,12 +132,12 @@ const dados = {
 
 export const ModalTestesSelecionados: React.FC<ModalTestesSelecionadosProps> = ({
   selectedItems,
-  test
+  test,
 }) => {
   return (
     <>
       {selectedItems.map((item: any, index: any) => (
-        <div className='modal bg-white fade' tabIndex={-1} id={'modal-'+test.friendlytitle}>
+        <div className='modal bg-white fade' tabIndex={-1} id={'modal-' + test.friendlytitle}>
           <div className='modal-dialog modal-fullscreen'>
             <div className='modal-content shadow-none'>
               <div className='modal-header'>
@@ -150,9 +150,7 @@ export const ModalTestesSelecionados: React.FC<ModalTestesSelecionadosProps> = (
                   x
                 </div>
               </div>
-              <div className='modal-body'>
-              {test && <TesteBase dados={test} />}
-              </div>
+              <div className='modal-body'>{test && <TesteBase dados={test} />}</div>
               <div className='modal-footer'>
                 <button type='button' className='btn btn-light' data-bs-dismiss='modal'>
                   Close

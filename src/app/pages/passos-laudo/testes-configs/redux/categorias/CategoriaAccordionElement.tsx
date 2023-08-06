@@ -1,8 +1,8 @@
 import React, {FC, useState} from 'react'
-import { useSelector } from 'react-redux';
-import { RootState } from '../store'; 
-import TestesList from '../testes/testesList';
-import Teste from '../testes/testesSlice';
+import {useSelector} from 'react-redux'
+import {RootState} from '../store'
+import TestesList from '../testes/testesList'
+import Teste from '../testes/testesSlice'
 let indexdata = 1
 
 interface CategoriaAccordionElementProps {
@@ -23,7 +23,9 @@ export const CategoriaAccordionElement: React.FC<CategoriaAccordionElementProps>
   let numeroAccordion = 0
   var accordionId = `accordion_${indexdata++}`
 
-  const testes = useSelector((state: RootState) => state.testes.testes.filter(teste => teste.categoriaId === categoriaId));
+  const testes = useSelector((state: RootState) =>
+    state.testes.testes.filter((teste) => teste.categoriaId === categoriaId)
+  )
 
   return (
     <div className='accordion' id={accordionId}>
@@ -59,7 +61,7 @@ export const CategoriaAccordionElement: React.FC<CategoriaAccordionElementProps>
                   isExpanded[accordionKey] ? '' : 'collapsed'
                 }`}
               >
-                 <TestesList categoriaId={categoriaId} />
+                <TestesList categoriaId={categoriaId} />
               </div>
             </div>
           </div>

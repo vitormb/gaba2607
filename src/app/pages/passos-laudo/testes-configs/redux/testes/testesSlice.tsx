@@ -6,6 +6,7 @@ export interface Teste {
   id: string;
   nome: string;
   categoriaId: any;
+  descricao: string;
   subtestes: string[];
 }
 
