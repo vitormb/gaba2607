@@ -1,6 +1,6 @@
 import React, {useState, useCallback} from 'react'
 import {Field, ErrorMessage} from 'formik'
-import Chart from 'react-apexcharts'
+import Chart from 'react-apexcharts' 
 
 export interface Props {
   dados: {
