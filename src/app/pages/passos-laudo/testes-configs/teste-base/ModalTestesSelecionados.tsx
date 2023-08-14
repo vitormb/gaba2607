@@ -1,5 +1,5 @@
 import React, {FC, useState} from 'react'
-import {TesteBase} from './baseTestes'
+import {TesteBase} from '../redux/testes/baseTestes'
 
 interface ModalTestesSelecionadosProps {
   selectedItems: any[]
