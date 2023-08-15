@@ -6,11 +6,11 @@ import Modal from 'react-modal';
 interface SubtestesModalProps {
     testeId: string;
     onClose: () => void;
-    onSubtesteUpdate: (subtesteId: string, newScore: number) => void;
+    onSubtesteUpdate: (subtesteId: number, newScore: number) => void;
 }
 
 export interface Subteste {
-  id: string;
+  id: number;
   nome: string;
   descricao: string;
   resultado: number;
@@ -22,10 +22,10 @@ export function SubtestesModal({ testeId, onClose, onSubtesteUpdate }: Subtestes
     const allSubtestes = useSelector((state: RootState) => state.subtestes);
     
     const subtestes = teste 
-        ? teste.subtestes
-        .map((id: string) => allSubtestes.find((subteste: Subteste) => subteste.id === id))
-            .filter(subteste => subteste !== undefined) as Subteste[]
-        : [];
+    ? teste.subtestes
+    .map((testeId: string) => allSubtestes.find((subteste: Subteste) => subteste.testeId === testeId))
+        .filter(subteste => subteste !== undefined) as Subteste[]
+    : [];
 
     // Se teste ou subtestes forem undefined, retorne null ou algum componente de fallback
     if (!teste || !subtestes.length) {

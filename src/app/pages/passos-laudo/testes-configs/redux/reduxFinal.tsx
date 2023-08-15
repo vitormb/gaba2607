@@ -25,7 +25,7 @@ function TestesScreen() {
     setSelectedTeste(null)
   }
 
-  const handleSubtesteUpdate = (subtesteId: string, newScore: number) => {
+  const handleSubtesteUpdate = (subtesteId: number, newScore: number) => {
     dispatch(updateSubteste({id: subtesteId, changes: {resultado: newScore}}))
   }
 

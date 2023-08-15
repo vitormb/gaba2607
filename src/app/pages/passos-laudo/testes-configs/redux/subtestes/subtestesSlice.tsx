@@ -2,12 +2,14 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 
 // Define the interface for the Subteste type
 export interface Subteste {
-  id: string
+  id: number
+  idFriendly: string
   nome: string
   descricao: string
   pontuacao: number
   resultado: number
   testeId: string
+  opcional: boolean
 }
 
 // Define the initial state
@@ -26,7 +28,7 @@ const subtestesSlice = createSlice({
       // Adds a new subtest to the state
       state.push(action.payload)
     },
-    updateSubteste(state, action: PayloadAction<{id: string; changes: Partial<Subteste>}>) {
+    updateSubteste(state, action: PayloadAction<{id: number; changes: Partial<Subteste>}>) {
       // Finds the subtest by ID and updates it with the provided changes
       const {id, changes} = action.payload
       const subteste = state.find((subteste) => subteste.id === id)
@@ -34,12 +36,12 @@ const subtestesSlice = createSlice({
         Object.assign(subteste, changes)
       }
     },
-    updatePontuacao: (state, action: PayloadAction<{ id: string, pontuacao: number }>) => {
+    updatePontuacao: (state, action) => {
       const subtesteToUpdate = state.find(subteste => subteste.id === action.payload.id);
       if (subtesteToUpdate) {
-        subtesteToUpdate.pontuacao = action.payload.pontuacao;
+          subtesteToUpdate.pontuacao = action.payload.pontuacao;
       }
-    },
+  },
   },
 })
 

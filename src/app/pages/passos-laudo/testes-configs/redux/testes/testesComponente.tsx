@@ -19,7 +19,7 @@ let dadosExemplo = {
   pontuacaoBase: [100, 95],
   normas: ['Norma1', 'Norma2'],
   interpretacao: ['Interpretacao1', 'Interpretacao2'],
-  indices: ['Indice1', 'Indice2'],
+  indices: [1,2],
 }
 
 function prepareDataForTesteBase(testeId: string): typeof dadosExemplo {
@@ -34,7 +34,7 @@ function prepareDataForTesteBase(testeId: string): typeof dadosExemplo {
 )
 
   // Mapeie os subtestes para a estrutura esperada pelo componente TesteBase
-  const dados = {
+  const dados = {    
     nomeDoSubTeste: subtestes.map((subteste) => subteste.nome),
     friendlyTitle: subtestes.map((subteste) => subteste.nome), 
     descricao: subtestes.map((subteste) => subteste.descricao),
@@ -67,7 +67,7 @@ export const SelectedTestsList = () => {
     setShowModal(false)
   }
 
-  const handlePontuacaoChange = (event: React.ChangeEvent<HTMLInputElement>, id: string) => {
+  const handlePontuacaoChange = (event: React.ChangeEvent<HTMLInputElement>, id: number) => {
     const pontuacao = Number(event.target.value);
     dispatch(updatePontuacao({ id, pontuacao }));
 };

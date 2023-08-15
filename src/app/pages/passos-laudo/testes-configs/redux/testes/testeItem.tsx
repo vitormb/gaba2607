@@ -8,7 +8,7 @@ import {addTest, removeTest} from './selectedTestsSlice'
 
 interface TesteItemProps {
   teste: Teste
-  subtesteId: string
+  subtesteId: number
 }
 
 const TesteItem: FC<TesteItemProps> = ({teste, subtesteId}) => {

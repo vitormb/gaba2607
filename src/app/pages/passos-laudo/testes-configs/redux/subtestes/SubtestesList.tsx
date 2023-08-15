@@ -17,7 +17,7 @@ const SubtestesList: React.FC<SubtestesListProps> = ({ subtestesIds }) => {
   return (
     <div>
       {subtestesIds.map((id) => {
-        const subteste = subtestes.find((subteste: Subteste) => subteste.id === id);
+       const subteste = subtestes.find((subteste: Subteste) => subteste.idFriendly === id);
         if (!subteste) return null;
 
         console.log('Renderizando subteste:', subteste);

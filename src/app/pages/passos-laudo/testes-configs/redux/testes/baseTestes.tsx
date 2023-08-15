@@ -14,23 +14,24 @@ export interface Props {
     pontuacaoBase: number[]
     normas: string[]
     interpretacao: string[]
-    indices: string[]
+    indices: number[]
   }
-  onPontuacaoChange: (event: React.ChangeEvent<HTMLInputElement>, id: string) => void // Adicione esta linha
+  onPontuacaoChange: (event: React.ChangeEvent<HTMLInputElement>, id: number) => void 
 }
 
-interface TestePropValues {
+interface TestePropValues {  
+  id: number;
   pontuacao: number
   nome: string
   descricao: string
   friendlyname: string
-  indices: string
+  indices: number
 }
 interface TestePropGraficoValues {
   nomes: string[]
   pontuacao: number[]
   pontuacaoBase: number[]
-  indices: string[]
+  indices: number[]
 }
 
 export function TesteBase({dados, onPontuacaoChange}: Props) {
