@@ -1,5 +1,6 @@
 import React, {useState, useCallback} from 'react'
 import {useDispatch} from 'react-redux'
+import { updatePontuacao } from '../subtestes/subtestesSlice';
 import {Field, ErrorMessage} from 'formik'
 import Chart from 'react-apexcharts'
 
@@ -43,9 +44,14 @@ export function TesteBase({dados, onPontuacaoChange}: Props) {
   const [showPontuacaoBruta, setShowPontuacaoBruta] = useState(false)
 
   const handleSubmitPontuacoes = () => {
-    // Aqui, você pode enviar os valores para um servidor ou fazer qualquer outra coisa com eles
-    console.log(allPontuacoes) // Por enquanto, apenas log os valores
-  }
+    allPontuacoes.forEach((pontuacao, index) => {
+        dispatch(updatePontuacao({
+            id: dados.nomeDoSubTeste[index], // Supondo que o nome do subteste é usado como ID. Ajuste conforme necessário.
+            pontuacao: pontuacao
+        }));
+    }); 
+    console.log(allPontuacoes);
+}
 
   const toggleColumn = useCallback((column: string) => {
     switch (column) {
