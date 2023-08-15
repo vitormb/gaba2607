@@ -120,11 +120,11 @@ export function TesteBase({dados}: Props) {
           <td className='col-3'>{descricao}</td>
           <td className='col bg-primary'>
             <div className='form-floating'>
-              <input
+              <input               
                 name={friendlyname + '-percentil'}
                 type='number'
                 value={pontuacao}
-                className='form-control border-0'
+                className='form-control border-0 formPontuacaoInput'
                 placeholder='Percentil'
                 inputMode='numeric'
                 onChange={handlePercentilChange} // Adicione a função handlePercentilChange aqui
