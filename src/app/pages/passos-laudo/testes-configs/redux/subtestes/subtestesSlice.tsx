@@ -5,12 +5,14 @@ export interface Subteste {
   id: string
   nome: string
   descricao: string
+  pontuacao: number
   resultado: number
   testeId: string
 }
 
 // Define the initial state
 const initialState: Subteste[] = []
+
 
 const subtestesSlice = createSlice({
   name: 'subtestes',
@@ -32,9 +34,15 @@ const subtestesSlice = createSlice({
         Object.assign(subteste, changes)
       }
     },
+    updatePontuacao: (state, action: PayloadAction<{ id: string, pontuacao: number }>) => {
+      const subtesteToUpdate = state.find(subteste => subteste.id === action.payload.id);
+      if (subtesteToUpdate) {
+        subtesteToUpdate.pontuacao = action.payload.pontuacao;
+      }
+    },
   },
 })
 
-export const {initializeSubtestes, addSubteste, updateSubteste} = subtestesSlice.actions
+export const { initializeSubtestes, addSubteste, updateSubteste, updatePontuacao } = subtestesSlice.actions;
 
 export default subtestesSlice.reducer
