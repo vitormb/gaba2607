@@ -7,6 +7,9 @@ import Modal from 'react-bootstrap/Modal'
 import {TesteBase} from './baseTestes'
 import {initialData} from '../data/initialData'
 
+import { useDispatch } from 'react-redux';
+import { updatePontuacao } from '../subtestes/subtestesSlice';
+
 let dadosExemplo = {
   nomeDoSubTeste: ['SubTeste1', 'SubTeste2'],
   friendlyTitle: ['Titulo1', 'Titulo2'],
@@ -26,9 +29,9 @@ function prepareDataForTesteBase(testeId: string): typeof dadosExemplo {
     throw new Error('Teste não encontrado')
   }
 
-  const subtestes: Subteste[] = initialData.subtestes.filter(
+  const subtestes: Subteste[] = (initialData.subtestes as Subteste[]).filter(
     (st: Subteste) => st.testeId === testeId
-  )
+)
 
   // Mapeie os subtestes para a estrutura esperada pelo componente TesteBase
   const dados = {
@@ -47,10 +50,11 @@ function prepareDataForTesteBase(testeId: string): typeof dadosExemplo {
 }
 
 export const SelectedTestsList = () => {
-  const [showModal, setShowModal] = useState(false)
-  const [currentTest, setCurrentTest] = useState<Teste | null>(null)
-  const selectedTests = useSelector((state: RootState) => state.selectedTests)
-  const subtestes = useSelector((state: RootState) => state.subtestes)
+  const [showModal, setShowModal] = useState(false);
+  const [currentTest, setCurrentTest] = useState<Teste | null>(null);
+  const selectedTests = useSelector((state: RootState) => state.selectedTests);
+  const subtestes = useSelector((state: RootState) => state.subtestes);
+  const dispatch = useDispatch();
   console.log('currentTest', currentTest);
   
   const handleOpenModal = (test: any) => {
@@ -62,6 +66,12 @@ export const SelectedTestsList = () => {
     setCurrentTest(null)
     setShowModal(false)
   }
+
+  const handlePontuacaoChange = (event: React.ChangeEvent<HTMLInputElement>, id: string) => {
+    const pontuacao = Number(event.target.value);
+    dispatch(updatePontuacao({ id, pontuacao }));
+};
+
 
   return (
     <div>
@@ -118,8 +128,13 @@ export const SelectedTestsList = () => {
         <Modal.Header closeButton>
           <Modal.Title>Subtestes de {currentTest?.nome}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>          
-          {currentTest && <TesteBase dados={prepareDataForTesteBase(currentTest.id)} />}
+        <Modal.Body>
+          {currentTest && (
+            <TesteBase
+              dados={prepareDataForTesteBase(currentTest.id)}
+              onPontuacaoChange={handlePontuacaoChange}
+            />
+          )}
         </Modal.Body>
         <Modal.Footer>
           <button className='btn btn-primary' onClick={handleCloseModal}>
